@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Carta Astral, Rectificación Multievento & Tránsitos</title>
+  <title>Carta Astral Profesional - Astrodienst & Bi-Wheel</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -67,13 +67,13 @@
 
     <header class="text-center space-y-2 pt-1">
       <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-400/30 bg-amber-400/10 text-amber-300 text-xs font-semibold tracking-wider uppercase">
-        <span>☉</span> Carta Placidus, Rectificación Multievento & Monitor de Ciclos <span>☉</span>
+        <span>☉</span> Rueda Bi-Wheel, Rectificación Multievento & Monitor de Ciclos <span>☉</span>
       </div>
       <h1 class="text-3xl sm:text-5xl font-cinzel font-bold tracking-tight gold-gradient">
         Carta Astral & Dinámica de Ciclos
       </h1>
       <p class="text-slate-400 text-xs sm:text-sm max-w-2xl mx-auto">
-        Rueda estilo Astrodienst con nombres arquetípicos de casas, rectificación avanzada por acontecimientos y gestión neutral de perfiles.
+        Suite astrológica completa: superposición Bi-Wheel, filtros interactivos de aspectos, copias JSON y monitor de ciclos.
       </p>
     </header>
 
@@ -82,7 +82,7 @@
       <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-slate-800 pb-3">
         <div>
           <span class="text-xs uppercase tracking-wider text-amber-400 font-bold block">Gestión de Perfiles</span>
-          <span class="text-xs text-slate-400">Guarda cartas natales en tu navegador o consulta las creadas:</span>
+          <span class="text-xs text-slate-400">Guarda cartas natales en memoria local o exporta copias de respaldo:</span>
         </div>
         <div class="flex flex-wrap items-center gap-2 w-full sm:w-auto">
           <select id="savedProfilesSelect" class="flex-1 sm:flex-initial px-3 py-2 rounded-xl bg-slate-900 border border-amber-500/40 text-amber-300 text-xs sm:text-sm font-medium focus:outline-none focus:border-amber-400">
@@ -94,8 +94,15 @@
           <button type="button" id="saveProfileBtn" class="px-3 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 text-xs font-bold transition flex items-center gap-1 shadow">
             <span>💾</span> Guardar
           </button>
+          <button type="button" id="exportBackupBtn" class="px-2.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs border border-slate-700 transition" title="Exportar archivo de perfiles JSON">
+            📤 Copia
+          </button>
+          <label class="px-2.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs border border-slate-700 transition cursor-pointer" title="Importar archivo de perfiles JSON">
+            📥 Restaurar
+            <input type="file" id="importBackupInput" accept=".json" class="hidden">
+          </label>
           <button type="button" id="deleteProfileBtn" class="px-2.5 py-2 rounded-xl bg-rose-950/70 hover:bg-rose-900 text-rose-300 text-xs font-bold border border-rose-800 transition" title="Eliminar perfil seleccionado">
-            🗑️
+            🗑
           </button>
         </div>
       </div>
@@ -115,7 +122,6 @@
             <div class="flex justify-between items-center mb-1">
               <label for="birthTime" class="text-xs uppercase tracking-wider text-slate-300 font-semibold block">Hora Local</label>
               <div class="flex items-center gap-1">
-                <button type="button" id="unknownHourBtn" class="text-[9px] text-amber-400/90 hover:underline mr-1" title="Si no se sabe la hora, fija 12:00 h solar como base">¿Hora desconocida?</button>
                 <button type="button" class="quick-adjust px-1.5 py-0.5 rounded bg-slate-800 hover:bg-slate-700 border border-slate-600 text-[10px] font-mono text-amber-300" data-min="-5">-5m</button>
                 <button type="button" class="quick-adjust px-1.5 py-0.5 rounded bg-slate-800 hover:bg-slate-700 border border-slate-600 text-[10px] font-mono text-amber-300" data-min="-1">-1m</button>
                 <button type="button" class="quick-adjust px-1.5 py-0.5 rounded bg-slate-800 hover:bg-slate-700 border border-slate-600 text-[10px] font-mono text-amber-300" data-min="1">+1m</button>
@@ -171,37 +177,85 @@
           </div>
         </div>
 
-        <!-- MÓDULO DE RECTIFICACIÓN HORARIA MULTIEVENTO AMPLIADO -->
+        <!-- MÓDULO INTEGRAL DE RECTIFICACIÓN HORARIA -->
         <div id="rectificationAccordion" class="pt-3 border-t border-amber-500/30 bg-amber-500/10 p-4 rounded-xl space-y-3">
           <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
             <div>
               <h4 class="font-cinzel text-sm font-bold text-amber-300 flex items-center gap-1.5">
-                <span>⏱</span> Rectificación Multievento por Arco Solar (Clave 1° = 1 Año)
+                <span>⏱</span> Módulo de Rectificación Horaria
               </h4>
-              <p class="text-xs text-slate-300 mt-0.5">Triangula la hora exacta a partir de múltiples acontecimientos vitales clave.</p>
+              <p class="text-xs text-slate-300 mt-0.5">Triangula la hora exacta por eventos o inicia el protocolo si la hora es completamente desconocida.</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <button type="button" id="tabFineTuneBtn" class="px-3 py-1 rounded-lg bg-amber-400 text-slate-950 font-bold text-xs transition">
+                Ajuste por Eventos
+              </button>
+              <button type="button" id="tabUnknownHourBtn" class="px-3 py-1 rounded-lg bg-slate-900 text-amber-300 border border-slate-700 hover:border-amber-400 font-bold text-xs transition">
+                ¿Hora Totalmente Desconocida?
+              </button>
             </div>
           </div>
 
-          <!-- Contenedor dinámico de filas de eventos -->
-          <div id="eventsListContainer" class="space-y-2 pt-1"></div>
+          <!-- ASISTENTE GUIADO: CUANDO NO SE SABE LA HORA EN ABSOLUTO -->
+          <div id="unknownHourGuidePanel" class="hidden p-3.5 rounded-xl bg-slate-900/90 border border-amber-400/50 space-y-3 text-xs">
+            <div class="border-b border-slate-800 pb-2">
+              <span class="text-amber-300 font-bold block">Protocolo de Descarte en 3 Pasos (Sin Hora Inicial)</span>
+              <span class="text-slate-400 text-[11px]">En 24 horas el Ascendente recorre los 12 signos. Debes acotar primero la franja y el temperamento antes de usar los eventos.</span>
+            </div>
 
-          <div class="flex flex-wrap items-center justify-between gap-2 pt-1">
-            <button type="button" id="addEventRowBtn" class="px-3 py-1.5 rounded-lg bg-slate-900 border border-amber-400/50 text-amber-300 text-xs hover:bg-slate-800 transition flex items-center gap-1 font-medium">
-              <span>+</span> Añadir Evento
-            </button>
-            <button type="button" id="calcMultiRectifyBtn" class="py-2 px-5 rounded-lg font-cinzel text-xs font-bold text-slate-950 bg-amber-400 hover:bg-amber-300 shadow transition">
-              Calcular Convergencia de Eventos
-            </button>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label for="daypartSelect" class="text-slate-300 font-semibold block mb-1">1. Franja del Día Conocida o Estimada:</label>
+                <select id="daypartSelect" class="w-full px-2.5 py-1.5 rounded-lg bg-slate-950 border border-slate-700 text-slate-200 text-xs focus:outline-none focus:border-amber-400">
+                  <option value="06:00">Madrugada / Amanecer (~06:00 h - Sol en Ascendente)</option>
+                  <option value="10:00">Media Mañana (~10:00 h - Sol en Casa 11)</option>
+                  <option value="12:00">Mediodía / Sol cenital (~12:00 h - Sol en MC)</option>
+                  <option value="16:00">Tarde (~16:00 h - Sol en Casa 8/9)</option>
+                  <option value="19:30">Atardecer / Ocaso (~19:30 h - Sol en Descendente)</option>
+                  <option value="23:30">Noche (~23:30 h - Sol en Casa 4 / IC)</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="temperamentSelect" class="text-slate-300 font-semibold block mb-1">2. Fisiognomía / Temperamento del Ascendente:</label>
+                <select id="temperamentSelect" class="w-full px-2.5 py-1.5 rounded-lg bg-slate-950 border border-slate-700 text-slate-200 text-xs focus:outline-none focus:border-amber-400">
+                  <option value="fire">Fuego (Aries, Leo, Sagitario) - Energético, impulsivo, mirada directa, calórico</option>
+                  <option value="earth">Tierra (Tauro, Virgo, Capricornio) - Sobrio, estructura ósea firme, paso pausado, práctico</option>
+                  <option value="air">Aire (Géminis, Libra, Acuario) - Comunicativo, gestual, fisonomía ligera, mente rápida</option>
+                  <option value="water">Agua (Cáncer, Escorpio, Piscis) - Mirada envolvente, receptivo, emotivo, fluido</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between pt-2 border-t border-slate-800 gap-2">
+              <span class="text-slate-400 text-[11px]">Fija esta hora tentativa de partida antes de calcular las cartas:</span>
+              <button type="button" id="applyDaypartTimeBtn" class="px-4 py-1.5 rounded-lg bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold transition text-xs">
+                Fijar Hora Tentativa y Volver a Eventos
+              </button>
+            </div>
           </div>
 
-          <!-- Resultado ponderado multievento -->
-          <div id="multiRectificationResult" class="hidden p-3 rounded-lg bg-slate-900/95 border border-amber-400 space-y-2.5 text-xs">
-            <div id="multiRectifySummary" class="text-slate-200 leading-relaxed"></div>
-            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between pt-2 border-t border-slate-800 gap-2">
-              <span class="text-slate-400 text-[11px]" id="convergenceScoreLabel">Triangulación sobre ejes angulares principales</span>
-              <button type="button" id="applyMultiRectifiedTimeBtn" class="px-4 py-2 rounded-lg bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-bold hover:brightness-110 transition shadow whitespace-nowrap">
-                Aplicar Hora de Consenso a la Carta
+          <!-- PANEL MULTIEVENTO HABITUAL -->
+          <div id="eventsListPanel" class="space-y-2">
+            <div id="eventsListContainer" class="space-y-2 pt-1"></div>
+
+            <div class="flex flex-wrap items-center justify-between gap-2 pt-1">
+              <button type="button" id="addEventRowBtn" class="px-3 py-1.5 rounded-lg bg-slate-900 border border-amber-400/50 text-amber-300 text-xs hover:bg-slate-800 transition flex items-center gap-1 font-medium">
+                <span>+</span> Añadir Evento
               </button>
+              <button type="button" id="calcMultiRectifyBtn" class="py-2 px-5 rounded-lg font-cinzel text-xs font-bold text-slate-950 bg-amber-400 hover:bg-amber-300 shadow transition">
+                Calcular Convergencia de Eventos
+              </button>
+            </div>
+
+            <div id="multiRectificationResult" class="hidden p-3 rounded-lg bg-slate-900/95 border border-amber-400 space-y-2.5 text-xs">
+              <div id="multiRectifySummary" class="text-slate-200 leading-relaxed"></div>
+              <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between pt-2 border-t border-slate-800 gap-2">
+                <span class="text-slate-400 text-[11px]" id="convergenceScoreLabel">Triangulación sobre ejes angulares principales</span>
+                <button type="button" id="applyMultiRectifiedTimeBtn" class="px-4 py-2 rounded-lg bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-bold hover:brightness-110 transition shadow whitespace-nowrap">
+                  Aplicar Hora de Consenso a la Carta
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -249,10 +303,34 @@
         </div>
       </section>
 
-      <!-- DOBLE CARTA ASTRAL EN PARALELO -->
-      <section class="grid grid-cols-1 lg:grid-cols-2 gap-5 items-stretch">
-        
-        <!-- Rueda 1: Carta Natal -->
+      <!-- BARRA DE CONTROL VISUAL: BI-WHEEL, FILTROS Y EXPORTAR -->
+      <section class="glass-card rounded-2xl p-3.5 flex flex-wrap items-center justify-between gap-3 text-xs">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="font-bold text-amber-300">Modo de Visualización:</span>
+          <button type="button" id="viewDualWheelsBtn" class="px-3 py-1.5 rounded-lg bg-amber-400 text-slate-950 font-bold transition">
+            Doble Rueda (Paralelo)
+          </button>
+          <button type="button" id="viewBiWheelBtn" class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-amber-300 hover:border-amber-400 font-bold transition">
+            Rueda Bi-Wheel (Superpuesta)
+          </button>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-slate-400 font-medium">Aspectos:</span>
+          <button type="button" id="filterHarmonicBtn" class="px-2.5 py-1 rounded bg-blue-950/80 border border-blue-500/50 text-blue-300 text-[11px] font-semibold active:scale-95 transition">
+            ✓ Trígonos/Sextiles
+          </button>
+          <button type="button" id="filterHardBtn" class="px-2.5 py-1 rounded bg-red-950/80 border border-red-500/50 text-red-300 text-[11px] font-semibold active:scale-95 transition">
+            ✓ Cuadraturas/Opos.
+          </button>
+          <button type="button" id="exportPngBtn" class="px-3 py-1 rounded bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs shadow transition flex items-center gap-1">
+            📷 Descargar PNG
+          </button>
+        </div>
+      </section>
+
+      <!-- CONTENEDOR 1: DOBLE CARTA EN PARALELO -->
+      <section id="dualWheelsSection" class="grid grid-cols-1 lg:grid-cols-2 gap-5 items-stretch">
         <div class="glass-card rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-between">
           <div class="flex items-center justify-between w-full px-2 mb-2">
             <div>
@@ -275,7 +353,6 @@
           </div>
         </div>
 
-        <!-- Rueda 2: Posición Actual del Cielo -->
         <div class="glass-card rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-between border-sky-400/30">
           <div class="flex items-center justify-between w-full px-2 mb-2">
             <div>
@@ -291,7 +368,29 @@
             <span class="text-slate-300 text-[11px]">MC arriba (Sur), IC abajo (Norte), Casas 1 a 12 correlativas</span>
           </div>
         </div>
+      </section>
 
+      <!-- CONTENEDOR 2: RUEDA CONCÉNTRICA BI-WHEEL (NATAL + TRÁNSITOS) -->
+      <section id="biWheelSection" class="hidden glass-card rounded-2xl p-5 flex flex-col items-center justify-between border-amber-400/40">
+        <div class="flex flex-col sm:flex-row items-center justify-between w-full px-2 mb-2 gap-2">
+          <div>
+            <span class="text-[10px] uppercase font-bold text-amber-400 block tracking-wider">Superposición Bi-Wheel Concéntrica</span>
+            <h3 class="font-cinzel text-base sm:text-lg font-bold text-white">Carta Natal (Interior) + Tránsitos en Vivo (Exterior)</h3>
+          </div>
+          <span class="text-xs text-sky-300 font-mono px-3 py-1 rounded-full bg-slate-900 border border-slate-700">Anillo Externo: Posiciones Actuales</span>
+        </div>
+
+        <div class="relative w-full flex justify-center overflow-hidden py-2">
+          <canvas id="biWheelCanvas" width="560" height="560" class="max-w-full drop-shadow-2xl rounded-full"></canvas>
+          <div id="biWheelTooltip" class="absolute pointer-events-none hidden px-3 py-2 rounded-xl bg-slate-950/95 border border-amber-400 text-xs shadow-2xl text-white transition-opacity duration-150 z-50">
+            <div id="biWheelTooltipContent"></div>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap justify-center items-center gap-4 text-xs text-slate-300 mt-2">
+          <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-amber-400 inline-block"></span> Planetas Natales (Anillo Interior)</span>
+          <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-sky-400 inline-block"></span> Tránsitos del Cielo Actual (Corona Exterior)</span>
+        </div>
       </section>
 
       <!-- Tabla de Planetas Natales y Matriz Aspectarium -->
@@ -311,7 +410,7 @@
                     <th class="py-1">Casa & Esfera</th>
                   </tr>
                 </thead>
-                <tbody id="natalPlanetsTable" class="divide-y border-slate-800/60 font-mono"></tbody>
+                <tbody id="natalPlanetsTable" class="divide-y divide-slate-800/60 font-mono"></tbody>
               </table>
             </div>
           </div>
@@ -396,7 +495,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3" id="transitsGrid"></div>
       </section>
 
-      <!-- SECCIÓN: CALENDARIO DE INGRESOS EN CASAS Y PRÓXIMOS MESES -->
+      <!-- Calendario de Ingresos en Casas y Próximos Meses -->
       <section class="glass-card rounded-2xl p-5 space-y-5 border-amber-400/30">
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-slate-800 pb-3">
           <div>
@@ -458,20 +557,10 @@
       "Capricornio": { elem: "Ti", mod: "C" }, "Acuario": { elem: "Ai", mod: "F" }, "Piscis": { elem: "Ag", mod: "M" }
     };
 
-    // Palabras clave definitorias de cada casa
     const HOUSE_KEYWORDS = {
-      1: "Identidad",
-      2: "Recursos",
-      3: "Entorno",
-      4: "Hogar",
-      5: "Creación",
-      6: "Rutina",
-      7: "Vínculos",
-      8: "Mutación",
-      9: "Expansión",
-      10: "Vocación",
-      11: "Comunidad",
-      12: "Trascendencia"
+      1: "Identidad", 2: "Recursos", 3: "Entorno", 4: "Hogar",
+      5: "Creación", 6: "Rutina", 7: "Vínculos", 8: "Mutación",
+      9: "Expansión", 10: "Vocación", 11: "Comunidad", 12: "Trascendencia"
     };
 
     const HOUSES_DESC = {
@@ -510,9 +599,14 @@
     };
 
     let natalInteractiveTargets = [];
+    let biWheelInteractiveTargets = [];
     let currentActiveProfile = null;
+    let currentSkyProfileGlobal = null;
     let userEvents = [];
     let multiSuggestedTime = null;
+
+    let showHarmonics = true;
+    let showHards = true;
 
     // --- ALMACENAMIENTO Y GESTIÓN DE PERFILES EN LOCALSTORAGE ---
     function getStoredProfiles() {
@@ -553,11 +647,6 @@
       renderEventRows();
     });
 
-    document.getElementById('unknownHourBtn').addEventListener('click', () => {
-      document.getElementById('birthTime').value = '12:00';
-      alert("Se ha fijado las 12:00 h como hora base de partida. Introduce las fechas de tus acontecimientos vitales en el módulo de rectificación para calibrar tus minutos exactos.");
-    });
-
     document.getElementById('saveProfileBtn').addEventListener('click', () => {
       const name = document.getElementById('userName').value.trim();
       const birthDate = document.getElementById('birthDate').value;
@@ -574,17 +663,7 @@
 
       const profiles = getStoredProfiles();
       const profileId = 'prof_' + Date.now();
-      profiles[profileId] = {
-        id: profileId,
-        name,
-        birthDate,
-        birthTime,
-        cityKey,
-        lat,
-        lng,
-        dst
-      };
-
+      profiles[profileId] = { id: profileId, name, birthDate, birthTime, cityKey, lat, lng, dst };
       saveStoredProfiles(profiles);
       refreshProfilesDropdown(profileId);
       alert(`Perfil "${name}" guardado correctamente.`);
@@ -615,7 +694,6 @@
         alert("Selecciona primero un perfil de la lista para eliminarlo.");
         return;
       }
-
       const profiles = getStoredProfiles();
       const profileName = profiles[selectedId]?.name || 'este perfil';
       if (confirm(`¿Estás seguro de que deseas eliminar el perfil de "${profileName}"?`)) {
@@ -624,6 +702,122 @@
         refreshProfilesDropdown();
         document.getElementById('newProfileBtn').click();
       }
+    });
+
+    document.getElementById('exportBackupBtn').addEventListener('click', () => {
+      const profiles = getStoredProfiles();
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(profiles, null, 2));
+      const dlAnchor = document.createElement('a');
+      dlAnchor.setAttribute("href", dataStr);
+      dlAnchor.setAttribute("download", `perfiles_astrales_${new Date().toISOString().slice(0, 10)}.json`);
+      dlAnchor.click();
+    });
+
+    document.getElementById('importBackupInput').addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        try {
+          const imported = JSON.parse(event.target.result);
+          const current = getStoredProfiles();
+          const merged = { ...current, ...imported };
+          saveStoredProfiles(merged);
+          refreshProfilesDropdown();
+          alert("Perfiles restaurados con éxito.");
+        } catch (err) {
+          alert("Error: Archivo JSON no válido.");
+        }
+      };
+      reader.readAsText(file);
+    });
+
+    document.getElementById('exportPngBtn').addEventListener('click', () => {
+      const isBiWheel = !document.getElementById('biWheelSection').classList.contains('hidden');
+      const activeCanvas = isBiWheel ? document.getElementById('biWheelCanvas') : document.getElementById('astroWheel');
+      if (!activeCanvas) return;
+      const link = document.createElement('a');
+      link.download = `carta_astral_${(currentActiveProfile?.name || 'natal').replace(/\s+/g, '_')}.png`;
+      link.href = activeCanvas.toDataURL("image/png");
+      link.click();
+    });
+
+    const viewDualWheelsBtn = document.getElementById('viewDualWheelsBtn');
+    const viewBiWheelBtn = document.getElementById('viewBiWheelBtn');
+    const dualWheelsSection = document.getElementById('dualWheelsSection');
+    const biWheelSection = document.getElementById('biWheelSection');
+
+    viewDualWheelsBtn.addEventListener('click', () => {
+      viewDualWheelsBtn.className = "px-3 py-1.5 rounded-lg bg-amber-400 text-slate-950 font-bold transition";
+      viewBiWheelBtn.className = "px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-amber-300 hover:border-amber-400 font-bold transition";
+      dualWheelsSection.classList.remove('hidden');
+      biWheelSection.classList.add('hidden');
+    });
+
+    viewBiWheelBtn.addEventListener('click', () => {
+      viewBiWheelBtn.className = "px-3 py-1.5 rounded-lg bg-amber-400 text-slate-950 font-bold transition";
+      viewDualWheelsBtn.className = "px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-amber-300 hover:border-amber-400 font-bold transition";
+      dualWheelsSection.classList.add('hidden');
+      biWheelSection.classList.remove('hidden');
+      if (currentActiveProfile && currentSkyProfileGlobal) {
+        drawBiWheelCanvas('biWheelCanvas', currentActiveProfile, currentSkyProfileGlobal);
+      }
+    });
+
+    const filterHarmonicBtn = document.getElementById('filterHarmonicBtn');
+    const filterHardBtn = document.getElementById('filterHardBtn');
+
+    filterHarmonicBtn.addEventListener('click', () => {
+      showHarmonics = !showHarmonics;
+      filterHarmonicBtn.className = showHarmonics 
+        ? "px-2.5 py-1 rounded bg-blue-950/80 border border-blue-500/50 text-blue-300 text-[11px] font-semibold active:scale-95 transition"
+        : "px-2.5 py-1 rounded bg-slate-900 border border-slate-800 text-slate-500 text-[11px] font-semibold active:scale-95 transition line-through";
+      redrawWheels();
+    });
+
+    filterHardBtn.addEventListener('click', () => {
+      showHards = !showHards;
+      filterHardBtn.className = showHards 
+        ? "px-2.5 py-1 rounded bg-red-950/80 border border-red-500/50 text-red-300 text-[11px] font-semibold active:scale-95 transition"
+        : "px-2.5 py-1 rounded bg-slate-900 border border-slate-800 text-slate-500 text-[11px] font-semibold active:scale-95 transition line-through";
+      redrawWheels();
+    });
+
+    function redrawWheels() {
+      if (currentActiveProfile) {
+        drawGenericWheel('astroWheel', currentActiveProfile, true);
+        if (currentSkyProfileGlobal) {
+          drawGenericWheel('currentAstroWheel', currentSkyProfileGlobal, false);
+          drawBiWheelCanvas('biWheelCanvas', currentActiveProfile, currentSkyProfileGlobal);
+        }
+      }
+    }
+
+    const tabFineTuneBtn = document.getElementById('tabFineTuneBtn');
+    const tabUnknownHourBtn = document.getElementById('tabUnknownHourBtn');
+    const unknownHourGuidePanel = document.getElementById('unknownHourGuidePanel');
+    const eventsListPanel = document.getElementById('eventsListPanel');
+
+    tabFineTuneBtn.addEventListener('click', () => {
+      tabFineTuneBtn.className = "px-3 py-1 rounded-lg bg-amber-400 text-slate-950 font-bold text-xs transition";
+      tabUnknownHourBtn.className = "px-3 py-1 rounded-lg bg-slate-900 text-amber-300 border border-slate-700 hover:border-amber-400 font-bold text-xs transition";
+      unknownHourGuidePanel.classList.add('hidden');
+      eventsListPanel.classList.remove('hidden');
+    });
+
+    tabUnknownHourBtn.addEventListener('click', () => {
+      tabUnknownHourBtn.className = "px-3 py-1 rounded-lg bg-amber-400 text-slate-950 font-bold text-xs transition";
+      tabFineTuneBtn.className = "px-3 py-1 rounded-lg bg-slate-900 text-amber-300 border border-slate-700 hover:border-amber-400 font-bold text-xs transition";
+      unknownHourGuidePanel.classList.remove('hidden');
+      eventsListPanel.classList.add('hidden');
+    });
+
+    document.getElementById('applyDaypartTimeBtn').addEventListener('click', () => {
+      const tentativeTime = document.getElementById('daypartSelect').value;
+      document.getElementById('birthTime').value = tentativeTime;
+      tabFineTuneBtn.click();
+      alert(`Se ha establecido las ${tentativeTime} h como base tentativa. Ahora añade tus acontecimientos vitales abajo para que el sistema triangule los minutos exactos.`);
+      document.getElementById('astralForm').dispatchEvent(new Event('submit'));
     });
 
     // --- CÁLCULOS MATEMÁTICOS Y ASTRONÓMICOS ---
@@ -807,122 +1001,7 @@
       };
     }
 
-    function renderCFMTable(planets, houses) {
-      const grid = {
-        "Fu": { "C": [], "F": [], "M": [] },
-        "Ti": { "C": [], "F": [], "M": [] },
-        "Ai": { "C": [], "F": [], "M": [] },
-        "Ag": { "C": [], "F": [], "M": [] }
-      };
-
-      planets.forEach(p => {
-        const attr = SIGN_ATTRIBUTES[p.sign];
-        if (attr) grid[attr.elem][attr.mod].push(p.sym);
-      });
-
-      const ascAttr = SIGN_ATTRIBUTES[houses[0].sign];
-      if (ascAttr) grid[ascAttr.elem][ascAttr.mod].push("AC");
-      const mcAttr = SIGN_ATTRIBUTES[houses[9].sign];
-      if (mcAttr) grid[mcAttr.elem][mcAttr.mod].push("MC");
-
-      const tbody = document.getElementById('cfmTableBody');
-      tbody.innerHTML = '';
-
-      const rowDefs = [
-        { key: "Fu", label: "Fu (Fuego)", color: "text-red-400" },
-        { key: "Ti", label: "Ti (Tierra)", color: "text-emerald-400" },
-        { key: "Ai", label: "Ai (Aire)", color: "text-amber-300" },
-        { key: "Ag", label: "Ag (Agua)", color: "text-blue-400" }
-      ];
-
-      rowDefs.forEach(r => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td class="py-1 px-2 font-bold ${r.color} text-left border-r border-slate-700">${r.label}</td>
-          <td class="py-1 px-1 border-r border-slate-700 tracking-wider">${grid[r.key]["C"].join(' ') || '-'}</td>
-          <td class="py-1 px-1 border-r border-slate-700 tracking-wider">${grid[r.key]["F"].join(' ') || '-'}</td>
-          <td class="py-1 px-1 tracking-wider">${grid[r.key]["M"].join(' ') || '-'}</td>
-        `;
-        tbody.appendChild(tr);
-      });
-    }
-
-    function renderAspectMatrix(planets) {
-      const container = document.getElementById('aspectGridMatrix');
-      container.innerHTML = '';
-
-      const refPlanets = planets.slice(0, 10);
-      const n = refPlanets.length;
-
-      const aspectsList = [
-        { sym: "☌", angle: 0, orb: 7, color: "text-red-400" },
-        { sym: "✱", angle: 60, orb: 5, color: "text-blue-400" },
-        { sym: "□", angle: 90, orb: 7, color: "text-red-400" },
-        { sym: "△", angle: 120, orb: 7, color: "text-blue-400" },
-        { sym: "☍", angle: 180, orb: 8, color: "text-red-400" }
-      ];
-
-      const table = document.createElement('table');
-      table.className = "aspect-grid-table font-mono";
-
-      const headerRow = document.createElement('tr');
-      for (let c = 0; c < n; c++) {
-        const td = document.createElement('td');
-        if (c < n - 1) {
-          td.className = "aspect-header";
-          td.textContent = refPlanets[c].sym;
-        } else {
-          td.className = "aspect-empty";
-        }
-        headerRow.appendChild(td);
-      }
-      table.appendChild(headerRow);
-
-      for (let r = 1; r < n; r++) {
-        const tr = document.createElement('tr');
-
-        for (let c = 0; c < n; c++) {
-          const td = document.createElement('td');
-
-          if (c < r) {
-            let diff = Math.abs(refPlanets[r].absDeg - refPlanets[c].absDeg);
-            if (diff > 180) diff = 360 - diff;
-
-            let match = null;
-            let foundOrb = 0;
-            for (const asp of aspectsList) {
-              const o = Math.abs(diff - asp.angle);
-              if (o <= asp.orb) {
-                match = asp;
-                foundOrb = Math.round(o);
-                break;
-              }
-            }
-
-            if (match) {
-              td.innerHTML = `<div class="flex flex-col items-center justify-center leading-none">
-                <span class="${match.color} text-[11px] font-bold">${match.sym}</span>
-                <span class="text-[8px] text-slate-400">${foundOrb}°</span>
-              </div>`;
-            } else {
-              td.innerHTML = '';
-            }
-          } else if (c === r) {
-            td.className = "aspect-header";
-            td.textContent = refPlanets[r].sym;
-          } else {
-            td.className = "aspect-empty";
-          }
-
-          tr.appendChild(td);
-        }
-        table.appendChild(tr);
-      }
-
-      container.appendChild(table);
-    }
-
-    // Dibujo con rotulación de número y palabra clave de cada casa en la rueda
+    // Dibujo estándar de la rueda (Natal o Cielo Actual)
     function drawGenericWheel(canvasId, profile, isNatal = false) {
       const canvas = document.getElementById(canvasId);
       if (!canvas) return;
@@ -1060,14 +1139,12 @@
         const numX = cx + ((rHousesMid + rCenter) / 2) * Math.cos(midRad);
         const numY = cy + ((rHousesMid + rCenter) / 2) * Math.sin(midRad);
 
-        // Número de la casa
         ctx.fillStyle = "#1e293b";
         ctx.font = 'bold 10px "Courier Prime", monospace';
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
         ctx.fillText(h.house, numX, numY - 4);
 
-        // Palabra clave arquetípica dentro de la rueda
         ctx.fillStyle = "#475569";
         ctx.font = '6px "Plus Jakarta Sans", sans-serif';
         ctx.fillText(HOUSE_KEYWORDS[h.house], numX, numY + 5);
@@ -1075,6 +1152,12 @@
 
       if (profile.aspectLines) {
         profile.aspectLines.forEach(l => {
+          const isHarmonic = (l.type === "trine" || l.type === "sextile");
+          const isHard = (l.type === "square" || l.type === "opp" || l.type === "conj");
+
+          if (isHarmonic && !showHarmonics) return;
+          if (isHard && !showHards) return;
+
           const a1 = toRad(180 - (l.from - ascDeg));
           const a2 = toRad(180 - (l.to - ascDeg));
           const x1 = cx + rCenter * Math.cos(a1);
@@ -1202,6 +1285,285 @@
       ctx.fillText(`IC ${Math.floor(icCuspDeg % 30)}°${String(icMin).padStart(2, '0')}'`, icX, icY + 12);
     }
 
+    // DIBUJADO DE RUEDA CONCÉNTRICA BI-WHEEL
+    function drawBiWheelCanvas(canvasId, natalProfile, transitProfile) {
+      const canvas = document.getElementById(canvasId);
+      if (!canvas || !natalProfile || !transitProfile) return;
+
+      const dpr = window.devicePixelRatio || 1;
+      const displaySize = 560;
+      canvas.width = displaySize * dpr;
+      canvas.height = displaySize * dpr;
+      canvas.style.width = `${displaySize}px`;
+      canvas.style.height = `${displaySize}px`;
+
+      const ctx = canvas.getContext('2d');
+      ctx.scale(dpr, dpr);
+
+      const cx = displaySize / 2;
+      const cy = displaySize / 2;
+
+      const rOuterTransits = 268;
+      const rOuterZodiac = 246;
+      const rInnerZodiac = 216;
+      const rNatalRing = 130;
+      const rCenter = 30;
+
+      const ascDeg = (natalProfile.houses[0].deg !== undefined) ? natalProfile.houses[0].deg : natalProfile.houses[0].absDeg;
+      biWheelInteractiveTargets = [];
+
+      ctx.clearRect(0, 0, displaySize, displaySize);
+
+      ctx.beginPath();
+      ctx.arc(cx, cy, rOuterTransits, 0, 2 * Math.PI);
+      ctx.fillStyle = "#0c1527";
+      ctx.fill();
+      ctx.strokeStyle = "#38bdf8";
+      ctx.lineWidth = 1.2;
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.arc(cx, cy, rOuterZodiac, 0, 2 * Math.PI);
+      ctx.fillStyle = "#fffee6";
+      ctx.fill();
+      ctx.strokeStyle = "#475569";
+      ctx.lineWidth = 1;
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.arc(cx, cy, rInnerZodiac, 0, 2 * Math.PI);
+      ctx.fillStyle = "#ffffff";
+      ctx.fill();
+      ctx.strokeStyle = "#64748b";
+      ctx.lineWidth = 1;
+      ctx.stroke();
+
+      for (let i = 0; i < 12; i++) {
+        const signStartDeg = (i * 30);
+        const signStartRad = toRad(180 - (signStartDeg - ascDeg));
+
+        ctx.beginPath();
+        ctx.moveTo(cx + rInnerZodiac * Math.cos(signStartRad), cy + rInnerZodiac * Math.sin(signStartRad));
+        ctx.lineTo(cx + rOuterZodiac * Math.cos(signStartRad), cy + rOuterZodiac * Math.sin(signStartRad));
+        ctx.strokeStyle = "#334155";
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
+        const signMidRad = toRad(180 - (signStartDeg + 15 - ascDeg));
+        const rSymbol = (rOuterZodiac + rInnerZodiac) / 2;
+        const sx = cx + rSymbol * Math.cos(signMidRad);
+        const sy = cy + rSymbol * Math.sin(signMidRad);
+
+        ctx.fillStyle = SIGN_COLORS[ZODIAC_NAMES[i]] || "#0f172a";
+        ctx.font = 'bold 16px "Courier Prime", monospace';
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(ZODIAC_GLYPHS[i], sx, sy);
+      }
+
+      natalProfile.houses.forEach((h, idx) => {
+        const cuspDeg = (h.deg !== undefined) ? h.deg : h.absDeg;
+        const angleRad = toRad(180 - (cuspDeg - ascDeg));
+        const isAngle = (idx === 0 || idx === 3 || idx === 6 || idx === 9);
+
+        ctx.beginPath();
+        ctx.moveTo(cx + rCenter * Math.cos(angleRad), cy + rCenter * Math.sin(angleRad));
+        ctx.lineTo(cx + rInnerZodiac * Math.cos(angleRad), cy + rInnerZodiac * Math.sin(angleRad));
+        ctx.strokeStyle = isAngle ? "#0f172a" : "#64748b";
+        ctx.lineWidth = isAngle ? 2.2 : 0.8;
+        if (!isAngle) ctx.setLineDash([3, 3]);
+        ctx.stroke();
+        ctx.setLineDash([]);
+      });
+
+      if (natalProfile.aspectLines) {
+        natalProfile.aspectLines.forEach(l => {
+          const isHarmonic = (l.type === "trine" || l.type === "sextile");
+          const isHard = (l.type === "square" || l.type === "opp" || l.type === "conj");
+
+          if (isHarmonic && !showHarmonics) return;
+          if (isHard && !showHards) return;
+
+          const a1 = toRad(180 - (l.from - ascDeg));
+          const a2 = toRad(180 - (l.to - ascDeg));
+          ctx.beginPath();
+          ctx.moveTo(cx + rCenter * Math.cos(a1), cy + rCenter * Math.sin(a1));
+          ctx.lineTo(cx + rCenter * Math.cos(a2), cy + rCenter * Math.sin(a2));
+          ctx.strokeStyle = (l.type === "square" || l.type === "opp") ? "#dc2626" : "#2563eb";
+          ctx.lineWidth = l.width || 2.0;
+          ctx.stroke();
+        });
+      }
+
+      natalProfile.planets.forEach(p => {
+        const pRad = toRad(180 - (p.absDeg - ascDeg));
+        const px = cx + rNatalRing * Math.cos(pRad);
+        const py = cy + rNatalRing * Math.sin(pRad);
+
+        biWheelInteractiveTargets.push({
+          type: "Natal",
+          name: p.name,
+          sym: p.sym,
+          sign: p.sign,
+          deg: p.deg,
+          house: p.house,
+          x: px, y: py, radius: 14
+        });
+
+        ctx.fillStyle = "#090d16";
+        ctx.font = 'bold 15px "Courier Prime", monospace';
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(p.sym, px, py);
+      });
+
+      const rTransitPlanets = (rOuterTransits + rOuterZodiac) / 2;
+      transitProfile.planets.forEach(tp => {
+        const tpRad = toRad(180 - (tp.absDeg - ascDeg));
+        const tpx = cx + rTransitPlanets * Math.cos(tpRad);
+        const tpy = cy + rTransitPlanets * Math.sin(tpRad);
+
+        biWheelInteractiveTargets.push({
+          type: "Tránsito",
+          name: tp.name,
+          sym: tp.sym,
+          sign: tp.sign,
+          deg: tp.deg,
+          house: getHouseFromCusps(tp.absDeg, natalProfile.houses),
+          x: tpx, y: tpy, radius: 14
+        });
+
+        ctx.beginPath();
+        ctx.arc(tpx, tpy, 9, 0, 2 * Math.PI);
+        ctx.fillStyle = "#0369a1";
+        ctx.fill();
+        ctx.strokeStyle = "#38bdf8";
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
+        ctx.fillStyle = "#ffffff";
+        ctx.font = 'bold 12px "Courier Prime", monospace';
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(tp.sym, tpx, tpy);
+      });
+    }
+
+    function renderCFMTable(planets, houses) {
+      const grid = {
+        "Fu": { "C": [], "F": [], "M": [] },
+        "Ti": { "C": [], "F": [], "M": [] },
+        "Ai": { "C": [], "F": [], "M": [] },
+        "Ag": { "C": [], "F": [], "M": [] }
+      };
+
+      planets.forEach(p => {
+        const attr = SIGN_ATTRIBUTES[p.sign];
+        if (attr) grid[attr.elem][attr.mod].push(p.sym);
+      });
+
+      const ascAttr = SIGN_ATTRIBUTES[houses[0].sign];
+      if (ascAttr) grid[ascAttr.elem][ascAttr.mod].push("AC");
+      const mcAttr = SIGN_ATTRIBUTES[houses[9].sign];
+      if (mcAttr) grid[mcAttr.elem][mcAttr.mod].push("MC");
+
+      const tbody = document.getElementById('cfmTableBody');
+      tbody.innerHTML = '';
+
+      const rowDefs = [
+        { key: "Fu", label: "Fu (Fuego)", color: "text-red-400" },
+        { key: "Ti", label: "Ti (Tierra)", color: "text-emerald-400" },
+        { key: "Ai", label: "Ai (Aire)", color: "text-amber-300" },
+        { key: "Ag", label: "Ag (Agua)", color: "text-blue-400" }
+      ];
+
+      rowDefs.forEach(r => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td class="py-1 px-2 font-bold ${r.color} text-left border-r border-slate-700">${r.label}</td>
+          <td class="py-1 px-1 border-r border-slate-700 tracking-wider">${grid[r.key]["C"].join(' ') || '-'}</td>
+          <td class="py-1 px-1 border-r border-slate-700 tracking-wider">${grid[r.key]["F"].join(' ') || '-'}</td>
+          <td class="py-1 px-1 tracking-wider">${grid[r.key]["M"].join(' ') || '-'}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function renderAspectMatrix(planets) {
+      const container = document.getElementById('aspectGridMatrix');
+      container.innerHTML = '';
+
+      const refPlanets = planets.slice(0, 10);
+      const n = refPlanets.length;
+
+      const aspectsList = [
+        { sym: "☌", angle: 0, orb: 7, color: "text-red-400" },
+        { sym: "✱", angle: 60, orb: 5, color: "text-blue-400" },
+        { sym: "□", angle: 90, orb: 7, color: "text-red-400" },
+        { sym: "△", angle: 120, orb: 7, color: "text-blue-400" },
+        { sym: "☍", angle: 180, orb: 8, color: "text-red-400" }
+      ];
+
+      const table = document.createElement('table');
+      table.className = "aspect-grid-table font-mono";
+
+      const headerRow = document.createElement('tr');
+      for (let c = 0; c < n; c++) {
+        const td = document.createElement('td');
+        if (c < n - 1) {
+          td.className = "aspect-header";
+          td.textContent = refPlanets[c].sym;
+        } else {
+          td.className = "aspect-empty";
+        }
+        headerRow.appendChild(td);
+      }
+      table.appendChild(headerRow);
+
+      for (let r = 1; r < n; r++) {
+        const tr = document.createElement('tr');
+
+        for (let c = 0; c < n; c++) {
+          const td = document.createElement('td');
+
+          if (c < r) {
+            let diff = Math.abs(refPlanets[r].absDeg - refPlanets[c].absDeg);
+            if (diff > 180) diff = 360 - diff;
+
+            let match = null;
+            let foundOrb = 0;
+            for (const asp of aspectsList) {
+              const o = Math.abs(diff - asp.angle);
+              if (o <= asp.orb) {
+                match = asp;
+                foundOrb = Math.round(o);
+                break;
+              }
+            }
+
+            if (match) {
+              td.innerHTML = `<div class="flex flex-col items-center justify-center leading-none">
+                <span class="${match.color} text-[11px] font-bold">${match.sym}</span>
+                <span class="text-[8px] text-slate-400">${foundOrb}°</span>
+              </div>`;
+            } else {
+              td.innerHTML = '';
+            }
+          } else if (c === r) {
+            td.className = "aspect-header";
+            td.textContent = refPlanets[r].sym;
+          } else {
+            td.className = "aspect-empty";
+          }
+
+          tr.appendChild(td);
+        }
+        table.appendChild(tr);
+      }
+
+      container.appendChild(table);
+    }
+
     function calculateUpcomingIngressesAndForecast(houses, evalDate) {
       const events = [
         { date: "14 Nov 2026", planet: "Marte ♂", targetDeg: 120, desc: "Impulso de acción vigorosa, energía dinámica e iniciativas." },
@@ -1313,15 +1675,18 @@
         pTable.appendChild(row);
       });
 
+      // Dibujar Ruedas
       drawGenericWheel('astroWheel', profile, true);
 
       const lat = profile.lat || 39.4699;
       const lng = profile.lng || -0.3763;
-      const currentSkyProfile = calculateDynamicProfile("Cielo Actual", evalDateStr, "12:00", lat, lng, 2);
-      drawGenericWheel('currentAstroWheel', currentSkyProfile, false);
+      currentSkyProfileGlobal = calculateDynamicProfile("Cielo Actual", evalDateStr, "12:00", lat, lng, 2);
+      drawGenericWheel('currentAstroWheel', currentSkyProfileGlobal, false);
+      drawBiWheelCanvas('biWheelCanvas', profile, currentSkyProfileGlobal);
 
       document.getElementById('currentSkyBadge').textContent = `Fecha: ${evalDateStr}`;
 
+      // Renderizar Tablas y Ciclos
       renderCFMTable(profile.planets, profile.houses);
       renderAspectMatrix(profile.planets);
 
@@ -1387,7 +1752,6 @@
       document.getElementById('lifeDesc').textContent = 
         `${age} años cumplidos. Septenario ${septIndex} (periodo de 7 años). Enfocado en consolidación de metas y maestría interior.`;
 
-      // Tránsitos Activos
       const transitsCurrent = [
         { name: "Júpiter", sym: "♃", deg: 104, sign: "Cáncer", desc: "Expansión, oportunidades de desarrollo y apertura benéfica." },
         { name: "Saturno", sym: "♄", deg: 2, sign: "Aries", desc: "Pruebas de responsabilidad, estructuración y límites firmes." },
@@ -1415,7 +1779,7 @@
       calculateUpcomingIngressesAndForecast(profile.houses, evalDate);
     }
 
-    // Tooltip flotante interactivo con palabra clave
+    // Tooltip Rueda Simple
     const wheelCanvas = document.getElementById('astroWheel');
     const tooltip = document.getElementById('planetTooltip');
     const tooltipContent = document.getElementById('tooltipContent');
@@ -1424,7 +1788,6 @@
       const rect = wheelCanvas.getBoundingClientRect();
       const scaleX = 500 / rect.width;
       const scaleY = 500 / rect.height;
-
       const mouseX = (e.clientX - rect.left) * scaleX;
       const mouseY = (e.clientY - rect.top) * scaleY;
 
@@ -1439,22 +1802,12 @@
           <div class="flex items-center gap-1.5 text-amber-300 font-bold font-cinzel text-xs">
             <span>${hovered.sym}</span> <span>${hovered.name}</span>
           </div>
-          <div class="text-[11px] text-slate-200 mt-0.5">
-            ${hovered.sign} • ${hovered.deg}
-          </div>
-          <div class="text-[10px] text-amber-400 font-semibold mt-0.5">
-            Casa ${hovered.house} · ${hovered.houseKeyword}
-          </div>
-          <div class="text-[9px] text-slate-400 leading-tight mt-0.5">
-            ${HOUSES_DESC[hovered.house].split(',')[0]}
-          </div>
+          <div class="text-[11px] text-slate-200 mt-0.5">${hovered.sign} • ${hovered.deg}</div>
+          <div class="text-[10px] text-amber-400 font-semibold mt-0.5">Casa ${hovered.house} · ${hovered.houseKeyword}</div>
+          <div class="text-[9px] text-slate-400 leading-tight mt-0.5">${HOUSES_DESC[hovered.house].split(',')[0]}</div>
         `;
-
-        const posX = e.clientX - rect.left;
-        const posY = e.clientY - rect.top;
-
-        tooltip.style.left = `${posX + 15}px`;
-        tooltip.style.top = `${posY - 40}px`;
+        tooltip.style.left = `${(e.clientX - rect.left) + 15}px`;
+        tooltip.style.top = `${(e.clientY - rect.top) - 40}px`;
         tooltip.classList.remove('hidden');
         wheelCanvas.style.cursor = 'pointer';
       } else {
@@ -1463,11 +1816,47 @@
       }
     });
 
-    wheelCanvas.addEventListener('mouseleave', () => {
-      tooltip.classList.add('hidden');
+    wheelCanvas.addEventListener('mouseleave', () => tooltip.classList.add('hidden'));
+
+    // Tooltip Rueda Bi-Wheel
+    const biWheelCanvas = document.getElementById('biWheelCanvas');
+    const biWheelTooltip = document.getElementById('biWheelTooltip');
+    const biWheelTooltipContent = document.getElementById('biWheelTooltipContent');
+
+    biWheelCanvas.addEventListener('mousemove', (e) => {
+      const rect = biWheelCanvas.getBoundingClientRect();
+      const scaleX = 560 / rect.width;
+      const scaleY = 560 / rect.height;
+      const mouseX = (e.clientX - rect.left) * scaleX;
+      const mouseY = (e.clientY - rect.top) * scaleY;
+
+      const hovered = biWheelInteractiveTargets.find(t => {
+        const dx = mouseX - t.x;
+        const dy = mouseY - t.y;
+        return Math.sqrt(dx * dx + dy * dy) <= t.radius;
+      });
+
+      if (hovered) {
+        biWheelTooltipContent.innerHTML = `
+          <div class="flex items-center justify-between gap-2 border-b border-slate-800 pb-1 mb-1">
+            <span class="text-[10px] font-bold ${hovered.type === 'Natal' ? 'text-amber-400' : 'text-sky-400'} uppercase">${hovered.type}</span>
+            <span class="font-bold font-cinzel text-xs text-white">${hovered.sym} ${hovered.name}</span>
+          </div>
+          <div class="text-[11px] text-slate-200">${hovered.sign} • ${hovered.deg}</div>
+          <div class="text-[10px] text-amber-300 font-semibold mt-0.5">En Casa Natal ${hovered.house} (${HOUSE_KEYWORDS[hovered.house]})</div>
+        `;
+        biWheelTooltip.style.left = `${(e.clientX - rect.left) + 15}px`;
+        biWheelTooltip.style.top = `${(e.clientY - rect.top) - 40}px`;
+        biWheelTooltip.classList.remove('hidden');
+        biWheelCanvas.style.cursor = 'pointer';
+      } else {
+        biWheelTooltip.classList.add('hidden');
+        biWheelCanvas.style.cursor = 'default';
+      }
     });
 
-    // Gestión dinámica de eventos biográficos ampliados (con nuevos eventos críticos)
+    biWheelCanvas.addEventListener('mouseleave', () => biWheelTooltip.classList.add('hidden'));
+
     function renderEventRows() {
       const container = document.getElementById('eventsListContainer');
       container.innerHTML = '';
@@ -1529,7 +1918,6 @@
       renderEventRows();
     });
 
-    // Micro-ajustes manuales (+/- minutos)
     document.querySelectorAll('.quick-adjust').forEach(btn => {
       btn.addEventListener('click', () => {
         const timeInput = document.getElementById('birthTime');
@@ -1545,7 +1933,6 @@
       });
     });
 
-    // Lógica de cálculo multievento por Arco Solar con nuevos eventos
     document.getElementById('calcMultiRectifyBtn').addEventListener('click', () => {
       if (!currentActiveProfile) {
         alert("Primero debes calcular tu carta natal antes de ajustar la hora.");
@@ -1599,7 +1986,7 @@
           targetName = "Cúspide Casa 5";
           candidates = currentActiveProfile.planets.filter(p => ['Luna', 'Júpiter', 'Venus'].includes(p.name));
         } else if (ev.type === 'sibling') {
-          targetAngle = currentActiveProfile.houses[2].deg; // Casa 3
+          targetAngle = currentActiveProfile.houses[2].deg;
           targetName = "Cúspide Casa 3";
           candidates = currentActiveProfile.planets.filter(p => ['Mercurio', 'Luna', 'Júpiter'].includes(p.name));
         } else if (ev.type === 'relocation') {
@@ -1607,7 +1994,7 @@
           targetName = "IC (Casa 4)";
           candidates = currentActiveProfile.planets.filter(p => ['Luna', 'Júpiter', 'Urano'].includes(p.name));
         } else if (ev.type === 'studies') {
-          targetAngle = currentActiveProfile.houses[8].deg; // Casa 9
+          targetAngle = currentActiveProfile.houses[8].deg;
           targetName = "Cúspide Casa 9";
           candidates = currentActiveProfile.planets.filter(p => ['Júpiter', 'Mercurio', 'Sol'].includes(p.name));
         } else if (ev.type === 'accident') {
@@ -1615,19 +2002,19 @@
           targetName = "Ascendente (AC)";
           candidates = currentActiveProfile.planets.filter(p => ['Marte', 'Urano', 'Saturno'].includes(p.name));
         } else if (ev.type === 'illness') {
-          targetAngle = currentActiveProfile.houses[5].deg; // Casa 6
+          targetAngle = currentActiveProfile.houses[5].deg;
           targetName = "Cúspide Casa 6";
           candidates = currentActiveProfile.planets.filter(p => ['Saturno', 'Neptuno', 'Marte'].includes(p.name));
         } else if (ev.type === 'financial_crisis') {
-          targetAngle = currentActiveProfile.houses[1].deg; // Casa 2
+          targetAngle = currentActiveProfile.houses[1].deg;
           targetName = "Cúspide Casa 2";
           candidates = currentActiveProfile.planets.filter(p => ['Saturno', 'Plutón', 'Marte'].includes(p.name));
         } else if (ev.type === 'inheritance_lawsuit') {
-          targetAngle = currentActiveProfile.houses[7].deg; // Casa 8
+          targetAngle = currentActiveProfile.houses[7].deg;
           targetName = "Cúspide Casa 8";
           candidates = currentActiveProfile.planets.filter(p => ['Júpiter', 'Saturno', 'Plutón'].includes(p.name));
         } else if (ev.type === 'spiritual_awakening') {
-          targetAngle = currentActiveProfile.houses[11].deg; // Casa 12
+          targetAngle = currentActiveProfile.houses[11].deg;
           targetName = "Cúspide Casa 12";
           candidates = currentActiveProfile.planets.filter(p => ['Neptuno', 'Júpiter', 'Plutón'].includes(p.name));
         }
@@ -1663,10 +2050,14 @@
       const newM = String(totalMin % 60).padStart(2, '0');
       multiSuggestedTime = `${newH}:${newM}`;
 
+      const variance = adjustments.reduce((acc, val) => acc + Math.pow(val - avgMinCorrection, 2), 0) / adjustments.length;
+      const stdDev = Math.sqrt(variance);
+      const consistencyPct = Math.max(50, Math.min(98, Math.round(100 - stdDev * 4)));
+
       const summary = document.getElementById('multiRectifySummary');
       const signStr = avgMinCorrection > 0 ? `-${avgMinCorrection}` : `+${Math.abs(avgMinCorrection)}`;
       summary.innerHTML = `
-        <div class="font-bold text-amber-300">Convergencia de ${adjustments.length} eventos analizados:</div>
+        <div class="font-bold text-amber-300">Convergencia de ${adjustments.length} eventos analizados (Consistencia: <strong>${consistencyPct}%</strong>):</div>
         <div class="text-[11px] text-slate-400 mt-1">${eventDetails.join(' • ')}</div>
         <div class="mt-1.5 text-slate-200">Desfase medio estimado: <strong class="text-amber-400 font-mono">${signStr} minutos</strong>. Hora sugerida: <strong class="text-amber-300 text-sm font-mono">${multiSuggestedTime}</strong></div>
       `;
