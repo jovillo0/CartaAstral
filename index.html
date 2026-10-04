@@ -65,7 +65,6 @@
 
   <main class="w-full max-w-7xl space-y-6">
 
-    <!-- Encabezado Principal -->
     <header class="text-center space-y-2 pt-1">
       <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-400/30 bg-amber-400/10 text-amber-300 text-xs font-semibold tracking-wider uppercase">
         <span>☉</span> Carta Placidus, Rectificación Multievento & Monitor de Ciclos <span>☉</span>
@@ -74,17 +73,34 @@
         Carta Astral & Dinámica de Ciclos
       </h1>
       <p class="text-slate-400 text-xs sm:text-sm max-w-2xl mx-auto">
-        Rueda circular clásica estilo Astrodienst con casas Placidus exactas, ajuste de nacimiento por convergencia multievento y comparativa en vivo.
+        Rueda estilo Astrodienst con nombres arquetípicos de casas, rectificación avanzada por acontecimientos y gestión neutral de perfiles.
       </p>
     </header>
 
-    <!-- Formulario de Entrada de Datos -->
-    <section class="glass-card rounded-2xl p-4 sm:p-6 shadow-2xl space-y-4">
-      <div class="border-b border-slate-800 pb-3">
-        <span class="text-xs uppercase tracking-wider text-amber-400 font-bold block">Datos de Nacimiento</span>
-        <span class="text-xs text-slate-400">Introduce la información requerida para calcular el cielo natal:</span>
+    <!-- Barra de Gestión de Perfiles -->
+    <section class="glass-card rounded-2xl p-4 sm:p-5 shadow-2xl space-y-4">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-slate-800 pb-3">
+        <div>
+          <span class="text-xs uppercase tracking-wider text-amber-400 font-bold block">Gestión de Perfiles</span>
+          <span class="text-xs text-slate-400">Guarda cartas natales en tu navegador o consulta las creadas:</span>
+        </div>
+        <div class="flex flex-wrap items-center gap-2 w-full sm:w-auto">
+          <select id="savedProfilesSelect" class="flex-1 sm:flex-initial px-3 py-2 rounded-xl bg-slate-900 border border-amber-500/40 text-amber-300 text-xs sm:text-sm font-medium focus:outline-none focus:border-amber-400">
+            <option value="none">-- Seleccionar Perfil Guardado --</option>
+          </select>
+          <button type="button" id="newProfileBtn" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-300 text-xs font-bold border border-slate-700 transition flex items-center gap-1">
+            <span>+</span> Nuevo
+          </button>
+          <button type="button" id="saveProfileBtn" class="px-3 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 text-xs font-bold transition flex items-center gap-1 shadow">
+            <span>💾</span> Guardar
+          </button>
+          <button type="button" id="deleteProfileBtn" class="px-2.5 py-2 rounded-xl bg-rose-950/70 hover:bg-rose-900 text-rose-300 text-xs font-bold border border-rose-800 transition" title="Eliminar perfil seleccionado">
+            🗑️
+          </button>
+        </div>
       </div>
 
+      <!-- Formulario de Entrada de Datos -->
       <form id="astralForm" class="space-y-4">
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3.5 items-end">
           <div>
@@ -98,8 +114,8 @@
           <div>
             <div class="flex justify-between items-center mb-1">
               <label for="birthTime" class="text-xs uppercase tracking-wider text-slate-300 font-semibold block">Hora Local</label>
-              <!-- Micro-ajustes rápidos -->
               <div class="flex items-center gap-1">
+                <button type="button" id="unknownHourBtn" class="text-[9px] text-amber-400/90 hover:underline mr-1" title="Si no se sabe la hora, fija 12:00 h solar como base">¿Hora desconocida?</button>
                 <button type="button" class="quick-adjust px-1.5 py-0.5 rounded bg-slate-800 hover:bg-slate-700 border border-slate-600 text-[10px] font-mono text-amber-300" data-min="-5">-5m</button>
                 <button type="button" class="quick-adjust px-1.5 py-0.5 rounded bg-slate-800 hover:bg-slate-700 border border-slate-600 text-[10px] font-mono text-amber-300" data-min="-1">-1m</button>
                 <button type="button" class="quick-adjust px-1.5 py-0.5 rounded bg-slate-800 hover:bg-slate-700 border border-slate-600 text-[10px] font-mono text-amber-300" data-min="1">+1m</button>
@@ -155,14 +171,14 @@
           </div>
         </div>
 
-        <!-- MÓDULO VISIBLE: RECTIFICACIÓN HORARIA MULTIEVENTO -->
+        <!-- MÓDULO DE RECTIFICACIÓN HORARIA MULTIEVENTO AMPLIADO -->
         <div id="rectificationAccordion" class="pt-3 border-t border-amber-500/30 bg-amber-500/10 p-4 rounded-xl space-y-3">
           <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
             <div>
               <h4 class="font-cinzel text-sm font-bold text-amber-300 flex items-center gap-1.5">
                 <span>⏱</span> Rectificación Multievento por Arco Solar (Clave 1° = 1 Año)
               </h4>
-              <p class="text-xs text-slate-300 mt-0.5">Añade varios hitos biográficos de tu vida (incluyendo fallecimientos, bodas, crisis o mudanzas) para encontrar la hora exacta por convergencia estadística.</p>
+              <p class="text-xs text-slate-300 mt-0.5">Triangula la hora exacta a partir de múltiples acontecimientos vitales clave.</p>
             </div>
           </div>
 
@@ -202,7 +218,7 @@
       </form>
     </section>
 
-    <!-- Zona de Resultados (Oculta al inicio hasta que se introduzcan datos) -->
+    <!-- Zona de Resultados -->
     <div id="results" class="hidden space-y-6">
 
       <!-- Tríada Fundamental -->
@@ -292,10 +308,10 @@
                     <th class="py-1">Astro</th>
                     <th class="py-1">Signo</th>
                     <th class="py-1">Grado</th>
-                    <th class="py-1">Casa</th>
+                    <th class="py-1">Casa & Esfera</th>
                   </tr>
                 </thead>
-                <tbody id="natalPlanetsTable" class="divide-y divide-slate-800/60 font-mono"></tbody>
+                <tbody id="natalPlanetsTable" class="divide-y border-slate-800/60 font-mono"></tbody>
               </table>
             </div>
           </div>
@@ -442,6 +458,22 @@
       "Capricornio": { elem: "Ti", mod: "C" }, "Acuario": { elem: "Ai", mod: "F" }, "Piscis": { elem: "Ag", mod: "M" }
     };
 
+    // Palabras clave definitorias de cada casa
+    const HOUSE_KEYWORDS = {
+      1: "Identidad",
+      2: "Recursos",
+      3: "Entorno",
+      4: "Hogar",
+      5: "Creación",
+      6: "Rutina",
+      7: "Vínculos",
+      8: "Mutación",
+      9: "Expansión",
+      10: "Vocación",
+      11: "Comunidad",
+      12: "Trascendencia"
+    };
+
     const HOUSES_DESC = {
       1: "Identidad personal, presencia, vitalidad e iniciativas.",
       2: "Economía propia, administración de recursos y valores materiales.",
@@ -479,10 +511,122 @@
 
     let natalInteractiveTargets = [];
     let currentActiveProfile = null;
-
     let userEvents = [];
     let multiSuggestedTime = null;
 
+    // --- ALMACENAMIENTO Y GESTIÓN DE PERFILES EN LOCALSTORAGE ---
+    function getStoredProfiles() {
+      try {
+        return JSON.parse(localStorage.getItem('astro_saved_profiles') || '{}');
+      } catch (e) {
+        return {};
+      }
+    }
+
+    function saveStoredProfiles(profiles) {
+      localStorage.setItem('astro_saved_profiles', JSON.stringify(profiles));
+    }
+
+    function refreshProfilesDropdown(selectedId = null) {
+      const select = document.getElementById('savedProfilesSelect');
+      const profiles = getStoredProfiles();
+      select.innerHTML = '<option value="none">-- Seleccionar Perfil Guardado --</option>';
+
+      Object.keys(profiles).forEach(id => {
+        const p = profiles[id];
+        const opt = document.createElement('option');
+        opt.value = id;
+        opt.textContent = `${p.name} (${p.birthDate})`;
+        if (selectedId && selectedId === id) opt.selected = true;
+        select.appendChild(opt);
+      });
+    }
+
+    document.getElementById('newProfileBtn').addEventListener('click', () => {
+      document.getElementById('savedProfilesSelect').value = 'none';
+      document.getElementById('userName').value = '';
+      document.getElementById('birthDate').value = '';
+      document.getElementById('birthTime').value = '';
+      document.getElementById('results').classList.add('hidden');
+      currentActiveProfile = null;
+      userEvents = [];
+      renderEventRows();
+    });
+
+    document.getElementById('unknownHourBtn').addEventListener('click', () => {
+      document.getElementById('birthTime').value = '12:00';
+      alert("Se ha fijado las 12:00 h como hora base de partida. Introduce las fechas de tus acontecimientos vitales en el módulo de rectificación para calibrar tus minutos exactos.");
+    });
+
+    document.getElementById('saveProfileBtn').addEventListener('click', () => {
+      const name = document.getElementById('userName').value.trim();
+      const birthDate = document.getElementById('birthDate').value;
+      const birthTime = document.getElementById('birthTime').value;
+      const cityKey = document.getElementById('cityPreset').value;
+      const lat = parseFloat(document.getElementById('geoLat').value);
+      const lng = parseFloat(document.getElementById('geoLng').value);
+      const dst = document.getElementById('dstOffset').value;
+
+      if (!name || !birthDate || !birthTime) {
+        alert("Por favor introduce Nombre, Fecha y Hora de nacimiento para guardar.");
+        return;
+      }
+
+      const profiles = getStoredProfiles();
+      const profileId = 'prof_' + Date.now();
+      profiles[profileId] = {
+        id: profileId,
+        name,
+        birthDate,
+        birthTime,
+        cityKey,
+        lat,
+        lng,
+        dst
+      };
+
+      saveStoredProfiles(profiles);
+      refreshProfilesDropdown(profileId);
+      alert(`Perfil "${name}" guardado correctamente.`);
+    });
+
+    document.getElementById('savedProfilesSelect').addEventListener('change', (e) => {
+      const selectedId = e.target.value;
+      if (selectedId === 'none') return;
+      const profiles = getStoredProfiles();
+      const p = profiles[selectedId];
+      if (!p) return;
+
+      document.getElementById('userName').value = p.name || '';
+      document.getElementById('birthDate').value = p.birthDate || '';
+      document.getElementById('birthTime').value = p.birthTime || '';
+      document.getElementById('cityPreset').value = p.cityKey || 'valencia';
+      document.getElementById('geoLat').value = p.lat || 39.4699;
+      document.getElementById('geoLng').value = p.lng || -0.3763;
+      document.getElementById('dstOffset').value = p.dst || "1";
+
+      document.getElementById('astralForm').dispatchEvent(new Event('submit'));
+    });
+
+    document.getElementById('deleteProfileBtn').addEventListener('click', () => {
+      const select = document.getElementById('savedProfilesSelect');
+      const selectedId = select.value;
+      if (selectedId === 'none') {
+        alert("Selecciona primero un perfil de la lista para eliminarlo.");
+        return;
+      }
+
+      const profiles = getStoredProfiles();
+      const profileName = profiles[selectedId]?.name || 'este perfil';
+      if (confirm(`¿Estás seguro de que deseas eliminar el perfil de "${profileName}"?`)) {
+        delete profiles[selectedId];
+        saveStoredProfiles(profiles);
+        refreshProfilesDropdown();
+        document.getElementById('newProfileBtn').click();
+      }
+    });
+
+    // --- CÁLCULOS MATEMÁTICOS Y ASTRONÓMICOS ---
     function toRad(deg) { return deg * Math.PI / 180; }
     function toDeg(rad) { return rad * 180 / Math.PI; }
 
@@ -599,6 +743,7 @@
           house: idx + 1,
           deg: norm,
           sign: ZODIAC_NAMES[signIdx],
+          keyword: HOUSE_KEYWORDS[idx + 1],
           label: `${ZODIAC_NAMES[signIdx]} ${Math.floor(norm % 30)}° ${String(Math.floor((norm % 1) * 60)).padStart(2, '0')}'`
         };
       });
@@ -618,13 +763,15 @@
 
       const planets = planetsRaw.map(p => {
         const f = formatDeg(p.total);
+        const hNum = getHouseFromCusps(p.total, houses);
         return {
           name: p.name,
           sym: p.sym,
           sign: f.sign,
           deg: f.deg,
           absDeg: p.total,
-          house: getHouseFromCusps(p.total, houses)
+          house: hNum,
+          houseKeyword: HOUSE_KEYWORDS[hNum]
         };
       });
 
@@ -775,6 +922,7 @@
       container.appendChild(table);
     }
 
+    // Dibujo con rotulación de número y palabra clave de cada casa en la rueda
     function drawGenericWheel(canvasId, profile, isNatal = false) {
       const canvas = document.getElementById(canvasId);
       if (!canvas) return;
@@ -795,7 +943,7 @@
       const rCyanBg = 240;
       const rZodiacOut = 222;
       const rZodiacIn = 188;
-      const rHousesMid = 80;
+      const rHousesMid = 84;
       const rCenter = 32;
 
       const ascDeg = (profile.houses[0].deg !== undefined) ? profile.houses[0].deg : profile.houses[0].absDeg;
@@ -912,11 +1060,17 @@
         const numX = cx + ((rHousesMid + rCenter) / 2) * Math.cos(midRad);
         const numY = cy + ((rHousesMid + rCenter) / 2) * Math.sin(midRad);
 
+        // Número de la casa
         ctx.fillStyle = "#1e293b";
-        ctx.font = 'bold 11px "Courier Prime", monospace';
+        ctx.font = 'bold 10px "Courier Prime", monospace';
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
-        ctx.fillText(h.house, numX, numY);
+        ctx.fillText(h.house, numX, numY - 4);
+
+        // Palabra clave arquetípica dentro de la rueda
+        ctx.fillStyle = "#475569";
+        ctx.font = '6px "Plus Jakarta Sans", sans-serif';
+        ctx.fillText(HOUSE_KEYWORDS[h.house], numX, numY + 5);
       });
 
       if (profile.aspectLines) {
@@ -973,6 +1127,7 @@
             sign: p.sign,
             deg: p.deg,
             house: p.house,
+            houseKeyword: HOUSE_KEYWORDS[p.house],
             x: px,
             y: py,
             radius: 16
@@ -1067,7 +1222,7 @@
         row.innerHTML = `
           <td class="py-2.5 px-3 text-amber-300 font-bold">${ev.date}</td>
           <td class="py-2.5 px-3 text-white font-bold">${ev.planet}</td>
-          <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded bg-amber-400/10 border border-amber-400/30 text-amber-300 font-bold">Casa ${hNum}</span></td>
+          <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded bg-amber-400/10 border border-amber-400/30 text-amber-300 font-bold">Casa ${hNum} (${HOUSE_KEYWORDS[hNum]})</span></td>
           <td class="py-2.5 px-3 text-slate-400">${cuspInfo.label}</td>
           <td class="py-2.5 px-3 text-slate-300 text-[11px] leading-tight">${ev.desc} Activa: ${HOUSES_DESC[hNum]}</td>
         `;
@@ -1082,7 +1237,7 @@
             <span class="text-[10px] text-slate-400 font-normal">Tránsito de Júpiter en Cáncer</span>
           </div>
           <p class="text-xs text-slate-300 leading-relaxed">
-            Período muy fértil para afianzar acuerdos y proyectos clave. La energía protectora de Júpiter dinamiza con solidez tu Casa ${getHouseFromCusps(104, houses)}.
+            Período muy fértil para afianzar acuerdos y proyectos clave. La energía protectora de Júpiter dinamiza con solidez tu Casa ${getHouseFromCusps(104, houses)} (${HOUSE_KEYWORDS[getHouseFromCusps(104, houses)]}).
           </p>
         </div>
         <div class="p-3.5 rounded-xl bg-slate-900/70 border border-slate-800 space-y-1.5">
@@ -1091,7 +1246,7 @@
             <span class="text-[10px] text-slate-400 font-normal">Paso de Marte & Sol</span>
           </div>
           <p class="text-xs text-slate-300 leading-relaxed">
-            Mayor dinamismo en la toma de decisiones y concreción material. Momento de cerrar compromisos pendientes y encauzar el orden de recursos en tu Casa ${getHouseFromCusps(270, houses)}.
+            Mayor dinamismo en la toma de decisiones y concreción material. Momento de cerrar compromisos pendientes y encauzar el orden de recursos en tu Casa ${getHouseFromCusps(270, houses)} (${HOUSE_KEYWORDS[getHouseFromCusps(270, houses)]}).
           </p>
         </div>
         <div class="p-3.5 rounded-xl bg-slate-900/70 border border-slate-800 space-y-1.5">
@@ -1100,7 +1255,7 @@
             <span class="text-[10px] text-slate-400 font-normal">Saturno afianzando Aries</span>
           </div>
           <p class="text-xs text-slate-300 leading-relaxed">
-            Examen kármico de firmeza y sobriedad. Todo lo que cimentes en tu Casa ${getHouseFromCusps(2, houses)} con paciencia y sin precipitación resistirá con éxito cualquier prueba.
+            Examen kármico de firmeza y sobriedad. Todo lo que cimentes en tu Casa ${getHouseFromCusps(2, houses)} (${HOUSE_KEYWORDS[getHouseFromCusps(2, houses)]}) con paciencia y sin precipitación resistirá con éxito cualquier prueba.
           </p>
         </div>
         <div class="p-3.5 rounded-xl bg-slate-900/70 border border-slate-800 space-y-1.5">
@@ -1133,17 +1288,17 @@
       const mc = profile.houses[9];
 
       document.getElementById('sunSignName').textContent = sun.sign;
-      document.getElementById('sunSignDegree').textContent = `${sun.deg} • Casa ${sun.house}`;
+      document.getElementById('sunSignDegree').textContent = `${sun.deg} • Casa ${sun.house} (${HOUSE_KEYWORDS[sun.house]})`;
 
       document.getElementById('moonSignName').textContent = moon.sign;
-      document.getElementById('moonSignDegree').textContent = `${moon.deg} • Casa ${moon.house}`;
+      document.getElementById('moonSignDegree').textContent = `${moon.deg} • Casa ${moon.house} (${HOUSE_KEYWORDS[moon.house]})`;
 
       document.getElementById('ascSignName').textContent = asc.sign;
-      document.getElementById('ascSignDegree').textContent = `${asc.label}`;
+      document.getElementById('ascSignDegree').textContent = `${asc.label} • Casa 1 (${HOUSE_KEYWORDS[1]})`;
 
       document.getElementById('chartOwnerTitle').textContent = `Carta de ${profile.name}`;
-      document.getElementById('mcBadge').textContent = `MC: ${mc.sign} ${mc.label.split('MC')[1] || ''}`;
-      document.getElementById('meridianInfo').textContent = `${mc.label} / ${profile.houses[3].label}`;
+      document.getElementById('mcBadge').textContent = `MC: ${mc.sign} ${mc.label.split('MC')[1] || ''} (${HOUSE_KEYWORDS[10]})`;
+      document.getElementById('meridianInfo').textContent = `${mc.label} (${HOUSE_KEYWORDS[10]}) / ${profile.houses[3].label} (${HOUSE_KEYWORDS[4]})`;
 
       const pTable = document.getElementById('natalPlanetsTable');
       pTable.innerHTML = '';
@@ -1153,12 +1308,11 @@
           <td class="py-1.5 font-bold text-amber-300 flex items-center gap-1.5">${p.sym} ${p.name}</td>
           <td class="py-1.5">${p.sign}</td>
           <td class="py-1.5">${p.deg}</td>
-          <td class="py-1.5 text-slate-400">Casa ${p.house}</td>
+          <td class="py-1.5 text-slate-300"><span class="text-amber-400 font-semibold">Casa ${p.house}</span> (${p.houseKeyword})</td>
         `;
         pTable.appendChild(row);
       });
 
-      // Ruedas
       drawGenericWheel('astroWheel', profile, true);
 
       const lat = profile.lat || 39.4699;
@@ -1250,7 +1404,7 @@
         card.innerHTML = `
           <div class="flex items-center justify-between">
             <span class="text-sm font-cinzel font-bold text-amber-300 flex items-center gap-1.5">${t.sym} ${t.name} en ${t.sign}</span>
-            <span class="text-xs px-2.5 py-0.5 rounded-full bg-amber-400/10 text-amber-300 border border-amber-400/20 font-bold">Casa ${h}</span>
+            <span class="text-xs px-2.5 py-0.5 rounded-full bg-amber-400/10 text-amber-300 border border-amber-400/20 font-bold">Casa ${h} (${HOUSE_KEYWORDS[h]})</span>
           </div>
           <div class="text-[11px] text-slate-400 font-medium">Área activada: ${HOUSES_DESC[h]}</div>
           <p class="text-xs text-slate-300 leading-relaxed">${t.desc}</p>
@@ -1261,7 +1415,7 @@
       calculateUpcomingIngressesAndForecast(profile.houses, evalDate);
     }
 
-    // Tooltip flotante interactivo
+    // Tooltip flotante interactivo con palabra clave
     const wheelCanvas = document.getElementById('astroWheel');
     const tooltip = document.getElementById('planetTooltip');
     const tooltipContent = document.getElementById('tooltipContent');
@@ -1289,7 +1443,10 @@
             ${hovered.sign} • ${hovered.deg}
           </div>
           <div class="text-[10px] text-amber-400 font-semibold mt-0.5">
-            Casa ${hovered.house} (${HOUSES_DESC[hovered.house].split(',')[0]})
+            Casa ${hovered.house} · ${hovered.houseKeyword}
+          </div>
+          <div class="text-[9px] text-slate-400 leading-tight mt-0.5">
+            ${HOUSES_DESC[hovered.house].split(',')[0]}
           </div>
         `;
 
@@ -1297,7 +1454,7 @@
         const posY = e.clientY - rect.top;
 
         tooltip.style.left = `${posX + 15}px`;
-        tooltip.style.top = `${posY - 35}px`;
+        tooltip.style.top = `${posY - 40}px`;
         tooltip.classList.remove('hidden');
         wheelCanvas.style.cursor = 'pointer';
       } else {
@@ -1310,7 +1467,7 @@
       tooltip.classList.add('hidden');
     });
 
-    // Gestión dinámica de eventos biográficos ampliados
+    // Gestión dinámica de eventos biográficos ampliados (con nuevos eventos críticos)
     function renderEventRows() {
       const container = document.getElementById('eventsListContainer');
       container.innerHTML = '';
@@ -1327,15 +1484,20 @@
           <div class="col-span-12 sm:col-span-6">
             <select class="event-type-input w-full px-2.5 py-1.5 rounded bg-slate-950 border border-slate-700 text-slate-200 text-xs focus:outline-none focus:border-amber-400" data-idx="${idx}">
               <option value="profession" ${ev.type === 'profession' ? 'selected' : ''}>Éxito Profesional / Vocación (MC - Sol/Júpiter)</option>
+              <option value="job_loss" ${ev.type === 'job_loss' ? 'selected' : ''}>Pérdida de empleo / Cese laboral (MC/Casa 6 - Saturno/Urano)</option>
               <option value="death_father" ${ev.type === 'death_father' ? 'selected' : ''}>Fallecimiento de Padre (MC/IC - Saturno/Sol)</option>
               <option value="death_mother" ${ev.type === 'death_mother' ? 'selected' : ''}>Fallecimiento de Madre (IC/MC - Luna/Saturno)</option>
               <option value="marriage" ${ev.type === 'marriage' ? 'selected' : ''}>Boda / Pareja formal (Casa 7 - Venus/Júpiter)</option>
               <option value="divorce" ${ev.type === 'divorce' ? 'selected' : ''}>Divorcio / Ruptura grave (Casa 7 - Urano/Marte)</option>
               <option value="child" ${ev.type === 'child' ? 'selected' : ''}>Nacimiento de Hijo (Casa 5 - Luna/Júpiter)</option>
+              <option value="sibling" ${ev.type === 'sibling' ? 'selected' : ''}>Nacimiento de Hermano en infancia (Casa 3/IC - Mercurio/Luna)</option>
               <option value="relocation" ${ev.type === 'relocation' ? 'selected' : ''}>Mudanza importante / Emigración (IC - Luna/Urano)</option>
               <option value="studies" ${ev.type === 'studies' ? 'selected' : ''}>Graduación / Estudios Superiores (Casa 9 - Júpiter/Mercurio)</option>
               <option value="accident" ${ev.type === 'accident' ? 'selected' : ''}>Accidente / Cirugía física (AC - Marte/Urano)</option>
-              <option value="financial_crisis" ${ev.type === 'financial_crisis' ? 'selected' : ''}>Crisis Financiera / Pérdida material (Casa 2/8 - Saturno/Plutón)</option>
+              <option value="illness" ${ev.type === 'illness' ? 'selected' : ''}>Enfermedad grave / Hospitalización (Casa 6/12 - Saturno/Neptuno)</option>
+              <option value="financial_crisis" ${ev.type === 'financial_crisis' ? 'selected' : ''}>Crisis Financiera / Bancarrota (Casa 2/8 - Saturno/Plutón)</option>
+              <option value="inheritance_lawsuit" ${ev.type === 'inheritance_lawsuit' ? 'selected' : ''}>Herencia / Litigio judicial (Casa 8/9 - Júpiter/Saturno)</option>
+              <option value="spiritual_awakening" ${ev.type === 'spiritual_awakening' ? 'selected' : ''}>Despertar espiritual / Retiro interior (Casa 12/9 - Neptuno/Plutón)</option>
             </select>
           </div>
           <div class="col-span-10 sm:col-span-5">
@@ -1367,8 +1529,6 @@
       renderEventRows();
     });
 
-    renderEventRows();
-
     // Micro-ajustes manuales (+/- minutos)
     document.querySelectorAll('.quick-adjust').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -1385,7 +1545,7 @@
       });
     });
 
-    // Lógica de cálculo multievento por Arco Solar con eventos ampliados
+    // Lógica de cálculo multievento por Arco Solar con nuevos eventos
     document.getElementById('calcMultiRectifyBtn').addEventListener('click', () => {
       if (!currentActiveProfile) {
         alert("Primero debes calcular tu carta natal antes de ajustar la hora.");
@@ -1414,7 +1574,11 @@
         let targetName = "MC";
         let candidates = currentActiveProfile.planets.filter(p => ['Sol', 'Júpiter', 'Saturno'].includes(p.name));
 
-        if (ev.type === 'death_father') {
+        if (ev.type === 'job_loss') {
+          targetAngle = currentActiveProfile.houses[9].deg;
+          targetName = "MC (Estatus)";
+          candidates = currentActiveProfile.planets.filter(p => ['Saturno', 'Urano', 'Marte'].includes(p.name));
+        } else if (ev.type === 'death_father') {
           targetAngle = currentActiveProfile.houses[9].deg;
           targetName = "MC (Eje Paterno)";
           candidates = currentActiveProfile.planets.filter(p => ['Saturno', 'Sol', 'Plutón'].includes(p.name));
@@ -1434,22 +1598,38 @@
           targetAngle = currentActiveProfile.houses[4].deg;
           targetName = "Cúspide Casa 5";
           candidates = currentActiveProfile.planets.filter(p => ['Luna', 'Júpiter', 'Venus'].includes(p.name));
+        } else if (ev.type === 'sibling') {
+          targetAngle = currentActiveProfile.houses[2].deg; // Casa 3
+          targetName = "Cúspide Casa 3";
+          candidates = currentActiveProfile.planets.filter(p => ['Mercurio', 'Luna', 'Júpiter'].includes(p.name));
         } else if (ev.type === 'relocation') {
           targetAngle = currentActiveProfile.houses[3].deg;
           targetName = "IC (Casa 4)";
           candidates = currentActiveProfile.planets.filter(p => ['Luna', 'Júpiter', 'Urano'].includes(p.name));
         } else if (ev.type === 'studies') {
-          targetAngle = currentActiveProfile.houses[8].deg;
+          targetAngle = currentActiveProfile.houses[8].deg; // Casa 9
           targetName = "Cúspide Casa 9";
           candidates = currentActiveProfile.planets.filter(p => ['Júpiter', 'Mercurio', 'Sol'].includes(p.name));
         } else if (ev.type === 'accident') {
           targetAngle = currentActiveProfile.houses[0].deg;
           targetName = "Ascendente (AC)";
           candidates = currentActiveProfile.planets.filter(p => ['Marte', 'Urano', 'Saturno'].includes(p.name));
+        } else if (ev.type === 'illness') {
+          targetAngle = currentActiveProfile.houses[5].deg; // Casa 6
+          targetName = "Cúspide Casa 6";
+          candidates = currentActiveProfile.planets.filter(p => ['Saturno', 'Neptuno', 'Marte'].includes(p.name));
         } else if (ev.type === 'financial_crisis') {
-          targetAngle = currentActiveProfile.houses[1].deg;
+          targetAngle = currentActiveProfile.houses[1].deg; // Casa 2
           targetName = "Cúspide Casa 2";
           candidates = currentActiveProfile.planets.filter(p => ['Saturno', 'Plutón', 'Marte'].includes(p.name));
+        } else if (ev.type === 'inheritance_lawsuit') {
+          targetAngle = currentActiveProfile.houses[7].deg; // Casa 8
+          targetName = "Cúspide Casa 8";
+          candidates = currentActiveProfile.planets.filter(p => ['Júpiter', 'Saturno', 'Plutón'].includes(p.name));
+        } else if (ev.type === 'spiritual_awakening') {
+          targetAngle = currentActiveProfile.houses[11].deg; // Casa 12
+          targetName = "Cúspide Casa 12";
+          candidates = currentActiveProfile.planets.filter(p => ['Neptuno', 'Júpiter', 'Plutón'].includes(p.name));
         }
 
         let bestPlanet = candidates[0] || currentActiveProfile.planets[0];
@@ -1536,7 +1716,9 @@
       }
     });
 
-    // Estado inicial: Formulario limpio sin datos precargados
+    // Inicialización limpia
+    refreshProfilesDropdown();
+    renderEventRows();
     document.getElementById('userName').value = '';
     document.getElementById('birthDate').value = '';
     document.getElementById('birthTime').value = '';
