@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Carta Astral Profesional - Astrodienst & Bi-Wheel</title>
+  <title>Carta Astral Profesional - Astrodienst, Bi-Wheel & Rectificación</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -73,7 +73,7 @@
         Carta Astral & Dinámica de Ciclos
       </h1>
       <p class="text-slate-400 text-xs sm:text-sm max-w-2xl mx-auto">
-        Suite astrológica completa: superposición Bi-Wheel, filtros interactivos de aspectos, copias JSON y monitor de ciclos.
+        Suite astrológica completa: superposición concéntrica Bi-Wheel, filtros de aspectos, copias JSON y rectificación biográfica ponderada.
       </p>
     </header>
 
@@ -132,7 +132,7 @@
           </div>
           <div>
             <label for="evalDate" class="text-xs uppercase tracking-wider text-slate-300 font-semibold block mb-1">Fecha Cielo Actual</label>
-            <input type="date" id="evalDate" value="2026-10-01" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs sm:text-sm focus:outline-none focus:border-amber-400">
+            <input type="date" id="evalDate" value="2026-10-04" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs sm:text-sm focus:outline-none focus:border-amber-400">
           </div>
         </div>
 
@@ -182,9 +182,9 @@
           <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
             <div>
               <h4 class="font-cinzel text-sm font-bold text-amber-300 flex items-center gap-1.5">
-                <span>⏱</span> Módulo de Rectificación Horaria
+                <span>⏱</span> Módulo de Rectificación Horaria Ponderada
               </h4>
-              <p class="text-xs text-slate-300 mt-0.5">Triangula la hora exacta por eventos o inicia el protocolo si la hora es completamente desconocida.</p>
+              <p class="text-xs text-slate-300 mt-0.5">Triangula la hora exacta por acontecimientos biográficos categorizados o inicia el protocolo sin hora.</p>
             </div>
             <div class="flex items-center gap-2">
               <button type="button" id="tabFineTuneBtn" class="px-3 py-1 rounded-lg bg-amber-400 text-slate-950 font-bold text-xs transition">
@@ -196,7 +196,7 @@
             </div>
           </div>
 
-          <!-- ASISTENTE GUIADO: CUANDO NO SE SABE LA HORA EN ABSOLUTO -->
+          <!-- ASISTENTE GUIADO: SIN HORA CONOCIDA -->
           <div id="unknownHourGuidePanel" class="hidden p-3.5 rounded-xl bg-slate-900/90 border border-amber-400/50 space-y-3 text-xs">
             <div class="border-b border-slate-800 pb-2">
               <span class="text-amber-300 font-bold block">Protocolo de Descarte en 3 Pasos (Sin Hora Inicial)</span>
@@ -235,7 +235,7 @@
             </div>
           </div>
 
-          <!-- PANEL MULTIEVENTO HABITUAL -->
+          <!-- PANEL MULTIEVENTO CATEGORIZADO -->
           <div id="eventsListPanel" class="space-y-2">
             <div id="eventsListContainer" class="space-y-2 pt-1"></div>
 
@@ -244,7 +244,7 @@
                 <span>+</span> Añadir Evento
               </button>
               <button type="button" id="calcMultiRectifyBtn" class="py-2 px-5 rounded-lg font-cinzel text-xs font-bold text-slate-950 bg-amber-400 hover:bg-amber-300 shadow transition">
-                Calcular Convergencia de Eventos
+                Calcular Convergencia Ponderada
               </button>
             </div>
 
@@ -370,7 +370,7 @@
         </div>
       </section>
 
-      <!-- CONTENEDOR 2: RUEDA CONCÉNTRICA BI-WHEEL (NATAL + TRÁNSITOS) -->
+      <!-- CONTENEDOR 2: RUEDA CONCÉNTRICA BI-WHEEL -->
       <section id="biWheelSection" class="hidden glass-card rounded-2xl p-5 flex flex-col items-center justify-between border-amber-400/40">
         <div class="flex flex-col sm:flex-row items-center justify-between w-full px-2 mb-2 gap-2">
           <div>
@@ -1675,7 +1675,6 @@
         pTable.appendChild(row);
       });
 
-      // Dibujar Ruedas
       drawGenericWheel('astroWheel', profile, true);
 
       const lat = profile.lat || 39.4699;
@@ -1686,7 +1685,6 @@
 
       document.getElementById('currentSkyBadge').textContent = `Fecha: ${evalDateStr}`;
 
-      // Renderizar Tablas y Ciclos
       renderCFMTable(profile.planets, profile.houses);
       renderAspectMatrix(profile.planets);
 
@@ -1857,6 +1855,7 @@
 
     biWheelCanvas.addEventListener('mouseleave', () => biWheelTooltip.classList.add('hidden'));
 
+    // Gestión dinámica de eventos organizados por categorías jerárquicas
     function renderEventRows() {
       const container = document.getElementById('eventsListContainer');
       container.innerHTML = '';
@@ -1872,21 +1871,43 @@
         row.innerHTML = `
           <div class="col-span-12 sm:col-span-6">
             <select class="event-type-input w-full px-2.5 py-1.5 rounded bg-slate-950 border border-slate-700 text-slate-200 text-xs focus:outline-none focus:border-amber-400" data-idx="${idx}">
-              <option value="profession" ${ev.type === 'profession' ? 'selected' : ''}>Éxito Profesional / Vocación (MC - Sol/Júpiter)</option>
-              <option value="job_loss" ${ev.type === 'job_loss' ? 'selected' : ''}>Pérdida de empleo / Cese laboral (MC/Casa 6 - Saturno/Urano)</option>
-              <option value="death_father" ${ev.type === 'death_father' ? 'selected' : ''}>Fallecimiento de Padre (MC/IC - Saturno/Sol)</option>
-              <option value="death_mother" ${ev.type === 'death_mother' ? 'selected' : ''}>Fallecimiento de Madre (IC/MC - Luna/Saturno)</option>
-              <option value="marriage" ${ev.type === 'marriage' ? 'selected' : ''}>Boda / Pareja formal (Casa 7 - Venus/Júpiter)</option>
-              <option value="divorce" ${ev.type === 'divorce' ? 'selected' : ''}>Divorcio / Ruptura grave (Casa 7 - Urano/Marte)</option>
-              <option value="child" ${ev.type === 'child' ? 'selected' : ''}>Nacimiento de Hijo (Casa 5 - Luna/Júpiter)</option>
-              <option value="sibling" ${ev.type === 'sibling' ? 'selected' : ''}>Nacimiento de Hermano en infancia (Casa 3/IC - Mercurio/Luna)</option>
-              <option value="relocation" ${ev.type === 'relocation' ? 'selected' : ''}>Mudanza importante / Emigración (IC - Luna/Urano)</option>
-              <option value="studies" ${ev.type === 'studies' ? 'selected' : ''}>Graduación / Estudios Superiores (Casa 9 - Júpiter/Mercurio)</option>
-              <option value="accident" ${ev.type === 'accident' ? 'selected' : ''}>Accidente / Cirugía física (AC - Marte/Urano)</option>
-              <option value="illness" ${ev.type === 'illness' ? 'selected' : ''}>Enfermedad grave / Hospitalización (Casa 6/12 - Saturno/Neptuno)</option>
-              <option value="financial_crisis" ${ev.type === 'financial_crisis' ? 'selected' : ''}>Crisis Financiera / Bancarrota (Casa 2/8 - Saturno/Plutón)</option>
-              <option value="inheritance_lawsuit" ${ev.type === 'inheritance_lawsuit' ? 'selected' : ''}>Herencia / Litigio judicial (Casa 8/9 - Júpiter/Saturno)</option>
-              <option value="spiritual_awakening" ${ev.type === 'spiritual_awakening' ? 'selected' : ''}>Despertar espiritual / Retiro interior (Casa 12/9 - Neptuno/Plutón)</option>
+              <optgroup label="🏛 Ejes Mayores & Familia (Peso Alto)">
+                <option value="death_father" ${ev.type === 'death_father' ? 'selected' : ''}>Fallecimiento de Padre (MC/IC - Saturno/Sol)</option>
+                <option value="death_mother" ${ev.type === 'death_mother' ? 'selected' : ''}>Fallecimiento de Madre (IC/MC - Luna/Saturno)</option>
+                <option value="death_grandparent" ${ev.type === 'death_grandparent' ? 'selected' : ''}>Fallecimiento de Abuelo/a (Casa 4/MC - Saturno/Luna)</option>
+                <option value="child" ${ev.type === 'child' ? 'selected' : ''}>Nacimiento de Hijo (Casa 5 - Luna/Júpiter)</option>
+                <option value="marriage" ${ev.type === 'marriage' ? 'selected' : ''}>Boda / Pareja formal (Casa 7 - Venus/Júpiter)</option>
+                <option value="cohabitation" ${ev.type === 'cohabitation' ? 'selected' : ''}>Inicio de Convivencia / Pareja (Casa 7/IC - Venus/Luna)</option>
+                <option value="home_purchase" ${ev.type === 'home_purchase' ? 'selected' : ''}>Compra de Vivienda (IC/Casa 4 - Saturno/Júpiter)</option>
+                <option value="relocation" ${ev.type === 'relocation' ? 'selected' : ''}>Mudanza importante / Emigración (IC - Luna/Urano)</option>
+                <option value="sibling" ${ev.type === 'sibling' ? 'selected' : ''}>Nacimiento de Hermano en infancia (Casa 3/IC - Mercurio/Luna)</option>
+              </optgroup>
+              <optgroup label="💼 Carrera & Profesión">
+                <option value="profession" ${ev.type === 'profession' ? 'selected' : ''}>Éxito Profesional / Ascenso (MC - Sol/Júpiter)</option>
+                <option value="job_loss" ${ev.type === 'job_loss' ? 'selected' : ''}>Pérdida de empleo / Cese laboral (MC/Casa 6 - Saturno/Urano)</option>
+                <option value="business_start" ${ev.type === 'business_start' ? 'selected' : ''}>Inicio de Negocio / Emprendimiento (MC/Casa 1 - Sol/Marte)</option>
+                <option value="public_award" ${ev.type === 'public_award' ? 'selected' : ''}>Premio / Reconocimiento Público (MC - Sol/Júpiter)</option>
+                <option value="retirement" ${ev.type === 'retirement' ? 'selected' : ''}>Jubilación / Retiro definitivo (MC/Casa 12 - Saturno/Sol)</option>
+              </optgroup>
+              <optgroup label="⚡ Crisis, Salud & Finanzas">
+                <option value="accident" ${ev.type === 'accident' ? 'selected' : ''}>Accidente / Cirugía física (AC - Marte/Urano)</option>
+                <option value="illness" ${ev.type === 'illness' ? 'selected' : ''}>Enfermedad grave / Hospitalización (Casa 6/12 - Saturno/Neptuno)</option>
+                <option value="divorce" ${ev.type === 'divorce' ? 'selected' : ''}>Divorcio / Ruptura grave (Casa 7 - Urano/Marte)</option>
+                <option value="partnership_break" ${ev.type === 'partnership_break' ? 'selected' : ''}>Ruptura de Sociedad / Amistad (Casa 7/11 - Urano/Marte)</option>
+                <option value="financial_crisis" ${ev.type === 'financial_crisis' ? 'selected' : ''}>Crisis Financiera / Bancarrota (Casa 2/8 - Saturno/Plutón)</option>
+                <option value="theft_fraud" ${ev.type === 'theft_fraud' ? 'selected' : ''}>Robo significativo / Estafa (Casa 2/8 - Neptuno/Plutón)</option>
+                <option value="inheritance_lawsuit" ${ev.type === 'inheritance_lawsuit' ? 'selected' : ''}>Herencia / Litigio judicial (Casa 8/9 - Júpiter/Saturno)</option>
+                <option value="legal_victory" ${ev.type === 'legal_victory' ? 'selected' : ''}>Victoria Judicial Favorable (Casa 9/MC - Júpiter/Sol)</option>
+              </optgroup>
+              <optgroup label="🎓 Estudios, Viajes & Hitos">
+                <option value="studies" ${ev.type === 'studies' ? 'selected' : ''}>Graduación / Estudios Superiores (Casa 9 - Júpiter/Mercurio)</option>
+                <option value="scholarship_loan" ${ev.type === 'scholarship_loan' ? 'selected' : ''}>Beca de Estudios / Gran Crédito (Casa 8/9 - Júpiter/Venus)</option>
+                <option value="long_travel" ${ev.type === 'long_travel' ? 'selected' : ''}>Viaje Transoceánico / Ultramar (Casa 9/IC - Júpiter/Urano)</option>
+                <option value="driver_license" ${ev.type === 'driver_license' ? 'selected' : ''}>Permiso Conducir / Primer Coche (Casa 3/AC - Mercurio/Marte)</option>
+                <option value="pet_loss" ${ev.type === 'pet_loss' ? 'selected' : ''}>Pérdida de Mascota (Casa 6 - Luna/Saturno)</option>
+                <option value="spiritual_initiation" ${ev.type === 'spiritual_initiation' ? 'selected' : ''}>Iniciación Mística / Maestro (Casa 9/12 - Júpiter/Neptuno)</option>
+                <option value="spiritual_awakening" ${ev.type === 'spiritual_awakening' ? 'selected' : ''}>Despertar espiritual / Retiro (Casa 12/9 - Neptuno/Plutón)</option>
+              </optgroup>
             </select>
           </div>
           <div class="col-span-10 sm:col-span-5">
@@ -1914,7 +1935,7 @@
     }
 
     document.getElementById('addEventRowBtn').addEventListener('click', () => {
-      userEvents.push({ type: 'profession', date: '2015-05-10' });
+      userEvents.push({ type: 'death_father', date: '2015-05-10' });
       renderEventRows();
     });
 
@@ -1933,6 +1954,7 @@
       });
     });
 
+    // Motor de cálculo de convergencia con ponderación jerárquica
     document.getElementById('calcMultiRectifyBtn').addEventListener('click', () => {
       if (!currentActiveProfile) {
         alert("Primero debes calcular tu carta natal antes de ajustar la hora.");
@@ -1947,6 +1969,7 @@
       const birth = new Date(bDateStr + 'T' + bTimeStr);
 
       const adjustments = [];
+      const weights = [];
       const eventDetails = [];
 
       userEvents.forEach((ev, i) => {
@@ -1960,63 +1983,153 @@
         let targetAngle = currentActiveProfile.houses[9].deg;
         let targetName = "MC";
         let candidates = currentActiveProfile.planets.filter(p => ['Sol', 'Júpiter', 'Saturno'].includes(p.name));
+        let weight = 1;
 
-        if (ev.type === 'job_loss') {
-          targetAngle = currentActiveProfile.houses[9].deg;
-          targetName = "MC (Estatus)";
-          candidates = currentActiveProfile.planets.filter(p => ['Saturno', 'Urano', 'Marte'].includes(p.name));
-        } else if (ev.type === 'death_father') {
+        if (ev.type === 'death_father') {
           targetAngle = currentActiveProfile.houses[9].deg;
           targetName = "MC (Eje Paterno)";
           candidates = currentActiveProfile.planets.filter(p => ['Saturno', 'Sol', 'Plutón'].includes(p.name));
+          weight = 3;
         } else if (ev.type === 'death_mother') {
           targetAngle = currentActiveProfile.houses[3].deg;
           targetName = "IC (Eje Materno)";
           candidates = currentActiveProfile.planets.filter(p => ['Luna', 'Saturno', 'Plutón'].includes(p.name));
+          weight = 3;
+        } else if (ev.type === 'death_grandparent') {
+          targetAngle = currentActiveProfile.houses[3].deg;
+          targetName = "IC (Linaje Ancestral)";
+          candidates = currentActiveProfile.planets.filter(p => ['Saturno', 'Luna', 'Plutón'].includes(p.name));
+          weight = 2;
         } else if (ev.type === 'marriage') {
           targetAngle = currentActiveProfile.houses[6].deg;
           targetName = "Descendente (Casa 7)";
           candidates = currentActiveProfile.planets.filter(p => ['Venus', 'Sol', 'Júpiter'].includes(p.name));
+          weight = 3;
+        } else if (ev.type === 'cohabitation') {
+          targetAngle = currentActiveProfile.houses[6].deg;
+          targetName = "Descendente (Convivencia)";
+          candidates = currentActiveProfile.planets.filter(p => ['Venus', 'Luna', 'Júpiter'].includes(p.name));
+          weight = 2;
         } else if (ev.type === 'divorce') {
           targetAngle = currentActiveProfile.houses[6].deg;
           targetName = "Descendente (Casa 7)";
           candidates = currentActiveProfile.planets.filter(p => ['Urano', 'Marte', 'Saturno'].includes(p.name));
+          weight = 3;
         } else if (ev.type === 'child') {
           targetAngle = currentActiveProfile.houses[4].deg;
           targetName = "Cúspide Casa 5";
           candidates = currentActiveProfile.planets.filter(p => ['Luna', 'Júpiter', 'Venus'].includes(p.name));
-        } else if (ev.type === 'sibling') {
-          targetAngle = currentActiveProfile.houses[2].deg;
-          targetName = "Cúspide Casa 3";
-          candidates = currentActiveProfile.planets.filter(p => ['Mercurio', 'Luna', 'Júpiter'].includes(p.name));
+          weight = 3;
+        } else if (ev.type === 'home_purchase') {
+          targetAngle = currentActiveProfile.houses[3].deg;
+          targetName = "IC (Patrimonio/Hogar)";
+          candidates = currentActiveProfile.planets.filter(p => ['Saturno', 'Júpiter', 'Luna'].includes(p.name));
+          weight = 2;
         } else if (ev.type === 'relocation') {
           targetAngle = currentActiveProfile.houses[3].deg;
           targetName = "IC (Casa 4)";
           candidates = currentActiveProfile.planets.filter(p => ['Luna', 'Júpiter', 'Urano'].includes(p.name));
-        } else if (ev.type === 'studies') {
-          targetAngle = currentActiveProfile.houses[8].deg;
-          targetName = "Cúspide Casa 9";
-          candidates = currentActiveProfile.planets.filter(p => ['Júpiter', 'Mercurio', 'Sol'].includes(p.name));
+          weight = 2;
+        } else if (ev.type === 'sibling') {
+          targetAngle = currentActiveProfile.houses[2].deg;
+          targetName = "Cúspide Casa 3";
+          candidates = currentActiveProfile.planets.filter(p => ['Mercurio', 'Luna', 'Júpiter'].includes(p.name));
+          weight = 2;
+        } else if (ev.type === 'profession') {
+          targetAngle = currentActiveProfile.houses[9].deg;
+          targetName = "MC (Éxito Vocacional)";
+          candidates = currentActiveProfile.planets.filter(p => ['Sol', 'Júpiter', 'Saturno'].includes(p.name));
+          weight = 2;
+        } else if (ev.type === 'job_loss') {
+          targetAngle = currentActiveProfile.houses[9].deg;
+          targetName = "MC (Estatus)";
+          candidates = currentActiveProfile.planets.filter(p => ['Saturno', 'Urano', 'Marte'].includes(p.name));
+          weight = 2;
+        } else if (ev.type === 'business_start') {
+          targetAngle = currentActiveProfile.houses[9].deg;
+          targetName = "MC (Emprendimiento)";
+          candidates = currentActiveProfile.planets.filter(p => ['Sol', 'Marte', 'Júpiter'].includes(p.name));
+          weight = 2;
+        } else if (ev.type === 'public_award') {
+          targetAngle = currentActiveProfile.houses[9].deg;
+          targetName = "MC (Reconocimiento)";
+          candidates = currentActiveProfile.planets.filter(p => ['Sol', 'Júpiter', 'Venus'].includes(p.name));
+          weight = 2;
+        } else if (ev.type === 'retirement') {
+          targetAngle = currentActiveProfile.houses[9].deg;
+          targetName = "MC (Retiro)";
+          candidates = currentActiveProfile.planets.filter(p => ['Saturno', 'Sol', 'Júpiter'].includes(p.name));
+          weight = 2;
         } else if (ev.type === 'accident') {
           targetAngle = currentActiveProfile.houses[0].deg;
           targetName = "Ascendente (AC)";
           candidates = currentActiveProfile.planets.filter(p => ['Marte', 'Urano', 'Saturno'].includes(p.name));
+          weight = 3;
         } else if (ev.type === 'illness') {
           targetAngle = currentActiveProfile.houses[5].deg;
           targetName = "Cúspide Casa 6";
           candidates = currentActiveProfile.planets.filter(p => ['Saturno', 'Neptuno', 'Marte'].includes(p.name));
+          weight = 2;
+        } else if (ev.type === 'partnership_break') {
+          targetAngle = currentActiveProfile.houses[6].deg;
+          targetName = "Descendente (Sociedad)";
+          candidates = currentActiveProfile.planets.filter(p => ['Urano', 'Marte', 'Saturno'].includes(p.name));
+          weight = 2;
         } else if (ev.type === 'financial_crisis') {
           targetAngle = currentActiveProfile.houses[1].deg;
           targetName = "Cúspide Casa 2";
           candidates = currentActiveProfile.planets.filter(p => ['Saturno', 'Plutón', 'Marte'].includes(p.name));
+          weight = 2;
+        } else if (ev.type === 'theft_fraud') {
+          targetAngle = currentActiveProfile.houses[1].deg;
+          targetName = "Cúspide Casa 2 (Recursos)";
+          candidates = currentActiveProfile.planets.filter(p => ['Neptuno', 'Plutón', 'Marte'].includes(p.name));
+          weight = 1;
         } else if (ev.type === 'inheritance_lawsuit') {
           targetAngle = currentActiveProfile.houses[7].deg;
           targetName = "Cúspide Casa 8";
           candidates = currentActiveProfile.planets.filter(p => ['Júpiter', 'Saturno', 'Plutón'].includes(p.name));
+          weight = 2;
+        } else if (ev.type === 'legal_victory') {
+          targetAngle = currentActiveProfile.houses[8].deg;
+          targetName = "Cúspide Casa 9 (Justicia)";
+          candidates = currentActiveProfile.planets.filter(p => ['Júpiter', 'Sol', 'Marte'].includes(p.name));
+          weight = 1;
+        } else if (ev.type === 'studies') {
+          targetAngle = currentActiveProfile.houses[8].deg;
+          targetName = "Cúspide Casa 9";
+          candidates = currentActiveProfile.planets.filter(p => ['Júpiter', 'Mercurio', 'Sol'].includes(p.name));
+          weight = 1;
+        } else if (ev.type === 'scholarship_loan') {
+          targetAngle = currentActiveProfile.houses[7].deg;
+          targetName = "Cúspide Casa 8 (Fondos)";
+          candidates = currentActiveProfile.planets.filter(p => ['Júpiter', 'Venus', 'Mercurio'].includes(p.name));
+          weight = 1;
+        } else if (ev.type === 'long_travel') {
+          targetAngle = currentActiveProfile.houses[8].deg;
+          targetName = "Cúspide Casa 9 (Ultramar)";
+          candidates = currentActiveProfile.planets.filter(p => ['Júpiter', 'Urano', 'Luna'].includes(p.name));
+          weight = 1;
+        } else if (ev.type === 'driver_license') {
+          targetAngle = currentActiveProfile.houses[2].deg;
+          targetName = "Cúspide Casa 3 (Movilidad)";
+          candidates = currentActiveProfile.planets.filter(p => ['Mercurio', 'Marte', 'Urano'].includes(p.name));
+          weight = 1;
+        } else if (ev.type === 'pet_loss') {
+          targetAngle = currentActiveProfile.houses[5].deg;
+          targetName = "Cúspide Casa 6 (Animales)";
+          candidates = currentActiveProfile.planets.filter(p => ['Luna', 'Saturno', 'Mercurio'].includes(p.name));
+          weight = 1;
+        } else if (ev.type === 'spiritual_initiation') {
+          targetAngle = currentActiveProfile.houses[8].deg;
+          targetName = "Cúspide Casa 9 (Iniciación)";
+          candidates = currentActiveProfile.planets.filter(p => ['Júpiter', 'Neptuno', 'Sol'].includes(p.name));
+          weight = 1;
         } else if (ev.type === 'spiritual_awakening') {
           targetAngle = currentActiveProfile.houses[11].deg;
           targetName = "Cúspide Casa 12";
           candidates = currentActiveProfile.planets.filter(p => ['Neptuno', 'Júpiter', 'Plutón'].includes(p.name));
+          weight = 1;
         }
 
         let bestPlanet = candidates[0] || currentActiveProfile.planets[0];
@@ -2034,7 +2147,8 @@
 
         const minCorrection = Math.round(minDelta * 4);
         adjustments.push(minCorrection);
-        eventDetails.push(`Evento ${i + 1} (${targetName} ↔ ${bestPlanet.name}): ${minCorrection > 0 ? `-${minCorrection}` : `+${Math.abs(minCorrection)}`}m`);
+        weights.push(weight);
+        eventDetails.push(`Evento ${i + 1} (${targetName} ↔ ${bestPlanet.name}): ${minCorrection > 0 ? `-${minCorrection}` : `+${Math.abs(minCorrection)}`}m [peso: ${weight}]`);
       });
 
       if (adjustments.length === 0) {
@@ -2042,7 +2156,11 @@
         return;
       }
 
-      const avgMinCorrection = Math.round(adjustments.reduce((a, b) => a + b, 0) / adjustments.length);
+      // Media ponderada por jerarquía
+      const totalWeight = weights.reduce((a, b) => a + b, 0);
+      const weightedSum = adjustments.reduce((acc, val, idx) => acc + (val * weights[idx]), 0);
+      const avgMinCorrection = Math.round(weightedSum / totalWeight);
+
       const [h, m] = bTimeStr.split(':').map(Number);
       let totalMin = (h * 60 + m) - avgMinCorrection;
       totalMin = (totalMin + 1440) % 1440;
@@ -2050,16 +2168,16 @@
       const newM = String(totalMin % 60).padStart(2, '0');
       multiSuggestedTime = `${newH}:${newM}`;
 
-      const variance = adjustments.reduce((acc, val) => acc + Math.pow(val - avgMinCorrection, 2), 0) / adjustments.length;
+      const variance = adjustments.reduce((acc, val, idx) => acc + (weights[idx] * Math.pow(val - avgMinCorrection, 2)), 0) / totalWeight;
       const stdDev = Math.sqrt(variance);
-      const consistencyPct = Math.max(50, Math.min(98, Math.round(100 - stdDev * 4)));
+      const consistencyPct = Math.max(50, Math.min(98, Math.round(100 - stdDev * 3.5)));
 
       const summary = document.getElementById('multiRectifySummary');
       const signStr = avgMinCorrection > 0 ? `-${avgMinCorrection}` : `+${Math.abs(avgMinCorrection)}`;
       summary.innerHTML = `
-        <div class="font-bold text-amber-300">Convergencia de ${adjustments.length} eventos analizados (Consistencia: <strong>${consistencyPct}%</strong>):</div>
+        <div class="font-bold text-amber-300">Convergencia Ponderada de ${adjustments.length} eventos (Consistencia: <strong>${consistencyPct}%</strong>):</div>
         <div class="text-[11px] text-slate-400 mt-1">${eventDetails.join(' • ')}</div>
-        <div class="mt-1.5 text-slate-200">Desfase medio estimado: <strong class="text-amber-400 font-mono">${signStr} minutos</strong>. Hora sugerida: <strong class="text-amber-300 text-sm font-mono">${multiSuggestedTime}</strong></div>
+        <div class="mt-1.5 text-slate-200">Desfase medio ponderado: <strong class="text-amber-400 font-mono">${signStr} minutos</strong>. Hora sugerida: <strong class="text-amber-300 text-sm font-mono">${multiSuggestedTime}</strong></div>
       `;
 
       document.getElementById('multiRectificationResult').classList.remove('hidden');
