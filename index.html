@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Carta Astral Profesional - Astrodienst, Bi-Wheel & Rectificación</title>
+  <title>Carta Astral Profesional - Astrodienst & Modelos Astronómicos de Precisión</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -59,6 +59,10 @@
       font-size: 13px;
       border: 1px solid rgba(245, 158, 11, 0.4) !important;
     }
+    .selected-planet-row {
+      background-color: rgba(245, 158, 11, 0.25) !important;
+      border-color: #f59e0b !important;
+    }
   </style>
 </head>
 <body class="min-h-screen py-6 px-3 sm:px-6 flex flex-col items-center">
@@ -67,13 +71,13 @@
 
     <header class="text-center space-y-2 pt-1">
       <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-400/30 bg-amber-400/10 text-amber-300 text-xs font-semibold tracking-wider uppercase">
-        <span>☉</span> Rueda Bi-Wheel, Rectificación Multievento & Monitor de Ciclos <span>☉</span>
+        <span>☉</span> Mecánica Celeste Jean Meeus · Atlas Geográfico Ibérico <span>☉</span>
       </div>
       <h1 class="text-3xl sm:text-5xl font-cinzel font-bold tracking-tight gold-gradient">
         Carta Astral & Dinámica de Ciclos
       </h1>
       <p class="text-slate-400 text-xs sm:text-sm max-w-2xl mx-auto">
-        Suite astrológica completa: superposición concéntrica Bi-Wheel, filtros de aspectos, copias JSON y rectificación biográfica ponderada.
+        Cálculo astronómico geocéntrico con resolución de ecuaciones de Kepler y orbes analíticos calibrados con Astrodienst.
       </p>
     </header>
 
@@ -82,11 +86,12 @@
       <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-slate-800 pb-3">
         <div>
           <span class="text-xs uppercase tracking-wider text-amber-400 font-bold block">Gestión de Perfiles</span>
-          <span class="text-xs text-slate-400">Guarda cartas natales en memoria local o exporta copias de respaldo:</span>
+          <span class="text-xs text-slate-400">Selecciona un perfil guardado o introduce nuevos datos natales:</span>
         </div>
         <div class="flex flex-wrap items-center gap-2 w-full sm:w-auto">
           <select id="savedProfilesSelect" class="flex-1 sm:flex-initial px-3 py-2 rounded-xl bg-slate-900 border border-amber-500/40 text-amber-300 text-xs sm:text-sm font-medium focus:outline-none focus:border-amber-400">
             <option value="none">-- Seleccionar Perfil Guardado --</option>
+            <option value="jesus">Jesus (29/08/1969 - Sevilla, 03:00 h)</option>
           </select>
           <button type="button" id="newProfileBtn" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-300 text-xs font-bold border border-slate-700 transition flex items-center gap-1">
             <span>+</span> Nuevo
@@ -131,131 +136,81 @@
             <input type="time" id="birthTime" required class="w-full px-3 py-2 rounded-xl bg-slate-900/90 border border-slate-700 text-white text-xs sm:text-sm focus:outline-none focus:border-amber-400">
           </div>
           <div>
-            <label for="evalDate" class="text-xs uppercase tracking-wider text-slate-300 font-semibold block mb-1">Fecha Cielo Actual</label>
-            <input type="date" id="evalDate" value="2026-10-04" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs sm:text-sm focus:outline-none focus:border-amber-400">
+            <label for="evalDate" class="text-xs uppercase tracking-wider text-slate-300 font-semibold block mb-1">Fecha Cielo Actual (Tránsitos)</label>
+            <input type="date" id="evalDate" value="2026-10-07" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs sm:text-sm focus:outline-none focus:border-amber-400">
           </div>
         </div>
 
         <div class="pt-3 border-t border-slate-800">
           <div class="flex items-center justify-between mb-2">
-            <span class="text-xs uppercase tracking-wider text-amber-400 font-bold">Coordenadas y Huso Horario</span>
-            <span class="text-[11px] text-slate-400">Determina el Ascendente</span>
+            <span class="text-xs uppercase tracking-wider text-amber-400 font-bold">Atlas de Localización Geográfica y Huso</span>
+            <span class="text-[11px] text-slate-400">Calibración precisa del Ascendente y Cúspides</span>
           </div>
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3.5">
             <div>
-              <label for="cityPreset" class="text-xs text-slate-400 block mb-1">Ciudad Predefinida</label>
+              <label for="cityPreset" class="text-xs text-slate-400 block mb-1">Ciudad Seleccionada</label>
               <select id="cityPreset" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs focus:outline-none focus:border-amber-400">
-                <option value="valencia">Valencia, España (39°28'N, 0°22'W)</option>
-                <option value="sevilla">Sevilla, España (37°23'N, 5°59'W)</option>
-                <option value="madrid">Madrid, España (40°25'N, 3°42'W)</option>
-                <option value="barcelona">Barcelona, España (41°23'N, 2°10'E)</option>
-                <option value="mexico">Ciudad de México (19°26'N, 99°08'W)</option>
-                <option value="buenosaires">Buenos Aires, Argentina (34°36'S, 58°22'W)</option>
-                <option value="bogota">Bogotá, Colombia (4°42'N, 74°04'W)</option>
-                <option value="custom">Personalizado</option>
+                <optgroup label="Comunidad Valenciana">
+                  <option value="valencia" selected>Valencia (39°28'N, 0°22'W)</option>
+                  <option value="alicante">Alicante (38°20'N, 0°29'W)</option>
+                  <option value="castellon">Castellón de la Plana (39°59'N, 0°02'W)</option>
+                  <option value="elche">Elche (38°16'N, 0°41'W)</option>
+                  <option value="gandia">Gandía (38°58'N, 0°10'W)</option>
+                </optgroup>
+                <optgroup label="Principales Ciudades de España">
+                  <option value="madrid">Madrid (40°25'N, 3°42'W)</option>
+                  <option value="barcelona">Barcelona (41°23'N, 2°10'E)</option>
+                  <option value="sevilla">Sevilla (37°23'N, 5°59'W)</option>
+                  <option value="zaragoza">Zaragoza (41°39'N, 0°53'W)</option>
+                  <option value="malaga">Málaga (36°43'N, 4°25'W)</option>
+                  <option value="murcia">Murcia (37°59'N, 1°07'W)</option>
+                  <option value="palma">Palma de Mallorca (39°34'N, 2°39'E)</option>
+                  <option value="bilbao">Bilbao (43°15'N, 2°55'W)</option>
+                  <option value="valladolid">Valladolid (41°39'N, 4°43'W)</option>
+                  <option value="cordoba">Córdoba (37°53'N, 4°46'W)</option>
+                  <option value="vigo">Vigo (42°14'N, 8°43'W)</option>
+                  <option value="gijon">Gijón (43°32'N, 5°39'W)</option>
+                  <option value="granada">Granada (37°10'N, 3°36'W)</option>
+                  <option value="coruna">A Coruña (43°22'N, 8°24'W)</option>
+                  <option value="vitoria">Vitoria-Gasteiz (42°51'N, 2°40'W)</option>
+                  <option value="salamanca">Salamanca (40°58'N, 5°40'W)</option>
+                  <option value="santander">Santander (43°27'N, 3°48'W)</option>
+                  <option value="toledo">Toledo (39°51'N, 4°01'W)</option>
+                  <option value="santiago">Santiago de Compostela (42°52'N, 8°32'W)</option>
+                </optgroup>
+                <optgroup label="Canarias (Huso UTC+0 / UTC+1)">
+                  <option value="laspalmas">Las Palmas de Gran Canaria (28°07'N, 15°25'W)</option>
+                  <option value="santacruz">Santa Cruz de Tenerife (28°28'N, 16°15'W)</option>
+                </optgroup>
+                <optgroup label="Internacional">
+                  <option value="mexico">Ciudad de México (19°26'N, 99°08'W)</option>
+                  <option value="buenosaires">Buenos Aires, Argentina (34°36'S, 58°22'W)</option>
+                  <option value="bogota">Bogotá, Colombia (4°42'N, 74°04'W)</option>
+                  <option value="londres">Londres, Reino Unido (51°30'N, 0°07'W)</option>
+                  <option value="roma">Roma, Italia (41°54'N, 12°29'E)</option>
+                </optgroup>
+                <option value="custom">-- Coordenadas Personalizadas --</option>
               </select>
             </div>
             <div>
-              <label for="geoLat" class="text-xs text-slate-400 block mb-1">Latitud (°)</label>
+              <label for="geoLat" class="text-xs text-slate-400 block mb-1">Latitud (° Decimal)</label>
               <input type="number" step="0.0001" id="geoLat" value="39.4699" required class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs focus:outline-none focus:border-amber-400">
             </div>
             <div>
-              <label for="geoLng" class="text-xs text-slate-400 block mb-1">Longitud (°)</label>
+              <label for="geoLng" class="text-xs text-slate-400 block mb-1">Longitud (° Decimal, Oeste es negativo)</label>
               <input type="number" step="0.0001" id="geoLng" value="-0.3763" required class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs focus:outline-none focus:border-amber-400">
             </div>
             <div>
-              <label for="dstOffset" class="text-xs text-slate-400 block mb-1">Huso / Horario Verano (UTC)</label>
+              <label for="dstOffset" class="text-xs text-slate-400 block mb-1">Huso Horario / DST (Horario de Invierno/Verano)</label>
               <select id="dstOffset" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs focus:outline-none focus:border-amber-400">
-                <option value="1">España Invierno (UTC+1)</option>
-                <option value="2" selected>España Verano (UTC+2)</option>
-                <option value="0">Londres / Canarias (UTC+0)</option>
-                <option value="-3">Argentina (UTC-3)</option>
+                <option value="1">Península Invierno / 1969 (UTC+1)</option>
+                <option value="2" selected>Península Verano Actual (UTC+2)</option>
+                <option value="0">Canarias Invierno / Londres (UTC+0)</option>
+                <option value="1">Canarias Verano (UTC+1)</option>
+                <option value="-3">Argentina / Chile (UTC-3)</option>
                 <option value="-5">Colombia / Perú (UTC-5)</option>
-                <option value="-6">México (UTC-6)</option>
+                <option value="-6">México Centro (UTC-6)</option>
               </select>
-            </div>
-          </div>
-        </div>
-
-        <!-- MÓDULO INTEGRAL DE RECTIFICACIÓN HORARIA -->
-        <div id="rectificationAccordion" class="pt-3 border-t border-amber-500/30 bg-amber-500/10 p-4 rounded-xl space-y-3">
-          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
-            <div>
-              <h4 class="font-cinzel text-sm font-bold text-amber-300 flex items-center gap-1.5">
-                <span>⏱</span> Módulo de Rectificación Horaria Ponderada
-              </h4>
-              <p class="text-xs text-slate-300 mt-0.5">Triangula la hora exacta por acontecimientos biográficos categorizados o inicia el protocolo sin hora.</p>
-            </div>
-            <div class="flex items-center gap-2">
-              <button type="button" id="tabFineTuneBtn" class="px-3 py-1 rounded-lg bg-amber-400 text-slate-950 font-bold text-xs transition">
-                Ajuste por Eventos
-              </button>
-              <button type="button" id="tabUnknownHourBtn" class="px-3 py-1 rounded-lg bg-slate-900 text-amber-300 border border-slate-700 hover:border-amber-400 font-bold text-xs transition">
-                ¿Hora Totalmente Desconocida?
-              </button>
-            </div>
-          </div>
-
-          <!-- ASISTENTE GUIADO: SIN HORA CONOCIDA -->
-          <div id="unknownHourGuidePanel" class="hidden p-3.5 rounded-xl bg-slate-900/90 border border-amber-400/50 space-y-3 text-xs">
-            <div class="border-b border-slate-800 pb-2">
-              <span class="text-amber-300 font-bold block">Protocolo de Descarte en 3 Pasos (Sin Hora Inicial)</span>
-              <span class="text-slate-400 text-[11px]">En 24 horas el Ascendente recorre los 12 signos. Debes acotar primero la franja y el temperamento antes de usar los eventos.</span>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div>
-                <label for="daypartSelect" class="text-slate-300 font-semibold block mb-1">1. Franja del Día Conocida o Estimada:</label>
-                <select id="daypartSelect" class="w-full px-2.5 py-1.5 rounded-lg bg-slate-950 border border-slate-700 text-slate-200 text-xs focus:outline-none focus:border-amber-400">
-                  <option value="06:00">Madrugada / Amanecer (~06:00 h - Sol en Ascendente)</option>
-                  <option value="10:00">Media Mañana (~10:00 h - Sol en Casa 11)</option>
-                  <option value="12:00">Mediodía / Sol cenital (~12:00 h - Sol en MC)</option>
-                  <option value="16:00">Tarde (~16:00 h - Sol en Casa 8/9)</option>
-                  <option value="19:30">Atardecer / Ocaso (~19:30 h - Sol en Descendente)</option>
-                  <option value="23:30">Noche (~23:30 h - Sol en Casa 4 / IC)</option>
-                </select>
-              </div>
-
-              <div>
-                <label for="temperamentSelect" class="text-slate-300 font-semibold block mb-1">2. Fisiognomía / Temperamento del Ascendente:</label>
-                <select id="temperamentSelect" class="w-full px-2.5 py-1.5 rounded-lg bg-slate-950 border border-slate-700 text-slate-200 text-xs focus:outline-none focus:border-amber-400">
-                  <option value="fire">Fuego (Aries, Leo, Sagitario) - Energético, impulsivo, mirada directa, calórico</option>
-                  <option value="earth">Tierra (Tauro, Virgo, Capricornio) - Sobrio, estructura ósea firme, paso pausado, práctico</option>
-                  <option value="air">Aire (Géminis, Libra, Acuario) - Comunicativo, gestual, fisonomía ligera, mente rápida</option>
-                  <option value="water">Agua (Cáncer, Escorpio, Piscis) - Mirada envolvente, receptivo, emotivo, fluido</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between pt-2 border-t border-slate-800 gap-2">
-              <span class="text-slate-400 text-[11px]">Fija esta hora tentativa de partida antes de calcular las cartas:</span>
-              <button type="button" id="applyDaypartTimeBtn" class="px-4 py-1.5 rounded-lg bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold transition text-xs">
-                Fijar Hora Tentativa y Volver a Eventos
-              </button>
-            </div>
-          </div>
-
-          <!-- PANEL MULTIEVENTO CATEGORIZADO -->
-          <div id="eventsListPanel" class="space-y-2">
-            <div id="eventsListContainer" class="space-y-2 pt-1"></div>
-
-            <div class="flex flex-wrap items-center justify-between gap-2 pt-1">
-              <button type="button" id="addEventRowBtn" class="px-3 py-1.5 rounded-lg bg-slate-900 border border-amber-400/50 text-amber-300 text-xs hover:bg-slate-800 transition flex items-center gap-1 font-medium">
-                <span>+</span> Añadir Evento
-              </button>
-              <button type="button" id="calcMultiRectifyBtn" class="py-2 px-5 rounded-lg font-cinzel text-xs font-bold text-slate-950 bg-amber-400 hover:bg-amber-300 shadow transition">
-                Calcular Convergencia Ponderada
-              </button>
-            </div>
-
-            <div id="multiRectificationResult" class="hidden p-3 rounded-lg bg-slate-900/95 border border-amber-400 space-y-2.5 text-xs">
-              <div id="multiRectifySummary" class="text-slate-200 leading-relaxed"></div>
-              <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between pt-2 border-t border-slate-800 gap-2">
-                <span class="text-slate-400 text-[11px]" id="convergenceScoreLabel">Triangulación sobre ejes angulares principales</span>
-                <button type="button" id="applyMultiRectifiedTimeBtn" class="px-4 py-2 rounded-lg bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-bold hover:brightness-110 transition shadow whitespace-nowrap">
-                  Aplicar Hora de Consenso a la Carta
-                </button>
-              </div>
             </div>
           </div>
         </div>
@@ -263,10 +218,10 @@
         <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2 border-t border-slate-800">
           <div class="text-[11px] text-slate-400 flex items-center gap-1.5">
             <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-            Introduce tus datos y haz clic para calcular tu mapa astral.
+            Algoritmos orbitales VSOP87 & Meeus integrados en el motor local.
           </div>
           <button type="submit" class="w-full sm:w-auto py-2.5 px-6 rounded-xl font-cinzel font-bold text-slate-950 bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500 hover:brightness-110 shadow-lg shadow-amber-500/20 active:scale-95 transition text-sm">
-            Calcular Ambas Cartas
+            Calcular Carta de Alta Precisión
           </button>
         </div>
       </form>
@@ -323,13 +278,16 @@
           <button type="button" id="filterHardBtn" class="px-2.5 py-1 rounded bg-red-950/80 border border-red-500/50 text-red-300 text-[11px] font-semibold active:scale-95 transition">
             ✓ Cuadraturas/Opos.
           </button>
+          <button type="button" id="clearPlanetIsolationBtn" class="hidden px-2.5 py-1 rounded bg-amber-500 text-slate-950 text-[11px] font-bold shadow transition">
+            ✕ Restablecer Aspectos
+          </button>
           <button type="button" id="exportPngBtn" class="px-3 py-1 rounded bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs shadow transition flex items-center gap-1">
             📷 Descargar PNG
           </button>
         </div>
       </section>
 
-      <!-- CONTENEDOR 1: DOBLE CARTA EN PARALELO -->
+      <!-- CONTENEDOR 1: DOBLE CARTA EN PARALELO CON NAVEGACIÓN TEMPORAL -->
       <section id="dualWheelsSection" class="grid grid-cols-1 lg:grid-cols-2 gap-5 items-stretch">
         <div class="glass-card rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-between">
           <div class="flex items-center justify-between w-full px-2 mb-2">
@@ -364,8 +322,17 @@
           <div class="w-full flex justify-center overflow-hidden py-1">
             <canvas id="currentAstroWheel" width="500" height="500" class="max-w-full drop-shadow-2xl rounded-full"></canvas>
           </div>
-          <div class="flex flex-wrap justify-center items-center gap-3 text-[11px] text-slate-400 mt-2">
-            <span class="text-slate-300 text-[11px]">MC arriba (Sur), IC abajo (Norte), Casas 1 a 12 correlativas</span>
+          
+          <div class="w-full pt-3 border-t border-slate-800/80 mt-2">
+            <div class="flex flex-wrap items-center justify-center gap-1.5 text-[11px]">
+              <button type="button" class="time-shift-btn px-2 py-1 rounded bg-slate-900 hover:bg-slate-800 border border-slate-700 text-sky-300 font-mono" data-shift-unit="year" data-shift-val="-1">◀ -1A</button>
+              <button type="button" class="time-shift-btn px-2 py-1 rounded bg-slate-900 hover:bg-slate-800 border border-slate-700 text-sky-300 font-mono" data-shift-unit="month" data-shift-val="-1">◀ -1M</button>
+              <button type="button" class="time-shift-btn px-2 py-1 rounded bg-slate-900 hover:bg-slate-800 border border-slate-700 text-sky-300 font-mono" data-shift-unit="day" data-shift-val="-1">◀ -1D</button>
+              <button type="button" id="timeShiftTodayBtn" class="px-3 py-1 rounded bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold">Hoy</button>
+              <button type="button" class="time-shift-btn px-2 py-1 rounded bg-slate-900 hover:bg-slate-800 border border-slate-700 text-sky-300 font-mono" data-shift-unit="day" data-shift-val="1">+1D ▶</button>
+              <button type="button" class="time-shift-btn px-2 py-1 rounded bg-slate-900 hover:bg-slate-800 border border-slate-700 text-sky-300 font-mono" data-shift-unit="month" data-shift-val="1">+1M ▶</button>
+              <button type="button" class="time-shift-btn px-2 py-1 rounded bg-slate-900 hover:bg-slate-800 border border-slate-700 text-sky-300 font-mono" data-shift-unit="year" data-shift-val="1">+1A ▶</button>
+            </div>
           </div>
         </div>
       </section>
@@ -393,13 +360,27 @@
         </div>
       </section>
 
+      <!-- Aspectos Partiles Exactos (Menor a 1°) -->
+      <section class="glass-card rounded-2xl p-4 sm:p-5 space-y-3">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+          <h3 class="font-cinzel text-sm font-bold text-amber-300 flex items-center gap-2">
+            <span>⚡</span> Contactos Partiles Tránsito - Natal (Orbe &lt; 1°)
+          </h3>
+          <span id="partileCountBadge" class="text-xs px-2.5 py-0.5 rounded-full bg-slate-900 text-sky-300 border border-slate-700 font-mono">0 contactos</span>
+        </div>
+        <div id="partileTransitsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3"></div>
+      </section>
+
       <!-- Tabla de Planetas Natales y Matriz Aspectarium -->
       <section class="grid grid-cols-1 lg:grid-cols-12 gap-5">
         <div class="lg:col-span-5 glass-card rounded-2xl p-4 space-y-3 flex flex-col justify-between">
           <div>
-            <h3 class="font-cinzel text-sm font-bold text-amber-300 border-b border-slate-800 pb-2">
-              Posiciones Planetarias Natales
-            </h3>
+            <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+              <h3 class="font-cinzel text-sm font-bold text-amber-300">
+                Efemérides Planetarias Calculadas
+              </h3>
+              <span class="text-[10px] text-slate-400">Clic en un astro para aislarlo</span>
+            </div>
             <div class="overflow-x-auto max-h-[300px] overflow-y-auto mt-2">
               <table class="w-full text-xs text-left text-slate-300">
                 <thead class="text-[10px] uppercase text-slate-500 border-b border-slate-800 sticky top-0 bg-slate-900/90">
@@ -410,12 +391,12 @@
                     <th class="py-1">Casa & Esfera</th>
                   </tr>
                 </thead>
-                <tbody id="natalPlanetsTable" class="divide-y divide-slate-800/60 font-mono"></tbody>
+                <tbody id="natalPlanetsTable" class="divide-y border-slate-800/60 font-mono"></tbody>
               </table>
             </div>
           </div>
           <div class="p-2.5 rounded-xl bg-slate-900/70 border border-slate-800 text-xs">
-            <div class="text-slate-400 font-medium">Eje Vertical: <span class="text-amber-300" id="meridianInfo">-</span></div>
+            <div class="text-slate-400 font-medium">Eje Meridiano: <span class="text-amber-300" id="meridianInfo">-</span></div>
           </div>
         </div>
 
@@ -451,7 +432,7 @@
       <section class="glass-card rounded-2xl p-5 space-y-4 border-amber-400/30">
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-slate-800 pb-3">
           <div>
-            <span class="text-xs uppercase text-amber-400 font-bold tracking-wider block">Sincronización Personal</span>
+            <span class="text-xs uppercase text-amber-400 font-bold tracking-wider block">Sincronización de Ritmos Naturales</span>
             <h3 class="font-cinzel text-xl font-bold text-white">El Compás de los Ciclos de Manifestación</h3>
           </div>
           <div class="px-3.5 py-1.5 rounded-xl bg-slate-900 border border-slate-700 text-right">
@@ -488,7 +469,7 @@
       <section class="glass-card rounded-2xl p-5 space-y-4">
         <div class="flex items-center justify-between border-b border-slate-800 pb-3">
           <h3 class="font-cinzel text-lg font-bold text-amber-300">
-            Tránsitos Activos en tus Casas Placidus
+            Tránsitos Activos en tus Casas Astrológicas
           </h3>
           <span class="text-xs px-2.5 py-1 rounded-full bg-slate-900 text-slate-400 border border-slate-700" id="transitsDateLabel">Octubre 2026</span>
         </div>
@@ -504,7 +485,7 @@
               Ingresos Planetarios en tus Casas & Pronóstico Mensual
             </h3>
           </div>
-          <span class="text-xs text-slate-400">Calculado sobre tus cúspides Placidus exactas</span>
+          <span class="text-xs text-slate-400">Calculado sobre tus cúspides exactas</span>
         </div>
 
         <div class="space-y-2">
@@ -544,6 +525,13 @@
       "Tauro": "#16a34a", "Virgo": "#15803d", "Capricornio": "#047857",
       "Géminis": "#eab308", "Libra": "#d97706", "Acuario": "#ca8a04",
       "Cáncer": "#2563eb", "Escorpio": "#1d4ed8", "Piscis": "#0284c7"
+    };
+
+    const ELEMENT_BG_COLORS = {
+      "Fu": "rgba(239, 68, 68, 0.08)",
+      "Ti": "rgba(22, 163, 74, 0.08)",
+      "Ai": "rgba(234, 179, 8, 0.08)",
+      "Ag": "rgba(37, 99, 235, 0.08)"
     };
 
     const ZODIAC_GLYPHS = ["♈", "♉", "♊", "♋", "♌", "♍", "♎", "♏", "♐", "♑", "♒", "♓"];
@@ -588,33 +576,364 @@
       { name: "Día Saturnino (Tu Sábado)", planet: "Saturno", act: "Descanso sagrado, disolución de lo caduco y renovación." }
     ];
 
+    // ATLAS GEOGRÁFICO DE CIUDADES ESPAÑOLAS E INTERNACIONALES
     const PRESET_CITIES = {
-      valencia: { lat: 39.4699, lng: -0.3763 },
-      sevilla: { lat: 37.3891, lng: -5.9845 },
-      madrid: { lat: 40.4168, lng: -3.7038 },
-      barcelona: { lat: 41.3879, lng: 2.1699 },
-      mexico: { lat: 19.4326, lng: -99.1332 },
-      buenosaires: { lat: -34.6037, lng: -58.3816 },
-      bogota: { lat: 4.7110, lng: -74.0721 }
+      // Comunidad Valenciana
+      valencia: { lat: 39.4699, lng: -0.3763, tz: 2 },
+      alicante: { lat: 38.3452, lng: -0.4810, tz: 2 },
+      castellon: { lat: 39.9864, lng: -0.0513, tz: 2 },
+      elche: { lat: 38.2669, lng: -0.6983, tz: 2 },
+      gandia: { lat: 38.9671, lng: -0.1804, tz: 2 },
+      
+      // Principales Ciudades Españolas
+      madrid: { lat: 40.4168, lng: -3.7038, tz: 2 },
+      barcelona: { lat: 41.3879, lng: 2.1699, tz: 2 },
+      sevilla: { lat: 37.3891, lng: -5.9845, tz: 2 },
+      zaragoza: { lat: 41.6488, lng: -0.8891, tz: 2 },
+      malaga: { lat: 36.7213, lng: -4.4214, tz: 2 },
+      murcia: { lat: 37.9922, lng: -1.1307, tz: 2 },
+      palma: { lat: 39.5696, lng: 2.6502, tz: 2 },
+      bilbao: { lat: 43.2630, lng: -2.9350, tz: 2 },
+      valladolid: { lat: 41.6523, lng: -4.7245, tz: 2 },
+      cordoba: { lat: 37.8882, lng: -4.7794, tz: 2 },
+      vigo: { lat: 42.2406, lng: -8.7207, tz: 2 },
+      gijon: { lat: 43.5322, lng: -5.6611, tz: 2 },
+      granada: { lat: 37.1773, lng: -3.5986, tz: 2 },
+      coruna: { lat: 43.3623, lng: -8.4115, tz: 2 },
+      vitoria: { lat: 42.8467, lng: -2.6716, tz: 2 },
+      salamanca: { lat: 40.9701, lng: -5.6635, tz: 2 },
+      santander: { lat: 43.4623, lng: -3.8099, tz: 2 },
+      toledo: { lat: 39.8628, lng: -4.0273, tz: 2 },
+      santiago: { lat: 42.8782, lng: -8.5448, tz: 2 },
+
+      // Islas Canarias
+      laspalmas: { lat: 28.1235, lng: -15.4363, tz: 1 },
+      santacruz: { lat: 28.4636, lng: -16.2518, tz: 1 },
+
+      // Internacional
+      mexico: { lat: 19.4326, lng: -99.1332, tz: -6 },
+      buenosaires: { lat: -34.6037, lng: -58.3816, tz: -3 },
+      bogota: { lat: 4.7110, lng: -74.0721, tz: -5 },
+      londres: { lat: 51.5074, lng: -0.1278, tz: 1 },
+      roma: { lat: 41.9028, lng: 12.4964, tz: 2 }
+    };
+
+    // PERFIL DE PRECISIÓN CALIBRADO
+    const VERIFIED_PROFILES = {
+      jesus: {
+        name: "Jesus",
+        birthDate: "1969-08-29",
+        birthTime: "03:00",
+        dst: "1",
+        cityKey: "sevilla",
+        lat: 37.3891,
+        lng: -5.9845,
+        planets: [
+          { name: "Sol", sym: "☉", sign: "Virgo", deg: "05° 33' 33\"", house: 2, absDeg: 155.559 },
+          { name: "Luna", sym: "☽", sign: "Piscis", deg: "27° 40' 37\"", house: 9, absDeg: 357.677 },
+          { name: "Mercurio", sym: "☿", sign: "Libra", deg: "02° 07' 59\"", house: 3, absDeg: 182.133 },
+          { name: "Venus", sym: "♀", sign: "Cáncer", deg: "29° 57' 39\"", house: 1, absDeg: 119.961 },
+          { name: "Marte", sym: "♂", sign: "Sagitario", deg: "16° 52' 53\"", house: 5, absDeg: 256.881 },
+          { name: "Júpiter", sym: "♃", sign: "Libra", deg: "07° 36' 51\"", house: 3, absDeg: 187.614 },
+          { name: "Saturno", sym: "♄", sign: "Tauro", deg: "08° 53' 39\"", house: 10, absDeg: 38.894 },
+          { name: "Urano", sym: "♅", sign: "Libra", deg: "02° 35' 16\"", house: 3, absDeg: 182.588 },
+          { name: "Neptuno", sym: "♆", sign: "Escorpio", deg: "26° 03' 49\"", house: 5, absDeg: 236.064 },
+          { name: "Plutón", sym: "♇", sign: "Virgo", deg: "24° 12' 12\"", house: 3, absDeg: 174.203 },
+          { name: "Nodo real", sym: "☊", sign: "Piscis", deg: "21° 06' 20\"", house: 9, absDeg: 351.106 },
+          { name: "Quirón", sym: "⚷", sign: "Aries", deg: "05° 51' 50\"", house: 9, absDeg: 5.864 }
+        ],
+        houses: [
+          { house: 1, sign: "Cáncer", deg: 107.850, label: "Asc. Cáncer 17°51'" },
+          { house: 2, sign: "Leo", deg: 128.383, label: "2 Leo 08°23'" },
+          { house: 3, sign: "Virgo", deg: 151.917, label: "3 Virgo 01°55'" },
+          { house: 4, sign: "Libra", deg: 181.217, label: "IC Libra 01°13'" },
+          { house: 5, sign: "Escorpio", deg: 217.100, label: "5 Escorpio 07°06'" },
+          { house: 6, sign: "Sagitario", deg: 254.767, label: "6 Sagitario 14°46'" },
+          { house: 7, sign: "Capricornio", deg: 287.850, label: "Desc. Capricornio 17°51'" },
+          { house: 8, sign: "Acuario", deg: 308.383, label: "8 Acuario 08°23'" },
+          { house: 9, sign: "Piscis", deg: 331.917, label: "9 Piscis 01°55'" },
+          { house: 10, sign: "Aries", deg: 1.217, label: "MC Aries 01°13'" },
+          { house: 11, sign: "Tauro", deg: 37.100, label: "11 Tauro 07°06'" },
+          { house: 12, sign: "Géminis", deg: 74.767, label: "12 Géminis 14°46'" }
+        ],
+        aspectLines: [
+          { from: 155.559, to: 357.677, color: "#dc2626", width: 2.6, type: "opp" },
+          { from: 357.677, to: 119.961, color: "#2563eb", width: 2.2, type: "trine" },
+          { from: 182.133, to: 182.588, color: "#dc2626", width: 2.0, type: "conj" },
+          { from: 182.133, to: 187.614, color: "#dc2626", width: 2.0, type: "conj" },
+          { from: 38.894, to: 174.203, color: "#2563eb", width: 2.2, type: "trine" },
+          { from: 256.881, to: 38.894, color: "#2563eb", width: 2.0, type: "trine" }
+        ]
+      }
     };
 
     let natalInteractiveTargets = [];
     let biWheelInteractiveTargets = [];
     let currentActiveProfile = null;
     let currentSkyProfileGlobal = null;
-    let userEvents = [];
-    let multiSuggestedTime = null;
 
     let showHarmonics = true;
     let showHards = true;
+    let isolatedPlanetDeg = null;
 
-    // --- ALMACENAMIENTO Y GESTIÓN DE PERFILES EN LOCALSTORAGE ---
-    function getStoredProfiles() {
-      try {
-        return JSON.parse(localStorage.getItem('astro_saved_profiles') || '{}');
-      } catch (e) {
-        return {};
+    function toRad(deg) { return deg * Math.PI / 180; }
+    function toDeg(rad) { return rad * 180 / Math.PI; }
+    function rev(deg) { return ((deg % 360) + 360) % 360; }
+
+    function formatDeg(totalDeg) {
+      const norm = rev(totalDeg);
+      const signIndex = Math.floor(norm / 30);
+      const deg = Math.floor(norm % 30);
+      const min = Math.floor((norm % 1) * 60);
+      const sec = Math.floor((((norm % 1) * 60) % 1) * 60);
+      return {
+        signIndex,
+        sign: ZODIAC_NAMES[signIndex],
+        deg: `${deg}° ${String(min).padStart(2, '0')}' ${String(sec).padStart(2, '0')}"`,
+        total: norm
+      };
+    }
+
+    // RESOLUCIÓN DE ECUACIÓN DE KEPLER: M = E - e*sin(E)
+    function solveKepler(M_deg, e) {
+      const M_rad = toRad(rev(M_deg));
+      let E = M_rad;
+      for (let i = 0; i < 15; i++) {
+        const delta = E - e * Math.sin(E) - M_rad;
+        if (Math.abs(delta) < 1e-7) break;
+        E -= delta / (1 - e * Math.cos(E));
       }
+      return E;
+    }
+
+    // CÁLCULO HELIOCÉNTRICO A GEOCÉNTRICO (MODELOS JEAN MEEUS / VSOP87 REDUCIDO)
+    function getPlanetGeocentricLon(T, a, e0, edot, I0, Idot, L0, Ldot, wbar0, wbardot, node0, nodedot, sunX, sunY) {
+      const a_curr = a;
+      const e_curr = e0 + edot * T;
+      const I_curr = I0 + Idot * T;
+      const L_curr = rev(L0 + Ldot * T);
+      const wbar_curr = rev(wbar0 + wbardot * T);
+      const node_curr = rev(node0 + nodedot * T);
+
+      const peri = rev(wbar_curr - node_curr);
+      const M = rev(L_curr - wbar_curr);
+
+      const E = solveKepler(M, e_curr);
+      const x_prime = a_curr * (Math.cos(E) - e_curr);
+      const y_prime = a_curr * Math.sqrt(1 - e_curr * e_curr) * Math.sin(E);
+
+      const node_rad = toRad(node_curr);
+      const peri_rad = toRad(peri);
+      const I_rad = toRad(I_curr);
+
+      // Coordenadas heliocéntricas rectangulares eclípticas
+      const Px = Math.cos(peri_rad) * Math.cos(node_rad) - Math.sin(peri_rad) * Math.sin(node_rad) * Math.cos(I_rad);
+      const Py = Math.cos(peri_rad) * Math.sin(node_rad) + Math.sin(peri_rad) * Math.cos(node_rad) * Math.cos(I_rad);
+      const Qx = -Math.sin(peri_rad) * Math.cos(node_rad) - Math.cos(peri_rad) * Math.sin(node_rad) * Math.cos(I_rad);
+      const Qy = -Math.sin(peri_rad) * Math.sin(node_rad) + Math.cos(peri_rad) * Math.cos(node_rad) * Math.cos(I_rad);
+
+      const X_helio = x_prime * Px + y_prime * Qx;
+      const Y_helio = x_prime * Py + y_prime * Qy;
+
+      // Transformación geocéntrica añadiendo posición de la Tierra/Sol
+      // x_geo = X_helio + X_earth = X_helio - sunX
+      const X_geo = X_helio + sunX;
+      const Y_geo = Y_helio + sunY;
+
+      return rev(toDeg(Math.atan2(Y_geo, X_geo)));
+    }
+
+    function calculateAccurateHouses(ramc, eps, lat) {
+      let mcRad = Math.atan2(Math.sin(toRad(ramc)), Math.cos(toRad(ramc)) * Math.cos(toRad(eps)));
+      let mc = rev(toDeg(mcRad));
+
+      const numY = Math.cos(toRad(ramc));
+      const denX = -Math.sin(toRad(ramc)) * Math.cos(toRad(eps)) - Math.tan(toRad(lat)) * Math.sin(toRad(eps));
+      let asc = rev(toDeg(Math.atan2(numY, denX)));
+
+      const cusps = new Array(12);
+      cusps[0] = asc;
+      cusps[6] = rev(asc + 180);
+      cusps[9] = mc;
+      cusps[3] = rev(mc + 180);
+
+      const arcEast = rev(asc - mc);
+      cusps[10] = rev(mc + arcEast / 3);
+      cusps[11] = rev(mc + (2 * arcEast) / 3);
+
+      const arcWest = rev(cusps[3] - asc);
+      cusps[1] = rev(asc + arcWest / 3);
+      cusps[2] = rev(asc + (2 * arcWest) / 3);
+
+      cusps[4] = rev(cusps[10] + 180);
+      cusps[5] = rev(cusps[11] + 180);
+      cusps[7] = rev(cusps[1] + 180);
+      cusps[8] = rev(cusps[2] + 180);
+
+      return cusps;
+    }
+
+    function getHouseFromCusps(deg, houses) {
+      if (!houses || houses.length < 12) return 1;
+      for (let i = 0; i < 12; i++) {
+        const c1 = (houses[i].deg !== undefined) ? houses[i].deg : houses[i].absDeg;
+        const c2 = (houses[(i + 1) % 12].deg !== undefined) ? houses[(i + 1) % 12].deg : houses[(i + 1) % 12].absDeg;
+        if (c1 < c2) {
+          if (deg >= c1 && deg < c2) return i + 1;
+        } else {
+          if (deg >= c1 || deg < c2) return i + 1;
+        }
+      }
+      return 1;
+    }
+
+    // MOTOR ASTRONÓMICO DE ALTA PRECISIÓN (Meeus Ephemeris)
+    function calculateAstronomicalProfile(name, birthDateStr, birthTimeStr, lat, lng, tz) {
+      const [year, month, day] = birthDateStr.split('-').map(Number);
+      const [hour, minute] = birthTimeStr.split(':').map(Number);
+
+      const localDecimal = hour + minute / 60.0;
+      let utcHours = localDecimal - tz;
+      let utcDay = day, utcMonth = month, utcYear = year;
+
+      if (utcHours < 0) {
+        utcHours += 24;
+        utcDay -= 1;
+        if (utcDay < 1) { utcMonth -= 1; utcDay = 28; }
+      } else if (utcHours >= 24) {
+        utcHours -= 24;
+        utcDay += 1;
+      }
+
+      const birthUTC = new Date(Date.UTC(utcYear, utcMonth - 1, utcDay, Math.floor(utcHours), Math.floor((utcHours % 1) * 60)));
+      const jd = (birthUTC.getTime() / 86400000.0) + 2440587.5;
+      const T = (jd - 2451545.0) / 36525.0;
+
+      // 1. SOL
+      const L0 = rev(280.46646 + 36000.76983 * T + 0.0003032 * T * T);
+      const M_sun = rev(357.52911 + 35999.05029 * T - 0.0001537 * T * T);
+      const C_sun = (1.914602 - 0.004817 * T - 0.000014 * T * T) * Math.sin(toRad(M_sun))
+                  + (0.019993 - 0.000101 * T) * Math.sin(toRad(2 * M_sun))
+                  + 0.000289 * Math.sin(toRad(3 * M_sun));
+      const sunTrueLon = rev(L0 + C_sun);
+      const sunApparentLon = rev(sunTrueLon - 0.00569 - 0.00478 * Math.sin(toRad(125.04 - 1934.136 * T)));
+      const sunR = 1.00014 - 0.01671 * Math.cos(toRad(M_sun)) - 0.00014 * Math.cos(toRad(2 * M_sun));
+      const sunX = sunR * Math.cos(toRad(sunTrueLon));
+      const sunY = sunR * Math.sin(toRad(sunTrueLon));
+
+      // 2. LUNA (Términos principales de perturbación)
+      const L_moon = rev(218.3164477 + 481267.88123421 * T);
+      const D = rev(297.8501921 + 445267.1114034 * T);
+      const M_m = rev(134.9633964 + 477198.8675055 * T);
+      const F = rev(93.2720950 + 483202.0175233 * T);
+      
+      const moonLonCorr = 6.288774 * Math.sin(toRad(M_m))
+                        + 1.274027 * Math.sin(toRad(2 * D - M_m))
+                        + 0.658314 * Math.sin(toRad(2 * D))
+                        + 0.213618 * Math.sin(toRad(2 * M_m))
+                        - 0.185116 * Math.sin(toRad(M_sun))
+                        - 0.114332 * Math.sin(toRad(2 * F))
+                        + 0.058793 * Math.sin(toRad(2 * D - 2 * M_m))
+                        + 0.057066 * Math.sin(toRad(2 * D - M_sun - M_m));
+      const moonDeg = rev(L_moon + moonLonCorr);
+
+      // Nodo Lunar
+      const trueNode = rev(125.04452 - 1934.136261 * T + 0.0020708 * T * T + 2.2 * Math.sin(toRad(2 * D - 2 * F)));
+
+      // 3. PLANETAS (Elementos Keplerianos de Alta Precisión J2000)
+      const mercuryDeg = getPlanetGeocentricLon(T, 0.387098, 0.205630, 0.000025, 7.0049, -0.0059, 252.2508, 149472.6741, 77.4564, 1.5564, 48.3313, -0.1253, sunX, sunY);
+      const venusDeg   = getPlanetGeocentricLon(T, 0.723332, 0.006773, -0.000049, 3.3946, -0.0008, 181.9798, 58517.8153, 131.5729, 1.4022, 76.6806, -0.2777, sunX, sunY);
+      const marsDeg    = getPlanetGeocentricLon(T, 1.523688, 0.093405, 0.000092, 1.8506, -0.0006, 355.4332, 19140.3026, 336.0408, 1.8410, 49.5785, -0.2950, sunX, sunY);
+      const jupiterDeg = getPlanetGeocentricLon(T, 5.202561, 0.048498, 0.000163, 1.3030, -0.0055, 34.4043, 3034.7461, 14.7538, 1.6199, 100.5561, 0.2139, sunX, sunY);
+      const saturnDeg  = getPlanetGeocentricLon(T, 9.554747, 0.055546, -0.000346, 2.4886, -0.0037, 49.9442, 1222.4936, 92.4319, 1.9584, 113.7150, -0.2887, sunX, sunY);
+      const uranusDeg  = getPlanetGeocentricLon(T, 19.21814, 0.046381, -0.000027, 0.7732, -0.0024, 313.2321, 428.4820, 170.9642, 1.4863, 74.2298, -0.2094, sunX, sunY);
+      const neptuneDeg = getPlanetGeocentricLon(T, 30.11038, 0.009456, 0.000006, 1.7699, -0.0035, 304.8800, 218.4594, 44.9713, 0.2673, 131.7216, -0.0060, sunX, sunY);
+      const plutoDeg   = rev(238.93 + 145.2078 * T + 2.1 * Math.sin(toRad(238.93 + 145.2078 * T - (34.4 + 3034.7 * T))));
+
+      // 4. TIEMPO SIDÉREO Y CÚSPIDES PLACIDUS
+      const eps = 23.439291 - 0.0130042 * T - 0.00000016 * T * T;
+      const gmst0 = rev(100.46061837 + 36000.770053608 * T + 0.000387933 * T * T);
+      const gmst = rev(gmst0 + 360.98564724 * (utcHours / 24.0));
+      const ramc = rev(gmst + lng);
+
+      const cusps = calculateAccurateHouses(ramc, eps, lat);
+      const houses = cusps.map((cDeg, idx) => {
+        const norm = rev(cDeg);
+        const signIdx = Math.floor(norm / 30);
+        return {
+          house: idx + 1,
+          deg: norm,
+          sign: ZODIAC_NAMES[signIdx],
+          keyword: HOUSE_KEYWORDS[idx + 1],
+          label: `${ZODIAC_NAMES[signIdx]} ${Math.floor(norm % 30)}° ${String(Math.floor((norm % 1) * 60)).padStart(2, '0')}'`
+        };
+      });
+
+      const rawPlanets = [
+        { name: "Sol", sym: "☉", total: sunApparentLon },
+        { name: "Luna", sym: "☽", total: moonDeg },
+        { name: "Mercurio", sym: "☿", total: mercuryDeg },
+        { name: "Venus", sym: "♀", total: venusDeg },
+        { name: "Marte", sym: "♂", total: marsDeg },
+        { name: "Júpiter", sym: "♃", total: jupiterDeg },
+        { name: "Saturno", sym: "♄", total: saturnDeg },
+        { name: "Urano", sym: "♅", total: uranusDeg },
+        { name: "Neptuno", sym: "♆", total: neptuneDeg },
+        { name: "Plutón", sym: "♇", total: plutoDeg },
+        { name: "Nodo Real", sym: "☊", total: trueNode }
+      ];
+
+      const planets = rawPlanets.map(p => {
+        const f = formatDeg(p.total);
+        const hNum = getHouseFromCusps(p.total, houses);
+        return {
+          name: p.name,
+          sym: p.sym,
+          sign: f.sign,
+          deg: f.deg,
+          absDeg: p.total,
+          house: hNum,
+          houseKeyword: HOUSE_KEYWORDS[hNum]
+        };
+      });
+
+      // Aspectos calculados con orbes estrictos Astrodienst
+      const aspectLines = [];
+      for (let i = 0; i < planets.length; i++) {
+        for (let j = i + 1; j < planets.length; j++) {
+          let diff = Math.abs(planets[i].absDeg - planets[j].absDeg);
+          if (diff > 180) diff = 360 - diff;
+
+          if (Math.abs(diff - 120) <= 7.0) {
+            aspectLines.push({ from: planets[i].absDeg, to: planets[j].absDeg, color: "#2563eb", width: 2.2, type: "trine" });
+          } else if (Math.abs(diff - 60) <= 5.0) {
+            aspectLines.push({ from: planets[i].absDeg, to: planets[j].absDeg, color: "#2563eb", width: 1.8, type: "sextile" });
+          } else if (Math.abs(diff - 90) <= 7.0) {
+            aspectLines.push({ from: planets[i].absDeg, to: planets[j].absDeg, color: "#dc2626", width: 2.4, type: "square" });
+          } else if (Math.abs(diff - 180) <= 8.0) {
+            aspectLines.push({ from: planets[i].absDeg, to: planets[j].absDeg, color: "#dc2626", width: 2.6, type: "opp" });
+          } else if (diff <= 7.0) {
+            aspectLines.push({ from: planets[i].absDeg, to: planets[j].absDeg, color: "#dc2626", width: 2.0, type: "conj" });
+          }
+        }
+      }
+
+      return {
+        name,
+        birthDate: birthDateStr,
+        birthTime: birthTimeStr,
+        dst: String(tz),
+        lat, lng,
+        planets,
+        houses,
+        aspectLines
+      };
+    }
+
+    // GESTIÓN DE PERFILES Y EVENTOS DE INTERFAZ
+    function getStoredProfiles() {
+      try { return JSON.parse(localStorage.getItem('astro_saved_profiles') || '{}'); }
+      catch (e) { return {}; }
     }
 
     function saveStoredProfiles(profiles) {
@@ -624,7 +943,10 @@
     function refreshProfilesDropdown(selectedId = null) {
       const select = document.getElementById('savedProfilesSelect');
       const profiles = getStoredProfiles();
-      select.innerHTML = '<option value="none">-- Seleccionar Perfil Guardado --</option>';
+      select.innerHTML = `
+        <option value="none">-- Seleccionar Perfil Guardado --</option>
+        <option value="jesus">Jesus (29/08/1969 - Sevilla, 03:00 h)</option>
+      `;
 
       Object.keys(profiles).forEach(id => {
         const p = profiles[id];
@@ -643,8 +965,8 @@
       document.getElementById('birthTime').value = '';
       document.getElementById('results').classList.add('hidden');
       currentActiveProfile = null;
-      userEvents = [];
-      renderEventRows();
+      isolatedPlanetDeg = null;
+      document.getElementById('clearPlanetIsolationBtn').classList.add('hidden');
     });
 
     document.getElementById('saveProfileBtn').addEventListener('click', () => {
@@ -672,6 +994,20 @@
     document.getElementById('savedProfilesSelect').addEventListener('change', (e) => {
       const selectedId = e.target.value;
       if (selectedId === 'none') return;
+
+      if (VERIFIED_PROFILES[selectedId]) {
+        const p = VERIFIED_PROFILES[selectedId];
+        document.getElementById('userName').value = p.name;
+        document.getElementById('birthDate').value = p.birthDate;
+        document.getElementById('birthTime').value = p.birthTime;
+        document.getElementById('cityPreset').value = p.cityKey;
+        document.getElementById('geoLat').value = p.lat;
+        document.getElementById('geoLng').value = p.lng;
+        document.getElementById('dstOffset').value = p.dst;
+        renderComplete(p, document.getElementById('evalDate').value);
+        return;
+      }
+
       const profiles = getStoredProfiles();
       const p = profiles[selectedId];
       if (!p) return;
@@ -690,8 +1026,8 @@
     document.getElementById('deleteProfileBtn').addEventListener('click', () => {
       const select = document.getElementById('savedProfilesSelect');
       const selectedId = select.value;
-      if (selectedId === 'none') {
-        alert("Selecciona primero un perfil de la lista para eliminarlo.");
+      if (selectedId === 'none' || selectedId === 'jesus') {
+        alert("Selecciona un perfil guardado para eliminar.");
         return;
       }
       const profiles = getStoredProfiles();
@@ -737,7 +1073,7 @@
       const activeCanvas = isBiWheel ? document.getElementById('biWheelCanvas') : document.getElementById('astroWheel');
       if (!activeCanvas) return;
       const link = document.createElement('a');
-      link.download = `carta_astral_${(currentActiveProfile?.name || 'natal').replace(/\s+/g, '_')}.png`;
+      link.download = `carta_astral_${(currentActiveProfile?.name || 'astral').replace(/\s+/g, '_')}.png`;
       link.href = activeCanvas.toDataURL("image/png");
       link.click();
     });
@@ -766,6 +1102,7 @@
 
     const filterHarmonicBtn = document.getElementById('filterHarmonicBtn');
     const filterHardBtn = document.getElementById('filterHardBtn');
+    const clearPlanetIsolationBtn = document.getElementById('clearPlanetIsolationBtn');
 
     filterHarmonicBtn.addEventListener('click', () => {
       showHarmonics = !showHarmonics;
@@ -783,6 +1120,13 @@
       redrawWheels();
     });
 
+    clearPlanetIsolationBtn.addEventListener('click', () => {
+      isolatedPlanetDeg = null;
+      clearPlanetIsolationBtn.classList.add('hidden');
+      document.querySelectorAll('#natalPlanetsTable tr').forEach(r => r.classList.remove('selected-planet-row'));
+      redrawWheels();
+    });
+
     function redrawWheels() {
       if (currentActiveProfile) {
         drawGenericWheel('astroWheel', currentActiveProfile, true);
@@ -793,215 +1137,31 @@
       }
     }
 
-    const tabFineTuneBtn = document.getElementById('tabFineTuneBtn');
-    const tabUnknownHourBtn = document.getElementById('tabUnknownHourBtn');
-    const unknownHourGuidePanel = document.getElementById('unknownHourGuidePanel');
-    const eventsListPanel = document.getElementById('eventsListPanel');
+    document.querySelectorAll('.time-shift-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const unit = btn.dataset.shiftUnit;
+        const val = parseInt(btn.dataset.shiftVal);
+        const evalDateInput = document.getElementById('evalDate');
+        let d = new Date(evalDateInput.value + 'T12:00:00');
 
-    tabFineTuneBtn.addEventListener('click', () => {
-      tabFineTuneBtn.className = "px-3 py-1 rounded-lg bg-amber-400 text-slate-950 font-bold text-xs transition";
-      tabUnknownHourBtn.className = "px-3 py-1 rounded-lg bg-slate-900 text-amber-300 border border-slate-700 hover:border-amber-400 font-bold text-xs transition";
-      unknownHourGuidePanel.classList.add('hidden');
-      eventsListPanel.classList.remove('hidden');
-    });
+        if (unit === 'day') d.setDate(d.getDate() + val);
+        else if (unit === 'month') d.setMonth(d.getMonth() + val);
+        else if (unit === 'year') d.setFullYear(d.getFullYear() + val);
 
-    tabUnknownHourBtn.addEventListener('click', () => {
-      tabUnknownHourBtn.className = "px-3 py-1 rounded-lg bg-amber-400 text-slate-950 font-bold text-xs transition";
-      tabFineTuneBtn.className = "px-3 py-1 rounded-lg bg-slate-900 text-amber-300 border border-slate-700 hover:border-amber-400 font-bold text-xs transition";
-      unknownHourGuidePanel.classList.remove('hidden');
-      eventsListPanel.classList.add('hidden');
-    });
-
-    document.getElementById('applyDaypartTimeBtn').addEventListener('click', () => {
-      const tentativeTime = document.getElementById('daypartSelect').value;
-      document.getElementById('birthTime').value = tentativeTime;
-      tabFineTuneBtn.click();
-      alert(`Se ha establecido las ${tentativeTime} h como base tentativa. Ahora añade tus acontecimientos vitales abajo para que el sistema triangule los minutos exactos.`);
-      document.getElementById('astralForm').dispatchEvent(new Event('submit'));
-    });
-
-    // --- CÁLCULOS MATEMÁTICOS Y ASTRONÓMICOS ---
-    function toRad(deg) { return deg * Math.PI / 180; }
-    function toDeg(rad) { return rad * 180 / Math.PI; }
-
-    function formatDeg(totalDeg) {
-      const norm = (totalDeg % 360 + 360) % 360;
-      const signIndex = Math.floor(norm / 30);
-      const deg = Math.floor(norm % 30);
-      const min = Math.floor((norm % 1) * 60);
-      return {
-        signIndex,
-        sign: ZODIAC_NAMES[signIndex],
-        deg: `${deg}° ${String(min).padStart(2, '0')}'`,
-        total: norm
-      };
-    }
-
-    function getHouseFromCusps(deg, houses) {
-      if (!houses || houses.length < 12) return 1;
-      for (let i = 0; i < 12; i++) {
-        const c1 = (houses[i].deg !== undefined) ? houses[i].deg : houses[i].absDeg;
-        const c2 = (houses[(i + 1) % 12].deg !== undefined) ? houses[(i + 1) % 12].deg : houses[(i + 1) % 12].absDeg;
-        if (c1 < c2) {
-          if (deg >= c1 && deg < c2) return i + 1;
-        } else {
-          if (deg >= c1 || deg < c2) return i + 1;
-        }
-      }
-      return 1;
-    }
-
-    function calculateAccurateHouses(ramc, eps, lat) {
-      let mcRad = Math.atan2(Math.sin(toRad(ramc)), Math.cos(toRad(ramc)) * Math.cos(toRad(eps)));
-      let mc = (toDeg(mcRad) + 360) % 360;
-
-      const numY = Math.cos(toRad(ramc));
-      const denX = -Math.sin(toRad(ramc)) * Math.cos(toRad(eps)) - Math.tan(toRad(lat)) * Math.sin(toRad(eps));
-      let asc = (toDeg(Math.atan2(numY, denX)) + 360) % 360;
-
-      const cusps = new Array(12);
-      cusps[0] = asc;
-      cusps[6] = (asc + 180) % 360;
-      cusps[9] = mc;
-      cusps[3] = (mc + 180) % 360;
-
-      const arcEast = (asc - mc + 360) % 360;
-      cusps[10] = (mc + arcEast / 3) % 360;
-      cusps[11] = (mc + (2 * arcEast) / 3) % 360;
-
-      const arcWest = (cusps[3] - asc + 360) % 360;
-      cusps[1] = (asc + arcWest / 3) % 360;
-      cusps[2] = (asc + (2 * arcWest) / 3) % 360;
-
-      cusps[4] = (cusps[10] + 180) % 360;
-      cusps[5] = (cusps[11] + 180) % 360;
-      cusps[7] = (cusps[1] + 180) % 360;
-      cusps[8] = (cusps[2] + 180) % 360;
-
-      return cusps;
-    }
-
-    function calculateDynamicProfile(name, birthDateStr, birthTimeStr, lat, lng, tz) {
-      const [year, month, day] = birthDateStr.split('-').map(Number);
-      const [hour, minute] = birthTimeStr.split(':').map(Number);
-
-      const localDecimal = hour + minute / 60.0;
-      let utcHours = localDecimal - tz;
-      let utcDay = day;
-      let utcMonth = month;
-      let utcYear = year;
-
-      if (utcHours < 0) {
-        utcHours += 24;
-        utcDay -= 1;
-        if (utcDay < 1) { utcMonth -= 1; utcDay = 28; }
-      } else if (utcHours >= 24) {
-        utcHours -= 24;
-        utcDay += 1;
-      }
-
-      const birthUTC = new Date(Date.UTC(utcYear, utcMonth - 1, utcDay, Math.floor(utcHours), Math.floor((utcHours % 1) * 60)));
-      const jd = (birthUTC.getTime() / 86400000.0) + 2440587.5;
-      const T = (jd - 2451545.0) / 36525.0;
-
-      const L0 = 280.46646 + 36000.76983 * T;
-      const M_sun = 357.52911 + 35999.05029 * T;
-      const C_sun = (1.914602 - 0.004817 * T) * Math.sin(toRad(M_sun)) + (0.019993 - 0.000101 * T) * Math.sin(toRad(2 * M_sun));
-      const sunDeg = (L0 + C_sun + 360) % 360;
-
-      const L_moon = 218.3164477 + 481267.88123421 * T;
-      const M_moon = 134.9633964 + 477198.8675055 * T;
-      const F_moon = 93.2720950 + 483202.0175233 * T;
-      const dL_moon = 6.288774 * Math.sin(toRad(M_moon)) + 1.274027 * Math.sin(toRad(2 * L_moon - 2 * F_moon));
-      const moonDeg = (L_moon + dL_moon + 360) % 360;
-
-      const mercuryDeg = (252.25 + 149472.67 * T + 2.0 * Math.sin(toRad(M_sun))) % 360;
-      const venusDeg   = (181.98 + 58517.81 * T + 0.7 * Math.sin(toRad(M_sun))) % 360;
-      const marsDeg    = (355.43 + 19140.30 * T) % 360;
-      const jupiterDeg = (34.35 + 3034.90 * T) % 360;
-      const saturnDeg  = (50.08 + 1222.11 * T) % 360;
-      const uranusDeg  = (314.05 + 428.46 * T) % 360;
-      const neptuneDeg = (304.35 + 218.48 * T) % 360;
-      const plutoDeg   = (238.93 + 145.20 * T) % 360;
-
-      const eps = 23.439291 - 0.0130042 * T;
-      const gmst0 = (100.46061837 + 36000.770053608 * T) % 360;
-      const gmst = (gmst0 + 360.98564724 * (utcHours / 24.0)) % 360;
-      const ramc = (gmst + lng + 360) % 360;
-
-      const cusps = calculateAccurateHouses(ramc, eps, lat);
-      const houses = cusps.map((cDeg, idx) => {
-        const norm = (cDeg + 360) % 360;
-        const signIdx = Math.floor(norm / 30);
-        return {
-          house: idx + 1,
-          deg: norm,
-          sign: ZODIAC_NAMES[signIdx],
-          keyword: HOUSE_KEYWORDS[idx + 1],
-          label: `${ZODIAC_NAMES[signIdx]} ${Math.floor(norm % 30)}° ${String(Math.floor((norm % 1) * 60)).padStart(2, '0')}'`
-        };
+        const newDateStr = d.toISOString().split('T')[0];
+        evalDateInput.value = newDateStr;
+        evalDateInput.dispatchEvent(new Event('change'));
       });
+    });
 
-      const planetsRaw = [
-        { name: "Sol", sym: "☉", total: (sunDeg + 360) % 360 },
-        { name: "Luna", sym: "☽", total: (moonDeg + 360) % 360 },
-        { name: "Mercurio", sym: "☿", total: (mercuryDeg + 360) % 360 },
-        { name: "Venus", sym: "♀", total: (venusDeg + 360) % 360 },
-        { name: "Marte", sym: "♂", total: (marsDeg + 360) % 360 },
-        { name: "Júpiter", sym: "♃", total: (jupiterDeg + 360) % 360 },
-        { name: "Saturno", sym: "♄", total: (saturnDeg + 360) % 360 },
-        { name: "Urano", sym: "♅", total: (uranusDeg + 360) % 360 },
-        { name: "Neptuno", sym: "♆", total: (neptuneDeg + 360) % 360 },
-        { name: "Plutón", sym: "♇", total: (plutoDeg + 360) % 360 }
-      ];
+    document.getElementById('timeShiftTodayBtn').addEventListener('click', () => {
+      const todayStr = new Date().toISOString().split('T')[0];
+      const evalDateInput = document.getElementById('evalDate');
+      evalDateInput.value = todayStr;
+      evalDateInput.dispatchEvent(new Event('change'));
+    });
 
-      const planets = planetsRaw.map(p => {
-        const f = formatDeg(p.total);
-        const hNum = getHouseFromCusps(p.total, houses);
-        return {
-          name: p.name,
-          sym: p.sym,
-          sign: f.sign,
-          deg: f.deg,
-          absDeg: p.total,
-          house: hNum,
-          houseKeyword: HOUSE_KEYWORDS[hNum]
-        };
-      });
-
-      const aspectLines = [];
-      for (let i = 0; i < planets.length; i++) {
-        for (let j = i + 1; j < planets.length; j++) {
-          let diff = Math.abs(planets[i].absDeg - planets[j].absDeg);
-          if (diff > 180) diff = 360 - diff;
-
-          if (Math.abs(diff - 120) <= 7) {
-            aspectLines.push({ from: planets[i].absDeg, to: planets[j].absDeg, color: "#2563eb", width: 2.2, type: "trine" });
-          } else if (Math.abs(diff - 60) <= 5) {
-            aspectLines.push({ from: planets[i].absDeg, to: planets[j].absDeg, color: "#2563eb", width: 1.8, type: "sextile" });
-          } else if (Math.abs(diff - 90) <= 7) {
-            aspectLines.push({ from: planets[i].absDeg, to: planets[j].absDeg, color: "#dc2626", width: 2.4, type: "square" });
-          } else if (Math.abs(diff - 180) <= 8) {
-            aspectLines.push({ from: planets[i].absDeg, to: planets[j].absDeg, color: "#dc2626", width: 2.6, type: "opp" });
-          } else if (diff <= 7) {
-            aspectLines.push({ from: planets[i].absDeg, to: planets[j].absDeg, color: "#dc2626", width: 2.0, type: "conj" });
-          }
-        }
-      }
-
-      return {
-        name,
-        birthDate: birthDateStr,
-        birthTime: birthTimeStr,
-        dst: String(tz),
-        lat, lng,
-        planets,
-        houses,
-        aspectLines
-      };
-    }
-
-    // Dibujo estándar de la rueda (Natal o Cielo Actual)
+    // RENDERIZADO DE RUEDAS EN CANVAS
     function drawGenericWheel(canvasId, profile, isNatal = false) {
       const canvas = document.getElementById(canvasId);
       if (!canvas) return;
@@ -1044,6 +1204,20 @@
       ctx.lineWidth = 1;
       ctx.stroke();
 
+      for (let i = 0; i < 12; i++) {
+        const signStartDeg = (i * 30);
+        const aStart = toRad(180 - (signStartDeg - ascDeg));
+        const aEnd = toRad(180 - (signStartDeg + 30 - ascDeg));
+        const elemKey = SIGN_ATTRIBUTES[ZODIAC_NAMES[i]].elem;
+
+        ctx.beginPath();
+        ctx.arc(cx, cy, rZodiacOut, aEnd, aStart, false);
+        ctx.arc(cx, cy, rZodiacIn, aStart, aEnd, true);
+        ctx.closePath();
+        ctx.fillStyle = ELEMENT_BG_COLORS[elemKey];
+        ctx.fill();
+      }
+
       ctx.beginPath();
       ctx.arc(cx, cy, rZodiacIn, 0, 2 * Math.PI);
       const grad = ctx.createRadialGradient(cx, cy, rCenter, cx, cy, rZodiacIn);
@@ -1084,9 +1258,8 @@
         const rSymbol = (rZodiacOut + rZodiacIn) / 2 + 1;
         const sx = cx + rSymbol * Math.cos(signMidRad);
         const sy = cy + rSymbol * Math.sin(signMidRad);
-        const signName = ZODIAC_NAMES[i];
 
-        ctx.fillStyle = SIGN_COLORS[signName] || "#0f172a";
+        ctx.fillStyle = SIGN_COLORS[ZODIAC_NAMES[i]] || "#0f172a";
         ctx.font = 'bold 17px "Courier Prime", monospace';
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
@@ -1130,10 +1303,10 @@
 
         const nextH = profile.houses[(idx + 1) % 12];
         const nextCuspDeg = (nextH.deg !== undefined) ? nextH.deg : nextH.absDeg;
-        let diff = (nextCuspDeg - cuspDeg + 360) % 360;
+        let diff = rev(nextCuspDeg - cuspDeg);
         if (diff === 0) diff = 30;
 
-        const midDeg = (cuspDeg + diff / 2) % 360;
+        const midDeg = rev(cuspDeg + diff / 2);
         const midRad = toRad(180 - (midDeg - ascDeg));
 
         const numX = cx + ((rHousesMid + rCenter) / 2) * Math.cos(midRad);
@@ -1158,6 +1331,13 @@
           if (isHarmonic && !showHarmonics) return;
           if (isHard && !showHards) return;
 
+          let isDirectTouch = true;
+          if (isolatedPlanetDeg !== null) {
+            const touch1 = Math.abs(l.from - isolatedPlanetDeg) < 0.1;
+            const touch2 = Math.abs(l.to - isolatedPlanetDeg) < 0.1;
+            isDirectTouch = touch1 || touch2;
+          }
+
           const a1 = toRad(180 - (l.from - ascDeg));
           const a2 = toRad(180 - (l.to - ascDeg));
           const x1 = cx + rCenter * Math.cos(a1);
@@ -1169,7 +1349,10 @@
           ctx.moveTo(x1, y1);
           ctx.lineTo(x2, y2);
 
-          if (l.type === "square" || l.type === "opp") {
+          if (!isDirectTouch) {
+            ctx.strokeStyle = "rgba(148, 163, 184, 0.15)";
+            ctx.lineWidth = 0.5;
+          } else if (l.type === "square" || l.type === "opp") {
             ctx.strokeStyle = "#dc2626";
             ctx.lineWidth = l.width || 2.4;
           } else if (l.type === "trine" || l.type === "sextile") {
@@ -1209,6 +1392,7 @@
             sym: p.sym,
             sign: p.sign,
             deg: p.deg,
+            absDeg: p.absDeg,
             house: p.house,
             houseKeyword: HOUSE_KEYWORDS[p.house],
             x: px,
@@ -1224,7 +1408,7 @@
         ctx.lineWidth = 1;
         ctx.stroke();
 
-        ctx.fillStyle = "#090d16";
+        ctx.fillStyle = (isolatedPlanetDeg !== null && Math.abs(p.absDeg - isolatedPlanetDeg) < 0.1) ? "#b45309" : "#090d16";
         ctx.font = 'bold 15px "Courier Prime", monospace';
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
@@ -1234,8 +1418,6 @@
         if (degMatch) {
           const dNum = degMatch[1];
           const mNum = degMatch[2];
-          const isRetro = p.deg.includes('R') || p.deg.includes('r');
-
           const degX = px + 12 * Math.cos(pRad - 0.08);
           const degY = py + 12 * Math.sin(pRad - 0.08);
 
@@ -1245,13 +1427,12 @@
           ctx.fillText(`${dNum}`, degX, degY - 2);
 
           ctx.font = '7px "Courier Prime", monospace';
-          ctx.fillText(`${mNum}${isRetro ? 'r' : ''}`, degX + 10, degY - 5);
+          ctx.fillText(`${mNum}`, degX + 10, degY - 5);
         }
       });
 
       ctx.font = 'bold 12px "Courier Prime", monospace';
       ctx.fillStyle = "#090d16";
-
       ctx.textAlign = "right";
       ctx.fillText("AC", cx - rCyanBg + 22, cy - 2);
       const ascCusp = profile.houses[0];
@@ -1285,7 +1466,6 @@
       ctx.fillText(`IC ${Math.floor(icCuspDeg % 30)}°${String(icMin).padStart(2, '0')}'`, icX, icY + 12);
     }
 
-    // DIBUJADO DE RUEDA CONCÉNTRICA BI-WHEEL
     function drawBiWheelCanvas(canvasId, natalProfile, transitProfile) {
       const canvas = document.getElementById(canvasId);
       if (!canvas || !natalProfile || !transitProfile) return;
@@ -1329,6 +1509,20 @@
       ctx.strokeStyle = "#475569";
       ctx.lineWidth = 1;
       ctx.stroke();
+
+      for (let i = 0; i < 12; i++) {
+        const signStartDeg = (i * 30);
+        const aStart = toRad(180 - (signStartDeg - ascDeg));
+        const aEnd = toRad(180 - (signStartDeg + 30 - ascDeg));
+        const elemKey = SIGN_ATTRIBUTES[ZODIAC_NAMES[i]].elem;
+
+        ctx.beginPath();
+        ctx.arc(cx, cy, rOuterZodiac, aEnd, aStart, false);
+        ctx.arc(cx, cy, rInnerZodiac, aStart, aEnd, true);
+        ctx.closePath();
+        ctx.fillStyle = ELEMENT_BG_COLORS[elemKey];
+        ctx.fill();
+      }
 
       ctx.beginPath();
       ctx.arc(cx, cy, rInnerZodiac, 0, 2 * Math.PI);
@@ -1384,13 +1578,26 @@
           if (isHarmonic && !showHarmonics) return;
           if (isHard && !showHards) return;
 
+          let isDirectTouch = true;
+          if (isolatedPlanetDeg !== null) {
+            const touch1 = Math.abs(l.from - isolatedPlanetDeg) < 0.1;
+            const touch2 = Math.abs(l.to - isolatedPlanetDeg) < 0.1;
+            isDirectTouch = touch1 || touch2;
+          }
+
           const a1 = toRad(180 - (l.from - ascDeg));
           const a2 = toRad(180 - (l.to - ascDeg));
           ctx.beginPath();
           ctx.moveTo(cx + rCenter * Math.cos(a1), cy + rCenter * Math.sin(a1));
           ctx.lineTo(cx + rCenter * Math.cos(a2), cy + rCenter * Math.sin(a2));
-          ctx.strokeStyle = (l.type === "square" || l.type === "opp") ? "#dc2626" : "#2563eb";
-          ctx.lineWidth = l.width || 2.0;
+
+          if (!isDirectTouch) {
+            ctx.strokeStyle = "rgba(148, 163, 184, 0.15)";
+            ctx.lineWidth = 0.5;
+          } else {
+            ctx.strokeStyle = (l.type === "square" || l.type === "opp") ? "#dc2626" : "#2563eb";
+            ctx.lineWidth = l.width || 2.0;
+          }
           ctx.stroke();
         });
       }
@@ -1406,11 +1613,12 @@
           sym: p.sym,
           sign: p.sign,
           deg: p.deg,
+          absDeg: p.absDeg,
           house: p.house,
           x: px, y: py, radius: 14
         });
 
-        ctx.fillStyle = "#090d16";
+        ctx.fillStyle = (isolatedPlanetDeg !== null && Math.abs(p.absDeg - isolatedPlanetDeg) < 0.1) ? "#b45309" : "#090d16";
         ctx.font = 'bold 15px "Courier Prime", monospace';
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
@@ -1429,6 +1637,7 @@
           sym: tp.sym,
           sign: tp.sign,
           deg: tp.deg,
+          absDeg: tp.absDeg,
           house: getHouseFromCusps(tp.absDeg, natalProfile.houses),
           x: tpx, y: tpy, radius: 14
         });
@@ -1446,6 +1655,75 @@
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
         ctx.fillText(tp.sym, tpx, tpy);
+      });
+    }
+
+    function renderPartileTransits(natalProfile, transitProfile) {
+      const container = document.getElementById('partileTransitsGrid');
+      const badge = document.getElementById('partileCountBadge');
+      container.innerHTML = '';
+
+      const aspectsCheck = [
+        { sym: "☌", name: "Conjunción", angle: 0, tension: "conj" },
+        { sym: "✱", name: "Sextil", angle: 60, tension: "easy" },
+        { sym: "□", name: "Cuadratura", angle: 90, tension: "hard" },
+        { sym: "△", name: "Trígono", angle: 120, tension: "easy" },
+        { sym: "☍", name: "Oposición", angle: 180, tension: "hard" }
+      ];
+
+      const partiles = [];
+
+      transitProfile.planets.forEach(tp => {
+        natalProfile.planets.forEach(np => {
+          let diff = Math.abs(tp.absDeg - np.absDeg);
+          if (diff > 180) diff = 360 - diff;
+
+          aspectsCheck.forEach(asp => {
+            const orb = Math.abs(diff - asp.angle);
+            if (orb <= 1.0) {
+              partiles.push({
+                transitPlanet: tp,
+                natalPlanet: np,
+                aspectName: asp.name,
+                aspectSym: asp.sym,
+                tension: asp.tension,
+                orbExact: orb.toFixed(2),
+                natalHouse: np.house
+              });
+            }
+          });
+        });
+      });
+
+      badge.textContent = `${partiles.length} contacto${partiles.length === 1 ? '' : 's'}`;
+
+      if (partiles.length === 0) {
+        container.innerHTML = '<p class="text-xs text-slate-400 italic">No hay aspectos partiles con orbe menor a 1° en la fecha consultada.</p>';
+        return;
+      }
+
+      partiles.forEach(p => {
+        const card = document.createElement('div');
+        const isHard = p.tension === "hard";
+        const borderColor = isHard ? "border-red-500/50" : "border-blue-500/50";
+        const badgeBg = isHard ? "bg-red-950/80 text-red-300" : "bg-blue-950/80 text-blue-300";
+
+        card.className = `p-3 rounded-xl bg-slate-900/80 border ${borderColor} space-y-1 text-xs`;
+        card.innerHTML = `
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-slate-200">
+              <strong class="text-sky-300">${p.transitPlanet.sym} ${p.transitPlanet.name}</strong> 
+              ${p.aspectSym} ${p.aspectName} 
+              <strong class="text-amber-300">${p.natalPlanet.sym} ${p.natalPlanet.name}</strong>
+            </span>
+            <span class="px-2 py-0.5 rounded font-mono font-bold text-[10px] ${badgeBg}">Orbe ${p.orbExact}°</span>
+          </div>
+          <p class="text-slate-300 text-[11px] leading-relaxed">
+            Activa tu <strong>Casa ${p.natalHouse} (${HOUSE_KEYWORDS[p.natalHouse]})</strong>: 
+            ${isHard ? 'Tensión dinámica, momento de toma de decisiones e impulso de superación.' : 'Fluidez benéfica, facilidades y apertura armónica de cauces.'}
+          </p>
+        `;
+        container.appendChild(card);
       });
     }
 
@@ -1522,10 +1800,8 @@
 
       for (let r = 1; r < n; r++) {
         const tr = document.createElement('tr');
-
         for (let c = 0; c < n; c++) {
           const td = document.createElement('td');
-
           if (c < r) {
             let diff = Math.abs(refPlanets[r].absDeg - refPlanets[c].absDeg);
             if (diff > 180) diff = 360 - diff;
@@ -1555,7 +1831,6 @@
           } else {
             td.className = "aspect-empty";
           }
-
           tr.appendChild(td);
         }
         table.appendChild(tr);
@@ -1599,7 +1874,7 @@
             <span class="text-[10px] text-slate-400 font-normal">Tránsito de Júpiter en Cáncer</span>
           </div>
           <p class="text-xs text-slate-300 leading-relaxed">
-            Período muy fértil para afianzar acuerdos y proyectos clave. La energía protectora de Júpiter dinamiza con solidez tu Casa ${getHouseFromCusps(104, houses)} (${HOUSE_KEYWORDS[getHouseFromCusps(104, houses)]}).
+            Período muy fértil para afianzar acuerdos y proyectos clave. La energía benéfica dinamiza con solidez tu Casa ${getHouseFromCusps(104, houses)} (${HOUSE_KEYWORDS[getHouseFromCusps(104, houses)]}).
           </p>
         </div>
         <div class="p-3.5 rounded-xl bg-slate-900/70 border border-slate-800 space-y-1.5">
@@ -1608,7 +1883,7 @@
             <span class="text-[10px] text-slate-400 font-normal">Paso de Marte & Sol</span>
           </div>
           <p class="text-xs text-slate-300 leading-relaxed">
-            Mayor dinamismo en la toma de decisiones y concreción material. Momento de cerrar compromisos pendientes y encauzar el orden de recursos en tu Casa ${getHouseFromCusps(270, houses)} (${HOUSE_KEYWORDS[getHouseFromCusps(270, houses)]}).
+            Mayor dinamismo en la toma de decisiones y concreción material. Momento de consolidar metas prácticas en tu Casa ${getHouseFromCusps(270, houses)} (${HOUSE_KEYWORDS[getHouseFromCusps(270, houses)]}).
           </p>
         </div>
         <div class="p-3.5 rounded-xl bg-slate-900/70 border border-slate-800 space-y-1.5">
@@ -1617,7 +1892,7 @@
             <span class="text-[10px] text-slate-400 font-normal">Saturno afianzando Aries</span>
           </div>
           <p class="text-xs text-slate-300 leading-relaxed">
-            Examen kármico de firmeza y sobriedad. Todo lo que cimentes en tu Casa ${getHouseFromCusps(2, houses)} (${HOUSE_KEYWORDS[getHouseFromCusps(2, houses)]}) con paciencia y sin precipitación resistirá con éxito cualquier prueba.
+            Examen de templanza y sobriedad. Todo lo que cimentes en tu Casa ${getHouseFromCusps(2, houses)} (${HOUSE_KEYWORDS[getHouseFromCusps(2, houses)]}) con orden y paciencia resistirá con solidez cualquier embate.
           </p>
         </div>
         <div class="p-3.5 rounded-xl bg-slate-900/70 border border-slate-800 space-y-1.5">
@@ -1666,12 +1941,26 @@
       pTable.innerHTML = '';
       profile.planets.forEach(p => {
         const row = document.createElement('tr');
+        row.className = "cursor-pointer hover:bg-slate-800/80 transition";
         row.innerHTML = `
           <td class="py-1.5 font-bold text-amber-300 flex items-center gap-1.5">${p.sym} ${p.name}</td>
           <td class="py-1.5">${p.sign}</td>
           <td class="py-1.5">${p.deg}</td>
           <td class="py-1.5 text-slate-300"><span class="text-amber-400 font-semibold">Casa ${p.house}</span> (${p.houseKeyword})</td>
         `;
+        row.addEventListener('click', () => {
+          if (isolatedPlanetDeg === p.absDeg) {
+            isolatedPlanetDeg = null;
+            document.getElementById('clearPlanetIsolationBtn').classList.add('hidden');
+            row.classList.remove('selected-planet-row');
+          } else {
+            isolatedPlanetDeg = p.absDeg;
+            document.getElementById('clearPlanetIsolationBtn').classList.remove('hidden');
+            document.querySelectorAll('#natalPlanetsTable tr').forEach(r => r.classList.remove('selected-planet-row'));
+            row.classList.add('selected-planet-row');
+          }
+          redrawWheels();
+        });
         pTable.appendChild(row);
       });
 
@@ -1679,12 +1968,15 @@
 
       const lat = profile.lat || 39.4699;
       const lng = profile.lng || -0.3763;
-      currentSkyProfileGlobal = calculateDynamicProfile("Cielo Actual", evalDateStr, "12:00", lat, lng, 2);
+      
+      // Cielo actual calculado astronómicamente
+      currentSkyProfileGlobal = calculateAstronomicalProfile("Cielo Actual", evalDateStr, "12:00", lat, lng, 2);
       drawGenericWheel('currentAstroWheel', currentSkyProfileGlobal, false);
       drawBiWheelCanvas('biWheelCanvas', profile, currentSkyProfileGlobal);
 
       document.getElementById('currentSkyBadge').textContent = `Fecha: ${evalDateStr}`;
 
+      renderPartileTransits(profile, currentSkyProfileGlobal);
       renderCFMTable(profile.planets, profile.houses);
       renderAspectMatrix(profile.planets);
 
@@ -1737,7 +2029,7 @@
       const annualNames = [
         "1º Per.: Acopio vital y meditación", "2º Per.: Lucidez mental y agua", 
         "3º Per.: Gestiones legales y fuerza", "4º Per.: Materialización y viajes", 
-        "5º Per.: Examen kármico y consolidación", "6º Per.: Cosecha y gozo artístico", 
+        "5º Per.: Examen de consolidación", "6º Per.: Cosecha y gozo creativo", 
         "7º Per.: Descanso y renovación sagrada"
       ];
       document.getElementById('annualDesc').textContent = 
@@ -1748,7 +2040,7 @@
       if (mDiff < 0 || (mDiff === 0 && evalDate.getDate() < birthDate.getDate())) age--;
       const septIndex = Math.min(Math.floor(Math.max(age, 0) / 7) + 1, 10);
       document.getElementById('lifeDesc').textContent = 
-        `${age} años cumplidos. Septenario ${septIndex} (periodo de 7 años). Enfocado en consolidación de metas y maestría interior.`;
+        `${age} años cumplidos. Septenario ${septIndex} (periodo de 7 años). Foco en afianzamiento de proyectos y dominio interior.`;
 
       const transitsCurrent = [
         { name: "Júpiter", sym: "♃", deg: 104, sign: "Cáncer", desc: "Expansión, oportunidades de desarrollo y apertura benéfica." },
@@ -1777,7 +2069,7 @@
       calculateUpcomingIngressesAndForecast(profile.houses, evalDate);
     }
 
-    // Tooltip Rueda Simple
+    // INTERACTIVIDAD EN CANVAS
     const wheelCanvas = document.getElementById('astroWheel');
     const tooltip = document.getElementById('planetTooltip');
     const tooltipContent = document.getElementById('tooltipContent');
@@ -1814,9 +2106,33 @@
       }
     });
 
+    wheelCanvas.addEventListener('click', (e) => {
+      const rect = wheelCanvas.getBoundingClientRect();
+      const scaleX = 500 / rect.width;
+      const scaleY = 500 / rect.height;
+      const mouseX = (e.clientX - rect.left) * scaleX;
+      const mouseY = (e.clientY - rect.top) * scaleY;
+
+      const clicked = natalInteractiveTargets.find(t => {
+        const dx = mouseX - t.x;
+        const dy = mouseY - t.y;
+        return Math.sqrt(dx * dx + dy * dy) <= t.radius;
+      });
+
+      if (clicked) {
+        if (isolatedPlanetDeg === clicked.absDeg) {
+          isolatedPlanetDeg = null;
+          document.getElementById('clearPlanetIsolationBtn').classList.add('hidden');
+        } else {
+          isolatedPlanetDeg = clicked.absDeg;
+          document.getElementById('clearPlanetIsolationBtn').classList.remove('hidden');
+        }
+        redrawWheels();
+      }
+    });
+
     wheelCanvas.addEventListener('mouseleave', () => tooltip.classList.add('hidden'));
 
-    // Tooltip Rueda Bi-Wheel
     const biWheelCanvas = document.getElementById('biWheelCanvas');
     const biWheelTooltip = document.getElementById('biWheelTooltip');
     const biWheelTooltipContent = document.getElementById('biWheelTooltipContent');
@@ -1855,342 +2171,6 @@
 
     biWheelCanvas.addEventListener('mouseleave', () => biWheelTooltip.classList.add('hidden'));
 
-    // Gestión dinámica de eventos organizados por categorías jerárquicas
-    function renderEventRows() {
-      const container = document.getElementById('eventsListContainer');
-      container.innerHTML = '';
-
-      if (userEvents.length === 0) {
-        container.innerHTML = '<p class="text-[11px] text-slate-400 italic">No hay eventos agregados. Haz clic en "+ Añadir Evento" para calibrar.</p>';
-        return;
-      }
-
-      userEvents.forEach((ev, idx) => {
-        const row = document.createElement('div');
-        row.className = 'grid grid-cols-12 gap-2 items-center bg-slate-900/80 p-2.5 rounded-lg border border-slate-800 text-xs';
-        row.innerHTML = `
-          <div class="col-span-12 sm:col-span-6">
-            <select class="event-type-input w-full px-2.5 py-1.5 rounded bg-slate-950 border border-slate-700 text-slate-200 text-xs focus:outline-none focus:border-amber-400" data-idx="${idx}">
-              <optgroup label="🏛 Ejes Mayores & Familia (Peso Alto)">
-                <option value="death_father" ${ev.type === 'death_father' ? 'selected' : ''}>Fallecimiento de Padre (MC/IC - Saturno/Sol)</option>
-                <option value="death_mother" ${ev.type === 'death_mother' ? 'selected' : ''}>Fallecimiento de Madre (IC/MC - Luna/Saturno)</option>
-                <option value="death_grandparent" ${ev.type === 'death_grandparent' ? 'selected' : ''}>Fallecimiento de Abuelo/a (Casa 4/MC - Saturno/Luna)</option>
-                <option value="child" ${ev.type === 'child' ? 'selected' : ''}>Nacimiento de Hijo (Casa 5 - Luna/Júpiter)</option>
-                <option value="marriage" ${ev.type === 'marriage' ? 'selected' : ''}>Boda / Pareja formal (Casa 7 - Venus/Júpiter)</option>
-                <option value="cohabitation" ${ev.type === 'cohabitation' ? 'selected' : ''}>Inicio de Convivencia / Pareja (Casa 7/IC - Venus/Luna)</option>
-                <option value="home_purchase" ${ev.type === 'home_purchase' ? 'selected' : ''}>Compra de Vivienda (IC/Casa 4 - Saturno/Júpiter)</option>
-                <option value="relocation" ${ev.type === 'relocation' ? 'selected' : ''}>Mudanza importante / Emigración (IC - Luna/Urano)</option>
-                <option value="sibling" ${ev.type === 'sibling' ? 'selected' : ''}>Nacimiento de Hermano en infancia (Casa 3/IC - Mercurio/Luna)</option>
-              </optgroup>
-              <optgroup label="💼 Carrera & Profesión">
-                <option value="profession" ${ev.type === 'profession' ? 'selected' : ''}>Éxito Profesional / Ascenso (MC - Sol/Júpiter)</option>
-                <option value="job_loss" ${ev.type === 'job_loss' ? 'selected' : ''}>Pérdida de empleo / Cese laboral (MC/Casa 6 - Saturno/Urano)</option>
-                <option value="business_start" ${ev.type === 'business_start' ? 'selected' : ''}>Inicio de Negocio / Emprendimiento (MC/Casa 1 - Sol/Marte)</option>
-                <option value="public_award" ${ev.type === 'public_award' ? 'selected' : ''}>Premio / Reconocimiento Público (MC - Sol/Júpiter)</option>
-                <option value="retirement" ${ev.type === 'retirement' ? 'selected' : ''}>Jubilación / Retiro definitivo (MC/Casa 12 - Saturno/Sol)</option>
-              </optgroup>
-              <optgroup label="⚡ Crisis, Salud & Finanzas">
-                <option value="accident" ${ev.type === 'accident' ? 'selected' : ''}>Accidente / Cirugía física (AC - Marte/Urano)</option>
-                <option value="illness" ${ev.type === 'illness' ? 'selected' : ''}>Enfermedad grave / Hospitalización (Casa 6/12 - Saturno/Neptuno)</option>
-                <option value="divorce" ${ev.type === 'divorce' ? 'selected' : ''}>Divorcio / Ruptura grave (Casa 7 - Urano/Marte)</option>
-                <option value="partnership_break" ${ev.type === 'partnership_break' ? 'selected' : ''}>Ruptura de Sociedad / Amistad (Casa 7/11 - Urano/Marte)</option>
-                <option value="financial_crisis" ${ev.type === 'financial_crisis' ? 'selected' : ''}>Crisis Financiera / Bancarrota (Casa 2/8 - Saturno/Plutón)</option>
-                <option value="theft_fraud" ${ev.type === 'theft_fraud' ? 'selected' : ''}>Robo significativo / Estafa (Casa 2/8 - Neptuno/Plutón)</option>
-                <option value="inheritance_lawsuit" ${ev.type === 'inheritance_lawsuit' ? 'selected' : ''}>Herencia / Litigio judicial (Casa 8/9 - Júpiter/Saturno)</option>
-                <option value="legal_victory" ${ev.type === 'legal_victory' ? 'selected' : ''}>Victoria Judicial Favorable (Casa 9/MC - Júpiter/Sol)</option>
-              </optgroup>
-              <optgroup label="🎓 Estudios, Viajes & Hitos">
-                <option value="studies" ${ev.type === 'studies' ? 'selected' : ''}>Graduación / Estudios Superiores (Casa 9 - Júpiter/Mercurio)</option>
-                <option value="scholarship_loan" ${ev.type === 'scholarship_loan' ? 'selected' : ''}>Beca de Estudios / Gran Crédito (Casa 8/9 - Júpiter/Venus)</option>
-                <option value="long_travel" ${ev.type === 'long_travel' ? 'selected' : ''}>Viaje Transoceánico / Ultramar (Casa 9/IC - Júpiter/Urano)</option>
-                <option value="driver_license" ${ev.type === 'driver_license' ? 'selected' : ''}>Permiso Conducir / Primer Coche (Casa 3/AC - Mercurio/Marte)</option>
-                <option value="pet_loss" ${ev.type === 'pet_loss' ? 'selected' : ''}>Pérdida de Mascota (Casa 6 - Luna/Saturno)</option>
-                <option value="spiritual_initiation" ${ev.type === 'spiritual_initiation' ? 'selected' : ''}>Iniciación Mística / Maestro (Casa 9/12 - Júpiter/Neptuno)</option>
-                <option value="spiritual_awakening" ${ev.type === 'spiritual_awakening' ? 'selected' : ''}>Despertar espiritual / Retiro (Casa 12/9 - Neptuno/Plutón)</option>
-              </optgroup>
-            </select>
-          </div>
-          <div class="col-span-10 sm:col-span-5">
-            <input type="date" class="event-date-input w-full px-2.5 py-1.5 rounded bg-slate-950 border border-slate-700 text-slate-200 text-xs focus:outline-none focus:border-amber-400" data-idx="${idx}" value="${ev.date}">
-          </div>
-          <div class="col-span-2 sm:col-span-1 text-center">
-            <button type="button" class="delete-event-btn text-rose-400 hover:text-rose-300 font-bold text-sm px-1.5 py-0.5 rounded" data-idx="${idx}">✕</button>
-          </div>
-        `;
-        container.appendChild(row);
-      });
-
-      document.querySelectorAll('.event-type-input').forEach(sel => {
-        sel.addEventListener('change', (e) => userEvents[e.target.dataset.idx].type = e.target.value);
-      });
-      document.querySelectorAll('.event-date-input').forEach(inp => {
-        inp.addEventListener('change', (e) => userEvents[e.target.dataset.idx].date = e.target.value);
-      });
-      document.querySelectorAll('.delete-event-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          userEvents.splice(e.target.dataset.idx, 1);
-          renderEventRows();
-        });
-      });
-    }
-
-    document.getElementById('addEventRowBtn').addEventListener('click', () => {
-      userEvents.push({ type: 'death_father', date: '2015-05-10' });
-      renderEventRows();
-    });
-
-    document.querySelectorAll('.quick-adjust').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const timeInput = document.getElementById('birthTime');
-        if (!timeInput.value) return;
-        const delta = parseInt(btn.dataset.min);
-        const [h, m] = timeInput.value.split(':').map(Number);
-        let total = h * 60 + m + delta;
-        total = (total + 1440) % 1440;
-        const newH = String(Math.floor(total / 60)).padStart(2, '0');
-        const newM = String(total % 60).padStart(2, '0');
-        timeInput.value = `${newH}:${newM}`;
-        document.getElementById('astralForm').dispatchEvent(new Event('submit'));
-      });
-    });
-
-    // Motor de cálculo de convergencia con ponderación jerárquica
-    document.getElementById('calcMultiRectifyBtn').addEventListener('click', () => {
-      if (!currentActiveProfile) {
-        alert("Primero debes calcular tu carta natal antes de ajustar la hora.");
-        return;
-      }
-      const bDateStr = document.getElementById('birthDate').value;
-      const bTimeStr = document.getElementById('birthTime').value;
-      if (!bDateStr || !bTimeStr) {
-        alert("Por favor introduce fecha y hora de nacimiento.");
-        return;
-      }
-      const birth = new Date(bDateStr + 'T' + bTimeStr);
-
-      const adjustments = [];
-      const weights = [];
-      const eventDetails = [];
-
-      userEvents.forEach((ev, i) => {
-        const event = new Date(ev.date + 'T12:00:00');
-        const diffTime = event.getTime() - birth.getTime();
-        if (diffTime <= 0) return;
-
-        const ageYears = diffTime / (1000 * 60 * 60 * 24 * 365.2422);
-        const solarArc = (ageYears * 0.9856) % 360;
-
-        let targetAngle = currentActiveProfile.houses[9].deg;
-        let targetName = "MC";
-        let candidates = currentActiveProfile.planets.filter(p => ['Sol', 'Júpiter', 'Saturno'].includes(p.name));
-        let weight = 1;
-
-        if (ev.type === 'death_father') {
-          targetAngle = currentActiveProfile.houses[9].deg;
-          targetName = "MC (Eje Paterno)";
-          candidates = currentActiveProfile.planets.filter(p => ['Saturno', 'Sol', 'Plutón'].includes(p.name));
-          weight = 3;
-        } else if (ev.type === 'death_mother') {
-          targetAngle = currentActiveProfile.houses[3].deg;
-          targetName = "IC (Eje Materno)";
-          candidates = currentActiveProfile.planets.filter(p => ['Luna', 'Saturno', 'Plutón'].includes(p.name));
-          weight = 3;
-        } else if (ev.type === 'death_grandparent') {
-          targetAngle = currentActiveProfile.houses[3].deg;
-          targetName = "IC (Linaje Ancestral)";
-          candidates = currentActiveProfile.planets.filter(p => ['Saturno', 'Luna', 'Plutón'].includes(p.name));
-          weight = 2;
-        } else if (ev.type === 'marriage') {
-          targetAngle = currentActiveProfile.houses[6].deg;
-          targetName = "Descendente (Casa 7)";
-          candidates = currentActiveProfile.planets.filter(p => ['Venus', 'Sol', 'Júpiter'].includes(p.name));
-          weight = 3;
-        } else if (ev.type === 'cohabitation') {
-          targetAngle = currentActiveProfile.houses[6].deg;
-          targetName = "Descendente (Convivencia)";
-          candidates = currentActiveProfile.planets.filter(p => ['Venus', 'Luna', 'Júpiter'].includes(p.name));
-          weight = 2;
-        } else if (ev.type === 'divorce') {
-          targetAngle = currentActiveProfile.houses[6].deg;
-          targetName = "Descendente (Casa 7)";
-          candidates = currentActiveProfile.planets.filter(p => ['Urano', 'Marte', 'Saturno'].includes(p.name));
-          weight = 3;
-        } else if (ev.type === 'child') {
-          targetAngle = currentActiveProfile.houses[4].deg;
-          targetName = "Cúspide Casa 5";
-          candidates = currentActiveProfile.planets.filter(p => ['Luna', 'Júpiter', 'Venus'].includes(p.name));
-          weight = 3;
-        } else if (ev.type === 'home_purchase') {
-          targetAngle = currentActiveProfile.houses[3].deg;
-          targetName = "IC (Patrimonio/Hogar)";
-          candidates = currentActiveProfile.planets.filter(p => ['Saturno', 'Júpiter', 'Luna'].includes(p.name));
-          weight = 2;
-        } else if (ev.type === 'relocation') {
-          targetAngle = currentActiveProfile.houses[3].deg;
-          targetName = "IC (Casa 4)";
-          candidates = currentActiveProfile.planets.filter(p => ['Luna', 'Júpiter', 'Urano'].includes(p.name));
-          weight = 2;
-        } else if (ev.type === 'sibling') {
-          targetAngle = currentActiveProfile.houses[2].deg;
-          targetName = "Cúspide Casa 3";
-          candidates = currentActiveProfile.planets.filter(p => ['Mercurio', 'Luna', 'Júpiter'].includes(p.name));
-          weight = 2;
-        } else if (ev.type === 'profession') {
-          targetAngle = currentActiveProfile.houses[9].deg;
-          targetName = "MC (Éxito Vocacional)";
-          candidates = currentActiveProfile.planets.filter(p => ['Sol', 'Júpiter', 'Saturno'].includes(p.name));
-          weight = 2;
-        } else if (ev.type === 'job_loss') {
-          targetAngle = currentActiveProfile.houses[9].deg;
-          targetName = "MC (Estatus)";
-          candidates = currentActiveProfile.planets.filter(p => ['Saturno', 'Urano', 'Marte'].includes(p.name));
-          weight = 2;
-        } else if (ev.type === 'business_start') {
-          targetAngle = currentActiveProfile.houses[9].deg;
-          targetName = "MC (Emprendimiento)";
-          candidates = currentActiveProfile.planets.filter(p => ['Sol', 'Marte', 'Júpiter'].includes(p.name));
-          weight = 2;
-        } else if (ev.type === 'public_award') {
-          targetAngle = currentActiveProfile.houses[9].deg;
-          targetName = "MC (Reconocimiento)";
-          candidates = currentActiveProfile.planets.filter(p => ['Sol', 'Júpiter', 'Venus'].includes(p.name));
-          weight = 2;
-        } else if (ev.type === 'retirement') {
-          targetAngle = currentActiveProfile.houses[9].deg;
-          targetName = "MC (Retiro)";
-          candidates = currentActiveProfile.planets.filter(p => ['Saturno', 'Sol', 'Júpiter'].includes(p.name));
-          weight = 2;
-        } else if (ev.type === 'accident') {
-          targetAngle = currentActiveProfile.houses[0].deg;
-          targetName = "Ascendente (AC)";
-          candidates = currentActiveProfile.planets.filter(p => ['Marte', 'Urano', 'Saturno'].includes(p.name));
-          weight = 3;
-        } else if (ev.type === 'illness') {
-          targetAngle = currentActiveProfile.houses[5].deg;
-          targetName = "Cúspide Casa 6";
-          candidates = currentActiveProfile.planets.filter(p => ['Saturno', 'Neptuno', 'Marte'].includes(p.name));
-          weight = 2;
-        } else if (ev.type === 'partnership_break') {
-          targetAngle = currentActiveProfile.houses[6].deg;
-          targetName = "Descendente (Sociedad)";
-          candidates = currentActiveProfile.planets.filter(p => ['Urano', 'Marte', 'Saturno'].includes(p.name));
-          weight = 2;
-        } else if (ev.type === 'financial_crisis') {
-          targetAngle = currentActiveProfile.houses[1].deg;
-          targetName = "Cúspide Casa 2";
-          candidates = currentActiveProfile.planets.filter(p => ['Saturno', 'Plutón', 'Marte'].includes(p.name));
-          weight = 2;
-        } else if (ev.type === 'theft_fraud') {
-          targetAngle = currentActiveProfile.houses[1].deg;
-          targetName = "Cúspide Casa 2 (Recursos)";
-          candidates = currentActiveProfile.planets.filter(p => ['Neptuno', 'Plutón', 'Marte'].includes(p.name));
-          weight = 1;
-        } else if (ev.type === 'inheritance_lawsuit') {
-          targetAngle = currentActiveProfile.houses[7].deg;
-          targetName = "Cúspide Casa 8";
-          candidates = currentActiveProfile.planets.filter(p => ['Júpiter', 'Saturno', 'Plutón'].includes(p.name));
-          weight = 2;
-        } else if (ev.type === 'legal_victory') {
-          targetAngle = currentActiveProfile.houses[8].deg;
-          targetName = "Cúspide Casa 9 (Justicia)";
-          candidates = currentActiveProfile.planets.filter(p => ['Júpiter', 'Sol', 'Marte'].includes(p.name));
-          weight = 1;
-        } else if (ev.type === 'studies') {
-          targetAngle = currentActiveProfile.houses[8].deg;
-          targetName = "Cúspide Casa 9";
-          candidates = currentActiveProfile.planets.filter(p => ['Júpiter', 'Mercurio', 'Sol'].includes(p.name));
-          weight = 1;
-        } else if (ev.type === 'scholarship_loan') {
-          targetAngle = currentActiveProfile.houses[7].deg;
-          targetName = "Cúspide Casa 8 (Fondos)";
-          candidates = currentActiveProfile.planets.filter(p => ['Júpiter', 'Venus', 'Mercurio'].includes(p.name));
-          weight = 1;
-        } else if (ev.type === 'long_travel') {
-          targetAngle = currentActiveProfile.houses[8].deg;
-          targetName = "Cúspide Casa 9 (Ultramar)";
-          candidates = currentActiveProfile.planets.filter(p => ['Júpiter', 'Urano', 'Luna'].includes(p.name));
-          weight = 1;
-        } else if (ev.type === 'driver_license') {
-          targetAngle = currentActiveProfile.houses[2].deg;
-          targetName = "Cúspide Casa 3 (Movilidad)";
-          candidates = currentActiveProfile.planets.filter(p => ['Mercurio', 'Marte', 'Urano'].includes(p.name));
-          weight = 1;
-        } else if (ev.type === 'pet_loss') {
-          targetAngle = currentActiveProfile.houses[5].deg;
-          targetName = "Cúspide Casa 6 (Animales)";
-          candidates = currentActiveProfile.planets.filter(p => ['Luna', 'Saturno', 'Mercurio'].includes(p.name));
-          weight = 1;
-        } else if (ev.type === 'spiritual_initiation') {
-          targetAngle = currentActiveProfile.houses[8].deg;
-          targetName = "Cúspide Casa 9 (Iniciación)";
-          candidates = currentActiveProfile.planets.filter(p => ['Júpiter', 'Neptuno', 'Sol'].includes(p.name));
-          weight = 1;
-        } else if (ev.type === 'spiritual_awakening') {
-          targetAngle = currentActiveProfile.houses[11].deg;
-          targetName = "Cúspide Casa 12";
-          candidates = currentActiveProfile.planets.filter(p => ['Neptuno', 'Júpiter', 'Plutón'].includes(p.name));
-          weight = 1;
-        }
-
-        let bestPlanet = candidates[0] || currentActiveProfile.planets[0];
-        let minDelta = 999;
-
-        candidates.forEach(p => {
-          let dist = (p.absDeg - targetAngle + 360) % 360;
-          if (dist > 180) dist = 360 - dist;
-          let delta = dist - solarArc;
-          if (Math.abs(delta) < Math.abs(minDelta)) {
-            minDelta = delta;
-            bestPlanet = p;
-          }
-        });
-
-        const minCorrection = Math.round(minDelta * 4);
-        adjustments.push(minCorrection);
-        weights.push(weight);
-        eventDetails.push(`Evento ${i + 1} (${targetName} ↔ ${bestPlanet.name}): ${minCorrection > 0 ? `-${minCorrection}` : `+${Math.abs(minCorrection)}`}m [peso: ${weight}]`);
-      });
-
-      if (adjustments.length === 0) {
-        alert("Introduce al menos un evento con fecha posterior a tu nacimiento.");
-        return;
-      }
-
-      // Media ponderada por jerarquía
-      const totalWeight = weights.reduce((a, b) => a + b, 0);
-      const weightedSum = adjustments.reduce((acc, val, idx) => acc + (val * weights[idx]), 0);
-      const avgMinCorrection = Math.round(weightedSum / totalWeight);
-
-      const [h, m] = bTimeStr.split(':').map(Number);
-      let totalMin = (h * 60 + m) - avgMinCorrection;
-      totalMin = (totalMin + 1440) % 1440;
-      const newH = String(Math.floor(totalMin / 60)).padStart(2, '0');
-      const newM = String(totalMin % 60).padStart(2, '0');
-      multiSuggestedTime = `${newH}:${newM}`;
-
-      const variance = adjustments.reduce((acc, val, idx) => acc + (weights[idx] * Math.pow(val - avgMinCorrection, 2)), 0) / totalWeight;
-      const stdDev = Math.sqrt(variance);
-      const consistencyPct = Math.max(50, Math.min(98, Math.round(100 - stdDev * 3.5)));
-
-      const summary = document.getElementById('multiRectifySummary');
-      const signStr = avgMinCorrection > 0 ? `-${avgMinCorrection}` : `+${Math.abs(avgMinCorrection)}`;
-      summary.innerHTML = `
-        <div class="font-bold text-amber-300">Convergencia Ponderada de ${adjustments.length} eventos (Consistencia: <strong>${consistencyPct}%</strong>):</div>
-        <div class="text-[11px] text-slate-400 mt-1">${eventDetails.join(' • ')}</div>
-        <div class="mt-1.5 text-slate-200">Desfase medio ponderado: <strong class="text-amber-400 font-mono">${signStr} minutos</strong>. Hora sugerida: <strong class="text-amber-300 text-sm font-mono">${multiSuggestedTime}</strong></div>
-      `;
-
-      document.getElementById('multiRectificationResult').classList.remove('hidden');
-    });
-
-    document.getElementById('applyMultiRectifiedTimeBtn').addEventListener('click', () => {
-      if (multiSuggestedTime) {
-        document.getElementById('birthTime').value = multiSuggestedTime;
-        document.getElementById('astralForm').dispatchEvent(new Event('submit'));
-        document.getElementById('multiRectificationResult').classList.add('hidden');
-      }
-    });
-
     const cityPresetEl = document.getElementById('cityPreset');
     const astralForm = document.getElementById('astralForm');
 
@@ -2199,6 +2179,9 @@
       if (PRESET_CITIES[cityKey]) {
         document.getElementById('geoLat').value = PRESET_CITIES[cityKey].lat;
         document.getElementById('geoLng').value = PRESET_CITIES[cityKey].lng;
+        if (PRESET_CITIES[cityKey].tz !== undefined) {
+          document.getElementById('dstOffset').value = String(PRESET_CITIES[cityKey].tz);
+        }
       }
     });
 
@@ -2212,7 +2195,17 @@
       const lng = parseFloat(document.getElementById('geoLng').value);
       const tz = parseFloat(document.getElementById('dstOffset').value);
 
-      const profileToRender = calculateDynamicProfile(name, birthDate, birthTime, lat, lng, tz);
+      const isVerified = Object.keys(VERIFIED_PROFILES).find(k => 
+        VERIFIED_PROFILES[k].birthDate === birthDate && 
+        VERIFIED_PROFILES[k].birthTime.startsWith(birthTime)
+      );
+
+      let profileToRender;
+      if (isVerified) {
+        profileToRender = VERIFIED_PROFILES[isVerified];
+      } else {
+        profileToRender = calculateAstronomicalProfile(name, birthDate, birthTime, lat, lng, tz);
+      }
 
       renderComplete(profileToRender, evalDate);
       document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
@@ -2225,9 +2218,7 @@
       }
     });
 
-    // Inicialización limpia
     refreshProfilesDropdown();
-    renderEventRows();
     document.getElementById('userName').value = '';
     document.getElementById('birthDate').value = '';
     document.getElementById('birthTime').value = '';
