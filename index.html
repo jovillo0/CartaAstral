@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Carta Astral Profesional - Astrodienst & Modelos Astronómicos de Precisión</title>
+  <title>Carta Astral Profesional - Astrodienst, Rectificación al Minuto & Oráculo de Fechas</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -71,13 +71,13 @@
 
     <header class="text-center space-y-2 pt-1">
       <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-400/30 bg-amber-400/10 text-amber-300 text-xs font-semibold tracking-wider uppercase">
-        <span>☉</span> Mecánica Celeste Jean Meeus · Atlas Geográfico Ibérico <span>☉</span>
+        <span>☉</span> Jean Meeus · Rectificación al Minuto & Planificador de Fechas Propicias <span>☉</span>
       </div>
       <h1 class="text-3xl sm:text-5xl font-cinzel font-bold tracking-tight gold-gradient">
         Carta Astral & Dinámica de Ciclos
       </h1>
       <p class="text-slate-400 text-xs sm:text-sm max-w-2xl mx-auto">
-        Cálculo astronómico geocéntrico con resolución de ecuaciones de Kepler y orbes analíticos calibrados con Astrodienst.
+        Cálculo Placidus geocéntrico con barrido minuto a minuto, oráculo electivo de fechas óptimas y síntesis analítica personalizada.
       </p>
     </header>
 
@@ -86,7 +86,7 @@
       <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-slate-800 pb-3">
         <div>
           <span class="text-xs uppercase tracking-wider text-amber-400 font-bold block">Gestión de Perfiles</span>
-          <span class="text-xs text-slate-400">Selecciona un perfil guardado o introduce nuevos datos natales:</span>
+          <span class="text-xs text-slate-400">Selecciona un perfil verificado o introduce tus datos natales:</span>
         </div>
         <div class="flex flex-wrap items-center gap-2 w-full sm:w-auto">
           <select id="savedProfilesSelect" class="flex-1 sm:flex-initial px-3 py-2 rounded-xl bg-slate-900 border border-amber-500/40 text-amber-300 text-xs sm:text-sm font-medium focus:outline-none focus:border-amber-400">
@@ -124,27 +124,25 @@
             <input type="date" id="birthDate" required class="w-full px-3 py-2 rounded-xl bg-slate-900/90 border border-slate-700 text-white text-xs sm:text-sm focus:outline-none focus:border-amber-400">
           </div>
           <div>
-            <div class="flex justify-between items-center mb-1">
-              <label for="birthTime" class="text-xs uppercase tracking-wider text-slate-300 font-semibold block">Hora Local</label>
-              <div class="flex items-center gap-1">
-                <button type="button" class="quick-adjust px-1.5 py-0.5 rounded bg-slate-800 hover:bg-slate-700 border border-slate-600 text-[10px] font-mono text-amber-300" data-min="-5">-5m</button>
-                <button type="button" class="quick-adjust px-1.5 py-0.5 rounded bg-slate-800 hover:bg-slate-700 border border-slate-600 text-[10px] font-mono text-amber-300" data-min="-1">-1m</button>
-                <button type="button" class="quick-adjust px-1.5 py-0.5 rounded bg-slate-800 hover:bg-slate-700 border border-slate-600 text-[10px] font-mono text-amber-300" data-min="1">+1m</button>
-                <button type="button" class="quick-adjust px-1.5 py-0.5 rounded bg-slate-800 hover:bg-slate-700 border border-slate-600 text-[10px] font-mono text-amber-300" data-min="5">+5m</button>
-              </div>
+            <label for="birthTime" class="text-xs uppercase tracking-wider text-slate-300 font-semibold block mb-1">Hora Local</label>
+            <div class="relative">
+              <input type="time" id="birthTime" value="12:00" required class="w-full px-3 py-2 rounded-xl bg-slate-900/90 border border-slate-700 text-white text-xs sm:text-sm focus:outline-none focus:border-amber-400">
             </div>
-            <input type="time" id="birthTime" required class="w-full px-3 py-2 rounded-xl bg-slate-900/90 border border-slate-700 text-white text-xs sm:text-sm focus:outline-none focus:border-amber-400">
+            <div class="flex items-center gap-1.5 mt-1.5">
+              <input type="checkbox" id="unknownTimeCheckbox" class="rounded bg-slate-900 border-slate-700 text-amber-400 focus:ring-amber-400">
+              <label for="unknownTimeCheckbox" class="text-[11px] text-amber-300/90 font-medium cursor-pointer">Hora Desconocida (Usa Rectificación)</label>
+            </div>
           </div>
           <div>
             <label for="evalDate" class="text-xs uppercase tracking-wider text-slate-300 font-semibold block mb-1">Fecha Cielo Actual (Tránsitos)</label>
-            <input type="date" id="evalDate" value="2026-10-07" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs sm:text-sm focus:outline-none focus:border-amber-400">
+            <input type="date" id="evalDate" value="2026-10-11" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs sm:text-sm focus:outline-none focus:border-amber-400">
           </div>
         </div>
 
         <div class="pt-3 border-t border-slate-800">
           <div class="flex items-center justify-between mb-2">
-            <span class="text-xs uppercase tracking-wider text-amber-400 font-bold">Atlas de Localización Geográfica y Huso</span>
-            <span class="text-[11px] text-slate-400">Calibración precisa del Ascendente y Cúspides</span>
+            <span class="text-xs uppercase tracking-wider text-amber-400 font-bold">Atlas Geográfico & Huso Horario Automático</span>
+            <span class="text-[11px] text-slate-400" id="tzAutoNotice">Huso ajustado automáticamente por fecha y lugar</span>
           </div>
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3.5">
             <div>
@@ -197,19 +195,18 @@
               <input type="number" step="0.0001" id="geoLat" value="39.4699" required class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs focus:outline-none focus:border-amber-400">
             </div>
             <div>
-              <label for="geoLng" class="text-xs text-slate-400 block mb-1">Longitud (° Decimal, Oeste es negativo)</label>
+              <label for="geoLng" class="text-xs text-slate-400 block mb-1">Longitud (° Decimal, Oeste negativo)</label>
               <input type="number" step="0.0001" id="geoLng" value="-0.3763" required class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs focus:outline-none focus:border-amber-400">
             </div>
             <div>
-              <label for="dstOffset" class="text-xs text-slate-400 block mb-1">Huso Horario / DST (Horario de Invierno/Verano)</label>
+              <label for="dstOffset" class="text-xs text-slate-400 block mb-1">Huso Horario (UTC)</label>
               <select id="dstOffset" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs focus:outline-none focus:border-amber-400">
-                <option value="1">Península Invierno / 1969 (UTC+1)</option>
-                <option value="2" selected>Península Verano Actual (UTC+2)</option>
-                <option value="0">Canarias Invierno / Londres (UTC+0)</option>
-                <option value="1">Canarias Verano (UTC+1)</option>
-                <option value="-3">Argentina / Chile (UTC-3)</option>
-                <option value="-5">Colombia / Perú (UTC-5)</option>
-                <option value="-6">México Centro (UTC-6)</option>
+                <option value="2">UTC+2 (Península Verano)</option>
+                <option value="1">UTC+1 (Península Invierno / Canarias Verano)</option>
+                <option value="0">UTC+0 (Canarias Invierno / Londres)</option>
+                <option value="-3">UTC-3 (Argentina / Chile)</option>
+                <option value="-5">UTC-5 (Colombia / Perú)</option>
+                <option value="-6">UTC-6 (México)</option>
               </select>
             </div>
           </div>
@@ -218,7 +215,7 @@
         <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2 border-t border-slate-800">
           <div class="text-[11px] text-slate-400 flex items-center gap-1.5">
             <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-            Algoritmos orbitales VSOP87 & Meeus integrados en el motor local.
+            Algoritmos orbitales VSOP87 & Jean Meeus con corrección temporal activa.
           </div>
           <button type="submit" class="w-full sm:w-auto py-2.5 px-6 rounded-xl font-cinzel font-bold text-slate-950 bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500 hover:brightness-110 shadow-lg shadow-amber-500/20 active:scale-95 transition text-sm">
             Calcular Carta de Alta Precisión
@@ -231,30 +228,161 @@
     <div id="results" class="hidden space-y-6">
 
       <!-- Tríada Fundamental -->
-      <section class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-        <div class="glass-card rounded-2xl p-4 border-amber-400/40 text-center space-y-1">
-          <span class="text-[10px] uppercase tracking-wider text-amber-400 font-bold">Sol Natal (Esencia)</span>
-          <div class="text-2xl font-cinzel font-bold text-white flex items-center justify-center gap-2">
-            <span>☉</span>
-            <span id="sunSignName">-</span>
-          </div>
-          <p class="text-xs text-slate-300" id="sunSignDegree">-</p>
+      <section class="space-y-2">
+        <div class="text-xs text-slate-400 bg-slate-900/60 p-2.5 rounded-xl border border-slate-800">
+          <strong class="text-amber-300">¿Qué es esta sección?</strong> Representa el trípode fundamental de tu psicología cósmica: tu voluntad consciente y propósito vital (Sol), tu universo emocional, memoria y respuestas inconscientes (Luna), y tu lente de manifestación, temperamento físico y punto cardinal del horizonte (Ascendente).
         </div>
-        <div class="glass-card rounded-2xl p-4 border-slate-400/40 text-center space-y-1">
-          <span class="text-[10px] uppercase tracking-wider text-slate-300 font-bold">Luna Natal (Alma)</span>
-          <div class="text-2xl font-cinzel font-bold text-white flex items-center justify-center gap-2">
-            <span>☽</span>
-            <span id="moonSignName">-</span>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div class="glass-card rounded-2xl p-4 border-amber-400/40 text-center space-y-1">
+            <span class="text-[10px] uppercase tracking-wider text-amber-400 font-bold">Sol Natal (Esencia & Voluntad)</span>
+            <div class="text-2xl font-cinzel font-bold text-white flex items-center justify-center gap-2">
+              <span>☉</span>
+              <span id="sunSignName">-</span>
+            </div>
+            <p class="text-xs text-slate-300" id="sunSignDegree">-</p>
           </div>
-          <p class="text-xs text-slate-300" id="moonSignDegree">-</p>
+          <div class="glass-card rounded-2xl p-4 border-slate-400/40 text-center space-y-1">
+            <span class="text-[10px] uppercase tracking-wider text-slate-300 font-bold">Luna Natal (Alma & Subconsciente)</span>
+            <div class="text-2xl font-cinzel font-bold text-white flex items-center justify-center gap-2">
+              <span>☽</span>
+              <span id="moonSignName">-</span>
+            </div>
+            <p class="text-xs text-slate-300" id="moonSignDegree">-</p>
+          </div>
+          <div class="glass-card rounded-2xl p-4 border-amber-400/40 text-center space-y-1">
+            <span class="text-[10px] uppercase tracking-wider text-amber-300 font-bold">Ascendente (Horizonte & Destino)</span>
+            <div class="text-2xl font-cinzel font-bold text-white flex items-center justify-center gap-2">
+              <span>ASC</span>
+              <span id="ascSignName">-</span>
+            </div>
+            <p class="text-xs text-slate-300" id="ascSignDegree">-</p>
+          </div>
         </div>
-        <div class="glass-card rounded-2xl p-4 border-amber-400/40 text-center space-y-1">
-          <span class="text-[10px] uppercase tracking-wider text-amber-300 font-bold">Ascendente (Horizonte)</span>
-          <div class="text-2xl font-cinzel font-bold text-white flex items-center justify-center gap-2">
-            <span>ASC</span>
-            <span id="ascSignName">-</span>
+      </section>
+
+      <!-- MÓDULO DE RECTIFICACIÓN (Condicional: sólo visible si hora es desconocida) -->
+      <section id="rectificationSection" class="hidden glass-card rounded-2xl p-4 sm:p-5 border-amber-400/40 space-y-4">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-slate-800 pb-3">
+          <div>
+            <span class="text-xs uppercase text-amber-400 font-bold tracking-wider block">Rectificación Astrológica</span>
+            <h3 class="font-cinzel text-lg sm:text-xl font-bold text-white">Búsqueda de Hora Natal por Acontecimientos de Vida</h3>
           </div>
-          <p class="text-xs text-slate-300" id="ascSignDegree">-</p>
+          <div class="flex items-center gap-2">
+            <span class="text-xs text-slate-400">Hora en Carta:</span>
+            <span id="rectifiedTimeBadge" class="font-mono text-sm font-bold text-amber-300 px-3 py-1 rounded-xl bg-slate-900 border border-slate-700">12:00</span>
+          </div>
+        </div>
+
+        <div class="text-xs text-slate-400 bg-slate-900/60 p-2.5 rounded-xl border border-slate-800">
+          <strong class="text-amber-300">¿Qué es esta sección?</strong> Se ha activado porque indicaste que la hora de nacimiento es desconocida o requiere comprobación. Permite cotejar fechas clave de tu biografía con tránsitos sobre las cúspides angulares para encontrar la hora más armónica minuto a minuto.
+        </div>
+
+        <div class="space-y-3 bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+          <div class="grid grid-cols-1 sm:grid-cols-12 gap-2.5 items-end">
+            <div class="sm:col-span-5">
+              <label for="eventPresetSelect" class="text-[11px] text-slate-400 block mb-1">Tipo de Acontecimiento</label>
+              <select id="eventPresetSelect" class="w-full px-2.5 py-1.5 rounded-lg bg-slate-950 border border-slate-700 text-white text-xs focus:outline-none focus:border-amber-400">
+                <optgroup label="Vínculos y Pareja">
+                  <option value="matrimonio">Matrimonio o Pareja Crucial (Eje VII - Descendente)</option>
+                  <option value="divorcio">Divorcio o Separación Definitiva (Eje VII - Descendente)</option>
+                </optgroup>
+                <optgroup label="Carrera, Finanzas y Vocación">
+                  <option value="profesional">Éxito Laboral / Ascenso Importante (Eje X - Medio Cielo)</option>
+                  <option value="graduacion">Titulación Universitaria / Gran Logro Académico (Ejes IX - X)</option>
+                  <option value="despido">Pérdida de Empleo o Ruptura Profesional (Ejes X - VI)</option>
+                  <option value="empresa">Fundación de Empresa o Proyecto Autónomo (Ejes X - I)</option>
+                  <option value="herencia">Herencia, Indemnización o Gran Ganancia Extra (Eje VIII - Mutación)</option>
+                </optgroup>
+                <optgroup label="Familia, Hogar y Viajes">
+                  <option value="hijo">Nacimiento del Primer Hijo (Casa V / Eje Cardinal)</option>
+                  <option value="mudanza">Mudanza de Hogar / Emigración (Eje IV - Fondo Cielo)</option>
+                  <option value="vivienda">Compraventa de Primera Vivienda (Eje IV - Raíces)</option>
+                  <option value="viaje_largo">Gran Viaje Iniciático o Cambio de País (Eje IX - Expansión)</option>
+                </optgroup>
+                <optgroup label="Salud, Crisis y Pérdidas">
+                  <option value="accidente">Accidente / Cirugía Grave (Eje I - Ascendente / Casa VI)</option>
+                  <option value="enfermedad">Diagnóstico o Tratamiento Prolongado (Casa VI - Routine/Salud)</option>
+                  <option value="duelo_padres">Fallecimiento de Padre o Madre (Ejes IV - X)</option>
+                  <option value="duelo">Fallecimiento Cercano / Pérdida Vital (Ejes IV - VIII)</option>
+                  <option value="crisis_vital">Cierre de Ciclo o Crisis Transformadora (Eje VIII - Regeneración)</option>
+                </optgroup>
+                <optgroup label="Otros">
+                  <option value="legal">Sentencia Judicial o Resolución Legal (Ejes VII - IX)</option>
+                  <option value="personalizado">Otro Evento Significativo</option>
+                </optgroup>
+              </select>
+            </div>
+            <div class="sm:col-span-4">
+              <label for="eventDateInput" class="text-[11px] text-slate-400 block mb-1">Fecha del Acontecimiento</label>
+              <input type="date" id="eventDateInput" class="w-full px-2.5 py-1.5 rounded-lg bg-slate-950 border border-slate-700 text-white text-xs focus:outline-none focus:border-amber-400">
+            </div>
+            <div class="sm:col-span-3">
+              <button type="button" id="addEventBtn" class="w-full py-1.5 px-3 rounded-lg bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs shadow transition flex items-center justify-center gap-1">
+                <span>+</span> Añadir Evento
+              </button>
+            </div>
+          </div>
+
+          <div class="pt-2">
+            <span class="text-[11px] uppercase font-bold text-slate-400 block mb-1.5">Acontecimientos Cargados para Búsqueda:</span>
+            <div id="eventsListContainer" class="flex flex-wrap gap-2 text-xs">
+              <span class="text-slate-500 italic text-xs">Añade al menos un acontecimiento biográfico para calcular las horas más probables.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ajuste por Minutos en la Búsqueda Multi-Caso -->
+        <div class="flex flex-col md:flex-row items-center justify-between gap-3 bg-amber-950/20 border border-amber-500/30 p-3.5 rounded-xl">
+          <div class="text-xs text-slate-300">
+            <strong class="text-amber-300 block">Algoritmo de Búsqueda Inversa Multi-Caso</strong>
+            Selecciona la resolución del barrido temporal para evaluar la concordancia angular:
+          </div>
+          <div class="flex items-center gap-2 w-full md:w-auto">
+            <select id="rectScanResolution" class="px-2.5 py-1.5 rounded-xl bg-slate-900 border border-amber-400/40 text-amber-300 text-xs font-mono focus:outline-none">
+              <option value="1" selected>Paso Minuto a Minuto: Cada 1 Minuto (1.440 casos - Máxima Precisión)</option>
+              <option value="2">Paso Rápido: Cada 2 Minutos (720 casos)</option>
+              <option value="5">Paso Óptimo: Cada 5 Minutos (288 casos)</option>
+              <option value="15">Paso Rápido: Cada 15 Minutos (96 casos)</option>
+            </select>
+            <button type="button" id="runRectificationBtn" class="py-1.5 px-4 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:brightness-110 text-slate-950 font-cinzel font-bold text-xs shadow transition whitespace-nowrap">
+              Calcular Casos
+            </button>
+          </div>
+        </div>
+
+        <div id="rectificationResultsArea" class="hidden space-y-2">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-amber-300 flex items-center justify-between">
+            <span>Resultados de Concordancia (Horas más probables ordenadas):</span>
+            <span class="text-[10px] text-slate-400 font-normal">Pulsa "Aplicar" para fijar la hora en la carta</span>
+          </h4>
+          <div class="overflow-x-auto max-h-[220px] overflow-y-auto">
+            <table class="w-full text-xs text-left text-slate-300">
+              <thead class="text-[10px] uppercase text-slate-500 border-b border-slate-800 sticky top-0 bg-slate-900/90">
+                <tr>
+                  <th class="py-2 px-3">Hora Probable</th>
+                  <th class="py-2 px-3">Ascendente (ASC)</th>
+                  <th class="py-2 px-3">Medio Cielo (MC)</th>
+                  <th class="py-2 px-3">Puntuación / Concordancia</th>
+                  <th class="py-2 px-3 text-right">Acción</th>
+                </tr>
+              </thead>
+              <tbody id="rectificationRankingBody" class="divide-y divide-slate-800 font-mono"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Ajuste Manual de Apoyo -->
+        <div class="pt-3 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+          <span class="text-slate-400">Ajuste manual continuo:</span>
+          <div class="flex items-center gap-1.5 flex-wrap">
+            <button type="button" class="rect-btn px-2.5 py-1 rounded bg-slate-900 hover:bg-slate-800 text-amber-300 font-mono border border-slate-700" data-shift="-15">-15m</button>
+            <button type="button" class="rect-btn px-2.5 py-1 rounded bg-slate-900 hover:bg-slate-800 text-amber-300 font-mono border border-slate-700" data-shift="-5">-5m</button>
+            <button type="button" class="rect-btn px-2.5 py-1 rounded bg-slate-900 hover:bg-slate-800 text-amber-300 font-mono border border-slate-700" data-shift="-1">-1m</button>
+            <button type="button" id="rectResetBtn" class="px-3 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold border border-slate-600">Restablecer 12:00</button>
+            <button type="button" class="rect-btn px-2.5 py-1 rounded bg-slate-900 hover:bg-slate-800 text-amber-300 font-mono border border-slate-700" data-shift="1">+1m</button>
+            <button type="button" class="rect-btn px-2.5 py-1 rounded bg-slate-900 hover:bg-slate-800 text-amber-300 font-mono border border-slate-700" data-shift="5">+5m</button>
+            <button type="button" class="rect-btn px-2.5 py-1 rounded bg-slate-900 hover:bg-slate-800 text-amber-300 font-mono border border-slate-700" data-shift="15">+15m</button>
+          </div>
         </div>
       </section>
 
@@ -287,80 +415,90 @@
         </div>
       </section>
 
-      <!-- CONTENEDOR 1: DOBLE CARTA EN PARALELO CON NAVEGACIÓN TEMPORAL -->
-      <section id="dualWheelsSection" class="grid grid-cols-1 lg:grid-cols-2 gap-5 items-stretch">
-        <div class="glass-card rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-between">
-          <div class="flex items-center justify-between w-full px-2 mb-2">
-            <div>
-              <span class="text-[10px] uppercase font-bold text-amber-400 block tracking-wider">Cielo de Nacimiento</span>
-              <h3 class="font-cinzel text-sm sm:text-base font-bold text-white" id="chartOwnerTitle">Carta Natal</h3>
-            </div>
-            <span class="text-xs text-slate-400 font-mono" id="mcBadge">-</span>
-          </div>
-          
-          <div class="relative w-full flex justify-center overflow-hidden py-1">
-            <canvas id="astroWheel" width="500" height="500" class="max-w-full drop-shadow-2xl rounded-full"></canvas>
-            <div id="planetTooltip" class="absolute pointer-events-none hidden px-3 py-2 rounded-xl bg-slate-950/95 border border-amber-400 text-xs shadow-2xl text-white transition-opacity duration-150 z-50">
-              <div id="tooltipContent"></div>
-            </div>
-          </div>
-
-          <div class="flex flex-wrap justify-center items-center gap-3 text-[11px] text-slate-400 mt-2">
-            <span class="flex items-center gap-1.5"><span class="w-3 h-0.5 bg-blue-600 inline-block"></span> Trígonos / Sextiles</span>
-            <span class="flex items-center gap-1.5"><span class="w-3 h-1 bg-red-600 inline-block"></span> Cuadraturas / Oposiciones</span>
-          </div>
+      <!-- CONTENEDOR 1: DOBLE CARTA EN PARALELO -->
+      <section id="dualWheelsSection" class="space-y-2">
+        <div class="text-xs text-slate-400 bg-slate-900/60 p-2.5 rounded-xl border border-slate-800">
+          <strong class="text-amber-300">¿Qué es esta sección?</strong> Compara lado a lado el cielo exacto de tu nacimiento con el cielo dinámico del momento actual. Te permite explorar el paso del tiempo con los botones de salto (-1A, -1M, -1D, Hoy) para contemplar cómo evolucionan los planetas sobre el fondo del zodíaco.
         </div>
-
-        <div class="glass-card rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-between border-sky-400/30">
-          <div class="flex items-center justify-between w-full px-2 mb-2">
-            <div>
-              <span class="text-[10px] uppercase font-bold text-sky-400 block tracking-wider">Posición en Tiempo Real</span>
-              <h3 class="font-cinzel text-sm sm:text-base font-bold text-white">Cielo Actual de Tránsitos</h3>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 items-stretch">
+          <div class="glass-card rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-between">
+            <div class="flex items-center justify-between w-full px-2 mb-2">
+              <div>
+                <span class="text-[10px] uppercase font-bold text-amber-400 block tracking-wider">Cielo de Nacimiento</span>
+                <h3 class="font-cinzel text-sm sm:text-base font-bold text-white" id="chartOwnerTitle">Carta Natal</h3>
+              </div>
+              <span class="text-xs text-slate-400 font-mono" id="mcBadge">-</span>
             </div>
-            <span class="text-xs text-sky-300 font-mono" id="currentSkyBadge">Octubre 2026</span>
+            
+            <div class="relative w-full flex justify-center overflow-hidden py-1">
+              <canvas id="astroWheel" width="500" height="500" class="max-w-full drop-shadow-2xl rounded-full"></canvas>
+              <div id="planetTooltip" class="absolute pointer-events-none hidden px-3 py-2 rounded-xl bg-slate-950/95 border border-amber-400 text-xs shadow-2xl text-white transition-opacity duration-150 z-50">
+                <div id="tooltipContent"></div>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap justify-center items-center gap-3 text-[11px] text-slate-400 mt-2">
+              <span class="flex items-center gap-1.5"><span class="w-3 h-0.5 bg-blue-600 inline-block"></span> Trígonos / Sextiles</span>
+              <span class="flex items-center gap-1.5"><span class="w-3 h-1 bg-red-600 inline-block"></span> Cuadraturas / Oposiciones</span>
+            </div>
           </div>
-          <div class="w-full flex justify-center overflow-hidden py-1">
-            <canvas id="currentAstroWheel" width="500" height="500" class="max-w-full drop-shadow-2xl rounded-full"></canvas>
-          </div>
-          
-          <div class="w-full pt-3 border-t border-slate-800/80 mt-2">
-            <div class="flex flex-wrap items-center justify-center gap-1.5 text-[11px]">
-              <button type="button" class="time-shift-btn px-2 py-1 rounded bg-slate-900 hover:bg-slate-800 border border-slate-700 text-sky-300 font-mono" data-shift-unit="year" data-shift-val="-1">◀ -1A</button>
-              <button type="button" class="time-shift-btn px-2 py-1 rounded bg-slate-900 hover:bg-slate-800 border border-slate-700 text-sky-300 font-mono" data-shift-unit="month" data-shift-val="-1">◀ -1M</button>
-              <button type="button" class="time-shift-btn px-2 py-1 rounded bg-slate-900 hover:bg-slate-800 border border-slate-700 text-sky-300 font-mono" data-shift-unit="day" data-shift-val="-1">◀ -1D</button>
-              <button type="button" id="timeShiftTodayBtn" class="px-3 py-1 rounded bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold">Hoy</button>
-              <button type="button" class="time-shift-btn px-2 py-1 rounded bg-slate-900 hover:bg-slate-800 border border-slate-700 text-sky-300 font-mono" data-shift-unit="day" data-shift-val="1">+1D ▶</button>
-              <button type="button" class="time-shift-btn px-2 py-1 rounded bg-slate-900 hover:bg-slate-800 border border-slate-700 text-sky-300 font-mono" data-shift-unit="month" data-shift-val="1">+1M ▶</button>
-              <button type="button" class="time-shift-btn px-2 py-1 rounded bg-slate-900 hover:bg-slate-800 border border-slate-700 text-sky-300 font-mono" data-shift-unit="year" data-shift-val="1">+1A ▶</button>
+
+          <div class="glass-card rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-between border-sky-400/30">
+            <div class="flex items-center justify-between w-full px-2 mb-2">
+              <div>
+                <span class="text-[10px] uppercase font-bold text-sky-400 block tracking-wider">Posición en Tiempo Real</span>
+                <h3 class="font-cinzel text-sm sm:text-base font-bold text-white">Cielo Actual de Tránsitos</h3>
+              </div>
+              <span class="text-xs text-sky-300 font-mono" id="currentSkyBadge">Octubre 2026</span>
+            </div>
+            <div class="w-full flex justify-center overflow-hidden py-1">
+              <canvas id="currentAstroWheel" width="500" height="500" class="max-w-full drop-shadow-2xl rounded-full"></canvas>
+            </div>
+            
+            <div class="w-full pt-3 border-t border-slate-800/80 mt-2">
+              <div class="flex flex-wrap items-center justify-center gap-1.5 text-[11px]">
+                <button type="button" class="time-shift-btn px-2 py-1 rounded bg-slate-900 hover:bg-slate-800 border border-slate-700 text-sky-300 font-mono" data-shift-unit="year" data-shift-val="-1">◀ -1A</button>
+                <button type="button" class="time-shift-btn px-2 py-1 rounded bg-slate-900 hover:bg-slate-800 border border-slate-700 text-sky-300 font-mono" data-shift-unit="month" data-shift-val="-1">◀ -1M</button>
+                <button type="button" class="time-shift-btn px-2 py-1 rounded bg-slate-900 hover:bg-slate-800 border border-slate-700 text-sky-300 font-mono" data-shift-unit="day" data-shift-val="-1">◀ -1D</button>
+                <button type="button" id="timeShiftTodayBtn" class="px-3 py-1 rounded bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold">Hoy</button>
+                <button type="button" class="time-shift-btn px-2 py-1 rounded bg-slate-900 hover:bg-slate-800 border border-slate-700 text-sky-300 font-mono" data-shift-unit="day" data-shift-val="1">+1D ▶</button>
+                <button type="button" class="time-shift-btn px-2 py-1 rounded bg-slate-900 hover:bg-slate-800 border border-slate-700 text-sky-300 font-mono" data-shift-unit="month" data-shift-val="1">+1M ▶</button>
+                <button type="button" class="time-shift-btn px-2 py-1 rounded bg-slate-900 hover:bg-slate-800 border border-slate-700 text-sky-300 font-mono" data-shift-unit="year" data-shift-val="1">+1A ▶</button>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- CONTENEDOR 2: RUEDA CONCÉNTRICA BI-WHEEL -->
-      <section id="biWheelSection" class="hidden glass-card rounded-2xl p-5 flex flex-col items-center justify-between border-amber-400/40">
-        <div class="flex flex-col sm:flex-row items-center justify-between w-full px-2 mb-2 gap-2">
-          <div>
-            <span class="text-[10px] uppercase font-bold text-amber-400 block tracking-wider">Superposición Bi-Wheel Concéntrica</span>
-            <h3 class="font-cinzel text-base sm:text-lg font-bold text-white">Carta Natal (Interior) + Tránsitos en Vivo (Exterior)</h3>
-          </div>
-          <span class="text-xs text-sky-300 font-mono px-3 py-1 rounded-full bg-slate-900 border border-slate-700">Anillo Externo: Posiciones Actuales</span>
+      <!-- CONTENEDOR 2: BI-WHEEL -->
+      <section id="biWheelSection" class="hidden space-y-2">
+        <div class="text-xs text-slate-400 bg-slate-900/60 p-2.5 rounded-xl border border-slate-800">
+          <strong class="text-amber-300">¿Qué es esta sección?</strong> Superpone concéntricamente tu carta natal (anillo interior) con los planetas que se mueven en el cielo actual (corona exterior celeste). Permite ver con claridad geométrica en qué casa natal y sobre qué planeta está operando cada influencia viva del cosmos.
         </div>
-
-        <div class="relative w-full flex justify-center overflow-hidden py-2">
-          <canvas id="biWheelCanvas" width="560" height="560" class="max-w-full drop-shadow-2xl rounded-full"></canvas>
-          <div id="biWheelTooltip" class="absolute pointer-events-none hidden px-3 py-2 rounded-xl bg-slate-950/95 border border-amber-400 text-xs shadow-2xl text-white transition-opacity duration-150 z-50">
-            <div id="biWheelTooltipContent"></div>
+        <div class="glass-card rounded-2xl p-5 flex flex-col items-center justify-between border-amber-400/40">
+          <div class="flex flex-col sm:flex-row items-center justify-between w-full px-2 mb-2 gap-2">
+            <div>
+              <span class="text-[10px] uppercase font-bold text-amber-400 block tracking-wider">Superposición Bi-Wheel Concéntrica</span>
+              <h3 class="font-cinzel text-base sm:text-lg font-bold text-white">Carta Natal (Interior) + Tránsitos en Vivo (Exterior)</h3>
+            </div>
+            <span class="text-xs text-sky-300 font-mono px-3 py-1 rounded-full bg-slate-900 border border-slate-700">Anillo Externo: Posiciones Actuales</span>
           </div>
-        </div>
 
-        <div class="flex flex-wrap justify-center items-center gap-4 text-xs text-slate-300 mt-2">
-          <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-amber-400 inline-block"></span> Planetas Natales (Anillo Interior)</span>
-          <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-sky-400 inline-block"></span> Tránsitos del Cielo Actual (Corona Exterior)</span>
+          <div class="relative w-full flex justify-center overflow-hidden py-2">
+            <canvas id="biWheelCanvas" width="560" height="560" class="max-w-full drop-shadow-2xl rounded-full"></canvas>
+            <div id="biWheelTooltip" class="absolute pointer-events-none hidden px-3 py-2 rounded-xl bg-slate-950/95 border border-amber-400 text-xs shadow-2xl text-white transition-opacity duration-150 z-50">
+              <div id="biWheelTooltipContent"></div>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap justify-center items-center gap-4 text-xs text-slate-300 mt-2">
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-amber-400 inline-block"></span> Planetas Natales (Anillo Interior)</span>
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-sky-400 inline-block"></span> Tránsitos del Cielo Actual (Corona Exterior)</span>
+          </div>
         </div>
       </section>
 
-      <!-- Aspectos Partiles Exactos (Menor a 1°) -->
+      <!-- Aspectos Partiles Exactos (< 1°) -->
       <section class="glass-card rounded-2xl p-4 sm:p-5 space-y-3">
         <div class="flex items-center justify-between border-b border-slate-800 pb-2">
           <h3 class="font-cinzel text-sm font-bold text-amber-300 flex items-center gap-2">
@@ -368,51 +506,62 @@
           </h3>
           <span id="partileCountBadge" class="text-xs px-2.5 py-0.5 rounded-full bg-slate-900 text-sky-300 border border-slate-700 font-mono">0 contactos</span>
         </div>
+        <p class="text-[11px] text-slate-400">
+          <strong class="text-amber-300">¿Qué es esta sección?</strong> Destaca los tránsitos matemáticamente exactos (orbe menor a un grado). Son los "disparadores" o detonantes de acontecimientos inmediatos, momentos de máxima intensidad energética y sincronicidad.
+        </p>
         <div id="partileTransitsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3"></div>
       </section>
 
-      <!-- Tabla de Planetas Natales y Matriz Aspectarium -->
-      <section class="grid grid-cols-1 lg:grid-cols-12 gap-5">
-        <div class="lg:col-span-5 glass-card rounded-2xl p-4 space-y-3 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between border-b border-slate-800 pb-2">
-              <h3 class="font-cinzel text-sm font-bold text-amber-300">
-                Efemérides Planetarias Calculadas
-              </h3>
-              <span class="text-[10px] text-slate-400">Clic en un astro para aislarlo</span>
-            </div>
-            <div class="overflow-x-auto max-h-[300px] overflow-y-auto mt-2">
-              <table class="w-full text-xs text-left text-slate-300">
-                <thead class="text-[10px] uppercase text-slate-500 border-b border-slate-800 sticky top-0 bg-slate-900/90">
-                  <tr>
-                    <th class="py-1">Astro</th>
-                    <th class="py-1">Signo</th>
-                    <th class="py-1">Grado</th>
-                    <th class="py-1">Casa & Esfera</th>
-                  </tr>
-                </thead>
-                <tbody id="natalPlanetsTable" class="divide-y border-slate-800/60 font-mono"></tbody>
-              </table>
-            </div>
-          </div>
-          <div class="p-2.5 rounded-xl bg-slate-900/70 border border-slate-800 text-xs">
-            <div class="text-slate-400 font-medium">Eje Meridiano: <span class="text-amber-300" id="meridianInfo">-</span></div>
-          </div>
+      <!-- Efemérides & Aspectarium -->
+      <section class="space-y-2">
+        <div class="text-xs text-slate-400 bg-slate-900/60 p-2.5 rounded-xl border border-slate-800">
+          <strong class="text-amber-300">¿Qué es esta sección?</strong> Proporciona la precisión matemática pura. A la izquierda, la posición eclíptica exacta en grados, minutos y segundos, casa Placidus y regencia de cada astro. A la derecha, la matriz de aspectos (Aspectarium Astrodienst), mostrando las relaciones angulares (conjunciones, cuadraturas, trígonos, oposiciones) con sus orbes correspondientes.
         </div>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+          <div class="lg:col-span-5 glass-card rounded-2xl p-4 space-y-3 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+                <h3 class="font-cinzel text-sm font-bold text-amber-300">
+                  Efemérides Planetarias Calculadas
+                </h3>
+                <span class="text-[10px] text-slate-400">Clic en un astro para aislarlo</span>
+              </div>
+              <div class="overflow-x-auto max-h-[300px] overflow-y-auto mt-2">
+                <table class="w-full text-xs text-left text-slate-300">
+                  <thead class="text-[10px] uppercase text-slate-500 border-b border-slate-800 sticky top-0 bg-slate-900/90">
+                    <tr>
+                      <th class="py-1">Astro</th>
+                      <th class="py-1">Signo</th>
+                      <th class="py-1">Grado</th>
+                      <th class="py-1">Casa & Esfera</th>
+                    </tr>
+                  </thead>
+                  <tbody id="natalPlanetsTable" class="divide-y border-slate-800/60 font-mono"></tbody>
+                </table>
+              </div>
+            </div>
+            <div class="p-2.5 rounded-xl bg-slate-900/70 border border-slate-800 text-xs">
+              <div class="text-slate-400 font-medium">Eje Meridiano: <span class="text-amber-300" id="meridianInfo">-</span></div>
+            </div>
+          </div>
 
-        <div class="lg:col-span-7 glass-card rounded-2xl p-4 space-y-2 overflow-x-auto">
-          <h3 class="font-cinzel text-xs sm:text-sm font-bold text-amber-300 border-b border-slate-800 pb-2">
-            Aspectarium Astrodienst (Orbes e Interacciones)
-          </h3>
-          <div id="aspectGridMatrix" class="inline-block pt-1 font-mono"></div>
+          <div class="lg:col-span-7 glass-card rounded-2xl p-4 space-y-2 overflow-x-auto">
+            <h3 class="font-cinzel text-xs sm:text-sm font-bold text-amber-300 border-b border-slate-800 pb-2">
+              Aspectarium Astrodienst (Orbes e Interacciones)
+            </h3>
+            <div id="aspectGridMatrix" class="inline-block pt-1 font-mono"></div>
+          </div>
         </div>
       </section>
 
-      <!-- Tabla C/F/M y Elementos -->
+      <!-- C/F/M -->
       <section class="glass-card rounded-2xl p-4 sm:p-5 space-y-3">
         <h3 class="font-cinzel text-xs sm:text-sm font-bold text-amber-300 border-b border-slate-800 pb-2">
           Distribución Elemental & Modalidades (C / F / M)
         </h3>
+        <p class="text-[11px] text-slate-400">
+          <strong class="text-amber-300">¿Qué es esta sección?</strong> Evalúa el balance temperamental de tu carta según los 4 Elementos (Fuego/Impulso, Tierra/Realismo, Aire/Intelecto, Agua/Emoción) cruzados con las 3 Modalidades de manifestación (Cardinal/Iniciativa, Fijo/Constancia, Mutable/Adaptabilidad).
+        </p>
         <div class="overflow-x-auto">
           <table class="w-full text-center text-xs border border-slate-700">
             <thead>
@@ -428,7 +577,7 @@
         </div>
       </section>
 
-      <!-- Integración: Compás de los Ciclos y Día Solar Personal -->
+      <!-- Ciclos Personales -->
       <section class="glass-card rounded-2xl p-5 space-y-4 border-amber-400/30">
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-slate-800 pb-3">
           <div>
@@ -440,6 +589,10 @@
             <span class="font-cinzel text-amber-300 font-bold text-sm" id="natalSundayTag">-</span>
           </div>
         </div>
+
+        <p class="text-[11px] text-slate-400">
+          <strong class="text-amber-300">¿Qué es esta sección?</strong> Armoniza tu biorritmo semanal y anual con la ley de ciclos. Muestra tu "Día Solar Particular" (el día de la semana en que naciste, tu punto de regeneración), las 7 fases semanales de acción y los ciclos mayores de 52 días y septenios vitales de 7 años.
+        </p>
 
         <div class="space-y-2">
           <div class="flex items-center justify-between text-xs text-slate-400">
@@ -465,7 +618,7 @@
         </div>
       </section>
 
-      <!-- Tránsitos Actuales en tus Casas Placidus -->
+      <!-- Tránsitos en Casas -->
       <section class="glass-card rounded-2xl p-5 space-y-4">
         <div class="flex items-center justify-between border-b border-slate-800 pb-3">
           <h3 class="font-cinzel text-lg font-bold text-amber-300">
@@ -473,10 +626,13 @@
           </h3>
           <span class="text-xs px-2.5 py-1 rounded-full bg-slate-900 text-slate-400 border border-slate-700" id="transitsDateLabel">Octubre 2026</span>
         </div>
+        <p class="text-[11px] text-slate-400">
+          <strong class="text-amber-300">¿Qué es esta sección?</strong> Describe qué escenarios concretos de tu vida (profesión, hogar, economía, relaciones) están siendo visitados y transformados por los planetas lentos (Júpiter, Saturno, Urano, Plutón) en la fecha consultada.
+        </p>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3" id="transitsGrid"></div>
       </section>
 
-      <!-- Calendario de Ingresos en Casas y Próximos Meses -->
+      <!-- Pronósticos e Ingresos -->
       <section class="glass-card rounded-2xl p-5 space-y-5 border-amber-400/30">
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-slate-800 pb-3">
           <div>
@@ -488,9 +644,13 @@
           <span class="text-xs text-slate-400">Calculado sobre tus cúspides exactas</span>
         </div>
 
+        <p class="text-[11px] text-slate-400">
+          <strong class="text-amber-300">¿Qué es esta sección?</strong> Es tu calendario prospectivo. Calcula con precisión matemática cuándo un planeta cruzará una de tus cúspides natales abriendo una nueva etapa vivencial, junto con la climatología astrológica para los meses venideros.
+        </p>
+
         <div class="space-y-2">
           <h4 class="text-xs font-bold uppercase tracking-wider text-amber-300 flex items-center gap-1.5">
-            <span>⚝</span> Fechas Exactas de Ingreso a Nuevas Casas Natales & Su Significado
+            <span>⚝</span> Fechas Exactas de Ingreso a Nuevas Casas Natales
           </h4>
           <div class="overflow-x-auto">
             <table class="w-full text-xs text-left text-slate-300">
@@ -513,6 +673,114 @@
             <span>⏳</span> Clima y Tendencias Cósmicas: Próximos Meses
           </h4>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5" id="monthlyForecastGrid"></div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN DEL CONSULTOR DE MOMENTOS ÓPTIMOS -->
+      <section class="glass-card rounded-2xl p-4 sm:p-5 border-amber-400/40 space-y-4">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-slate-800 pb-3">
+          <div>
+            <span class="text-xs uppercase text-amber-400 font-bold tracking-wider block">Astrología Electiva & Sincronía</span>
+            <h3 class="font-cinzel text-lg sm:text-xl font-bold text-white">Consultor de Momentos Óptimos (¿Cuándo es el mejor día?)</h3>
+          </div>
+          <span class="text-xs text-amber-300/80 font-mono px-3 py-1 rounded-full bg-slate-900 border border-slate-700">Tránsitos + Biorritmo Solar</span>
+        </div>
+
+        <div class="text-xs text-slate-400 bg-slate-900/60 p-2.5 rounded-xl border border-slate-800">
+          <strong class="text-amber-300">¿Qué es esta sección?</strong> Te permite preguntar por un propósito concreto (firmar acuerdos, iniciar proyectos, citas románticas, inversiones, cirugías, conversaciones difíciles o exámenes). El motor explora los tránsitos planetarios, la fase lunar y tu propio compás semanal de 7 días durante la ventana elegida (la próxima semana, 1 mes o 3 meses), calculando y recomendando los días de máxima resonancia favorable.
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 items-end bg-slate-900/60 p-3.5 rounded-xl border border-slate-800">
+          <div class="sm:col-span-6">
+            <label for="electiveQueryPreset" class="text-xs text-slate-300 font-semibold block mb-1">¿Qué deseas realizar o consultar?</label>
+            <select id="electiveQueryPreset" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 text-white text-xs focus:outline-none focus:border-amber-400">
+              <option value="contratos">Firmar contratos, acuerdos o cerrar ventas (Mercurio & Júpiter)</option>
+              <option value="inicios">Iniciar nuevo proyecto o negocio (Marte & Sol)</option>
+              <option value="amor">Cita especial, boda o reconciliación de pareja (Venus & Luna)</option>
+              <option value="inversion">Invertir capital o comprar inmueble/vehículo (Tauro & Júpiter)</option>
+              <option value="dialogo">Tener una conversación delicada o resolver conflicto (Mercurio & Venus)</option>
+              <option value="estudio">Examen, entrevista de trabajo o presentación pública (Mercurio & Medio Cielo)</option>
+              <option value="salud">Cirugía programada o inicio de tratamiento (Luna menguante & Sol firme)</option>
+              <option value="descanso">Retiro espiritual, introspección o descanso profundo (Neptuno & Casa XII)</option>
+            </select>
+          </div>
+
+          <div class="sm:col-span-3">
+            <label for="electiveTimeHorizon" class="text-xs text-slate-300 font-semibold block mb-1">Horizonte Temporal</label>
+            <select id="electiveTimeHorizon" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 text-white text-xs focus:outline-none focus:border-amber-400">
+              <option value="7">Próxima semana (7 días)</option>
+              <option value="30" selected>Próximas semanas (1 mes / 30 días)</option>
+              <option value="90">Próximos meses (3 meses / 90 días)</option>
+            </select>
+          </div>
+
+          <div class="sm:col-span-3">
+            <button type="button" id="searchBestDaysBtn" class="w-full py-2 px-4 rounded-xl font-cinzel font-bold text-slate-950 bg-gradient-to-r from-amber-400 to-amber-500 hover:brightness-110 shadow transition text-xs">
+              Encontrar Mejores Días
+            </button>
+          </div>
+        </div>
+
+        <!-- Resultados de las Fechas Propicias -->
+        <div id="electiveResultsContainer" class="hidden space-y-3">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-amber-300 flex items-center justify-between">
+            <span>Días Recomendados Ordenados por Grado de Fortuna & Coherencia Cósmica:</span>
+            <span class="text-[10px] text-slate-400 font-normal">Basado en tu carta natal y tránsitos en vivo</span>
+          </h4>
+          <div id="electiveCardsGrid" class="grid grid-cols-1 md:grid-cols-3 gap-3"></div>
+        </div>
+      </section>
+
+      <!-- SÍNTESIS E INTERPRETACIÓN INTEGRAL PROFUNDIZADA DE LA CARTA NATAL -->
+      <section class="glass-card rounded-2xl p-5 sm:p-7 space-y-5 border-amber-400/50 bg-gradient-to-b from-slate-900/95 to-slate-950/95 shadow-2xl">
+        <div class="border-b border-amber-400/30 pb-3 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+          <div>
+            <span class="text-xs uppercase text-amber-400 font-bold tracking-wider block">Tratado Psico-Astrológico Personalizado</span>
+            <h3 class="font-cinzel text-xl sm:text-2xl font-bold text-white">Interpretación Profunda y Estructural de la Carta Natal</h3>
+          </div>
+          <span class="text-xs text-amber-300/80 font-mono px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/30" id="interpProfileBadge">-</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 text-xs text-slate-300 leading-relaxed pt-2">
+          <div class="p-4 sm:p-5 rounded-xl bg-slate-900/70 border border-slate-800 space-y-2.5">
+            <h4 class="font-cinzel text-sm font-bold text-amber-300 flex items-center gap-2">
+              <span>☉</span> 1. Eje de Identidad, Conciencia Solar y Propósito Vital
+            </h4>
+            <div id="interpSunAscText" class="text-slate-300 leading-relaxed space-y-2"></div>
+          </div>
+
+          <div class="p-4 sm:p-5 rounded-xl bg-slate-900/70 border border-slate-800 space-y-2.5">
+            <h4 class="font-cinzel text-sm font-bold text-amber-300 flex items-center gap-2">
+              <span>☽</span> 2. Arquitectura Emocional, Apego y Respuesta Subconsciente
+            </h4>
+            <div id="interpMoonText" class="text-slate-300 leading-relaxed space-y-2"></div>
+          </div>
+
+          <div class="p-4 sm:p-5 rounded-xl bg-slate-900/70 border border-slate-800 space-y-2.5">
+            <h4 class="font-cinzel text-sm font-bold text-amber-300 flex items-center gap-2">
+              <span>☿</span> 3. Dinámica Intelectual, Enlace Afectivo y Capacidad Operativa
+            </h4>
+            <div id="interpMentalText" class="text-slate-300 leading-relaxed space-y-2"></div>
+          </div>
+
+          <div class="p-4 sm:p-5 rounded-xl bg-slate-900/70 border border-slate-800 space-y-2.5">
+            <h4 class="font-cinzel text-sm font-bold text-amber-300 flex items-center gap-2">
+              <span>♄</span> 4. Cima Vocacional, Deber Kármico y Estructura Saturnina
+            </h4>
+            <div id="interpKarmaText" class="text-slate-300 leading-relaxed space-y-2"></div>
+          </div>
+        </div>
+
+        <div class="p-4 sm:p-5 rounded-xl bg-slate-900/70 border border-slate-800 space-y-2.5 text-xs text-slate-300 leading-relaxed">
+          <h4 class="font-cinzel text-sm font-bold text-amber-300 flex items-center gap-2">
+            <span>☊</span> 5. Dinámica Evolutiva: Eje Nodal y Mutación Transpersonal
+          </h4>
+          <div id="interpNodalText" class="space-y-2"></div>
+        </div>
+
+        <div class="p-4 sm:p-5 rounded-xl bg-amber-950/20 border border-amber-400/30 text-xs text-slate-300 space-y-2">
+          <h5 class="font-cinzel font-bold text-amber-300 uppercase tracking-wider text-xs">Clave de Integración Alquímica y Maestría Personal</h5>
+          <div id="interpSummaryText" class="leading-relaxed space-y-2"></div>
         </div>
       </section>
 
@@ -576,49 +844,65 @@
       { name: "Día Saturnino (Tu Sábado)", planet: "Saturno", act: "Descanso sagrado, disolución de lo caduco y renovación." }
     ];
 
-    // ATLAS GEOGRÁFICO DE CIUDADES ESPAÑOLAS E INTERNACIONALES
     const PRESET_CITIES = {
-      // Comunidad Valenciana
-      valencia: { lat: 39.4699, lng: -0.3763, tz: 2 },
-      alicante: { lat: 38.3452, lng: -0.4810, tz: 2 },
-      castellon: { lat: 39.9864, lng: -0.0513, tz: 2 },
-      elche: { lat: 38.2669, lng: -0.6983, tz: 2 },
-      gandia: { lat: 38.9671, lng: -0.1804, tz: 2 },
-      
-      // Principales Ciudades Españolas
-      madrid: { lat: 40.4168, lng: -3.7038, tz: 2 },
-      barcelona: { lat: 41.3879, lng: 2.1699, tz: 2 },
-      sevilla: { lat: 37.3891, lng: -5.9845, tz: 2 },
-      zaragoza: { lat: 41.6488, lng: -0.8891, tz: 2 },
-      malaga: { lat: 36.7213, lng: -4.4214, tz: 2 },
-      murcia: { lat: 37.9922, lng: -1.1307, tz: 2 },
-      palma: { lat: 39.5696, lng: 2.6502, tz: 2 },
-      bilbao: { lat: 43.2630, lng: -2.9350, tz: 2 },
-      valladolid: { lat: 41.6523, lng: -4.7245, tz: 2 },
-      cordoba: { lat: 37.8882, lng: -4.7794, tz: 2 },
-      vigo: { lat: 42.2406, lng: -8.7207, tz: 2 },
-      gijon: { lat: 43.5322, lng: -5.6611, tz: 2 },
-      granada: { lat: 37.1773, lng: -3.5986, tz: 2 },
-      coruna: { lat: 43.3623, lng: -8.4115, tz: 2 },
-      vitoria: { lat: 42.8467, lng: -2.6716, tz: 2 },
-      salamanca: { lat: 40.9701, lng: -5.6635, tz: 2 },
-      santander: { lat: 43.4623, lng: -3.8099, tz: 2 },
-      toledo: { lat: 39.8628, lng: -4.0273, tz: 2 },
-      santiago: { lat: 42.8782, lng: -8.5448, tz: 2 },
-
-      // Islas Canarias
-      laspalmas: { lat: 28.1235, lng: -15.4363, tz: 1 },
-      santacruz: { lat: 28.4636, lng: -16.2518, tz: 1 },
-
-      // Internacional
-      mexico: { lat: 19.4326, lng: -99.1332, tz: -6 },
-      buenosaires: { lat: -34.6037, lng: -58.3816, tz: -3 },
-      bogota: { lat: 4.7110, lng: -74.0721, tz: -5 },
-      londres: { lat: 51.5074, lng: -0.1278, tz: 1 },
-      roma: { lat: 41.9028, lng: 12.4964, tz: 2 }
+      valencia: { lat: 39.4699, lng: -0.3763, region: "peninsula" },
+      alicante: { lat: 38.3452, lng: -0.4810, region: "peninsula" },
+      castellon: { lat: 39.9864, lng: -0.0513, region: "peninsula" },
+      elche: { lat: 38.2669, lng: -0.6983, region: "peninsula" },
+      gandia: { lat: 38.9671, lng: -0.1804, region: "peninsula" },
+      madrid: { lat: 40.4168, lng: -3.7038, region: "peninsula" },
+      barcelona: { lat: 41.3879, lng: 2.1699, region: "peninsula" },
+      sevilla: { lat: 37.3891, lng: -5.9845, region: "peninsula" },
+      zaragoza: { lat: 41.6488, lng: -0.8891, region: "peninsula" },
+      malaga: { lat: 36.7213, lng: -4.4214, region: "peninsula" },
+      murcia: { lat: 37.9922, lng: -1.1307, region: "peninsula" },
+      palma: { lat: 39.5696, lng: 2.6502, region: "peninsula" },
+      bilbao: { lat: 43.2630, lng: -2.9350, region: "peninsula" },
+      valladolid: { lat: 41.6523, lng: -4.7245, region: "peninsula" },
+      cordoba: { lat: 37.8882, lng: -4.7794, region: "peninsula" },
+      vigo: { lat: 42.2406, lng: -8.7207, region: "peninsula" },
+      gijon: { lat: 43.5322, lng: -5.6611, region: "peninsula" },
+      granada: { lat: 37.1773, lng: -3.5986, region: "peninsula" },
+      coruna: { lat: 43.3623, lng: -8.4115, region: "peninsula" },
+      vitoria: { lat: 42.8467, lng: -2.6716, region: "peninsula" },
+      salamanca: { lat: 40.9701, lng: -5.6635, region: "peninsula" },
+      santander: { lat: 43.4623, lng: -3.8099, region: "peninsula" },
+      toledo: { lat: 39.8628, lng: -4.0273, region: "peninsula" },
+      santiago: { lat: 42.8782, lng: -8.5448, region: "peninsula" },
+      laspalmas: { lat: 28.1235, lng: -15.4363, region: "canarias" },
+      santacruz: { lat: 28.4636, lng: -16.2518, region: "canarias" },
+      mexico: { lat: 19.4326, lng: -99.1332, fixedTz: -6 },
+      buenosaires: { lat: -34.6037, lng: -58.3816, fixedTz: -3 },
+      bogota: { lat: 4.7110, lng: -74.0721, fixedTz: -5 },
+      londres: { lat: 51.5074, lng: -0.1278, region: "uk" },
+      roma: { lat: 41.9028, lng: 12.4964, region: "europe_cet" }
     };
 
-    // PERFIL DE PRECISIÓN CALIBRADO
+    function getHistoricalTimezone(dateStr, cityKey) {
+      if (!dateStr) return 1;
+      const city = PRESET_CITIES[cityKey];
+      if (city && city.fixedTz !== undefined) return city.fixedTz;
+
+      const [y, m, d] = dateStr.split('-').map(Number);
+      const isCanarias = city && city.region === "canarias";
+      const isUK = city && city.region === "uk";
+      const baseStandard = isCanarias || isUK ? 0 : 1;
+
+      if (y < 1918) return baseStandard;
+      if (y >= 1950 && y <= 1973) return baseStandard;
+
+      if (y >= 1974) {
+        const lastSunMarch = new Date(y, 2, 31 - (new Date(y, 2, 31).getDay()));
+        const lastSunOct = new Date(y, 9, 31 - (new Date(y, 9, 31).getDay()));
+        const curDate = new Date(y, m - 1, d);
+        if (curDate >= lastSunMarch && curDate < lastSunOct) {
+          return baseStandard + 1;
+        }
+      }
+
+      return baseStandard;
+    }
+
     const VERIFIED_PROFILES = {
       jesus: {
         name: "Jesus",
@@ -671,6 +955,8 @@
     let biWheelInteractiveTargets = [];
     let currentActiveProfile = null;
     let currentSkyProfileGlobal = null;
+    let originalBirthTime = "12:00";
+    let biographicalEvents = [];
 
     let showHarmonics = true;
     let showHards = true;
@@ -694,7 +980,6 @@
       };
     }
 
-    // RESOLUCIÓN DE ECUACIÓN DE KEPLER: M = E - e*sin(E)
     function solveKepler(M_deg, e) {
       const M_rad = toRad(rev(M_deg));
       let E = M_rad;
@@ -706,7 +991,6 @@
       return E;
     }
 
-    // CÁLCULO HELIOCÉNTRICO A GEOCÉNTRICO (MODELOS JEAN MEEUS / VSOP87 REDUCIDO)
     function getPlanetGeocentricLon(T, a, e0, edot, I0, Idot, L0, Ldot, wbar0, wbardot, node0, nodedot, sunX, sunY) {
       const a_curr = a;
       const e_curr = e0 + edot * T;
@@ -726,7 +1010,6 @@
       const peri_rad = toRad(peri);
       const I_rad = toRad(I_curr);
 
-      // Coordenadas heliocéntricas rectangulares eclípticas
       const Px = Math.cos(peri_rad) * Math.cos(node_rad) - Math.sin(peri_rad) * Math.sin(node_rad) * Math.cos(I_rad);
       const Py = Math.cos(peri_rad) * Math.sin(node_rad) + Math.sin(peri_rad) * Math.cos(node_rad) * Math.cos(I_rad);
       const Qx = -Math.sin(peri_rad) * Math.cos(node_rad) - Math.cos(peri_rad) * Math.sin(node_rad) * Math.cos(I_rad);
@@ -735,8 +1018,6 @@
       const X_helio = x_prime * Px + y_prime * Qx;
       const Y_helio = x_prime * Py + y_prime * Qy;
 
-      // Transformación geocéntrica añadiendo posición de la Tierra/Sol
-      // x_geo = X_helio + X_earth = X_helio - sunX
       const X_geo = X_helio + sunX;
       const Y_geo = Y_helio + sunY;
 
@@ -787,7 +1068,6 @@
       return 1;
     }
 
-    // MOTOR ASTRONÓMICO DE ALTA PRECISIÓN (Meeus Ephemeris)
     function calculateAstronomicalProfile(name, birthDateStr, birthTimeStr, lat, lng, tz) {
       const [year, month, day] = birthDateStr.split('-').map(Number);
       const [hour, minute] = birthTimeStr.split(':').map(Number);
@@ -809,7 +1089,7 @@
       const jd = (birthUTC.getTime() / 86400000.0) + 2440587.5;
       const T = (jd - 2451545.0) / 36525.0;
 
-      // 1. SOL
+      // SOL
       const L0 = rev(280.46646 + 36000.76983 * T + 0.0003032 * T * T);
       const M_sun = rev(357.52911 + 35999.05029 * T - 0.0001537 * T * T);
       const C_sun = (1.914602 - 0.004817 * T - 0.000014 * T * T) * Math.sin(toRad(M_sun))
@@ -821,7 +1101,7 @@
       const sunX = sunR * Math.cos(toRad(sunTrueLon));
       const sunY = sunR * Math.sin(toRad(sunTrueLon));
 
-      // 2. LUNA (Términos principales de perturbación)
+      // LUNA
       const L_moon = rev(218.3164477 + 481267.88123421 * T);
       const D = rev(297.8501921 + 445267.1114034 * T);
       const M_m = rev(134.9633964 + 477198.8675055 * T);
@@ -837,10 +1117,9 @@
                         + 0.057066 * Math.sin(toRad(2 * D - M_sun - M_m));
       const moonDeg = rev(L_moon + moonLonCorr);
 
-      // Nodo Lunar
       const trueNode = rev(125.04452 - 1934.136261 * T + 0.0020708 * T * T + 2.2 * Math.sin(toRad(2 * D - 2 * F)));
 
-      // 3. PLANETAS (Elementos Keplerianos de Alta Precisión J2000)
+      // PLANETAS
       const mercuryDeg = getPlanetGeocentricLon(T, 0.387098, 0.205630, 0.000025, 7.0049, -0.0059, 252.2508, 149472.6741, 77.4564, 1.5564, 48.3313, -0.1253, sunX, sunY);
       const venusDeg   = getPlanetGeocentricLon(T, 0.723332, 0.006773, -0.000049, 3.3946, -0.0008, 181.9798, 58517.8153, 131.5729, 1.4022, 76.6806, -0.2777, sunX, sunY);
       const marsDeg    = getPlanetGeocentricLon(T, 1.523688, 0.093405, 0.000092, 1.8506, -0.0006, 355.4332, 19140.3026, 336.0408, 1.8410, 49.5785, -0.2950, sunX, sunY);
@@ -850,13 +1129,13 @@
       const neptuneDeg = getPlanetGeocentricLon(T, 30.11038, 0.009456, 0.000006, 1.7699, -0.0035, 304.8800, 218.4594, 44.9713, 0.2673, 131.7216, -0.0060, sunX, sunY);
       const plutoDeg   = rev(238.93 + 145.2078 * T + 2.1 * Math.sin(toRad(238.93 + 145.2078 * T - (34.4 + 3034.7 * T))));
 
-      // 4. TIEMPO SIDÉREO Y CÚSPIDES PLACIDUS
+      // CASAS PLACIDUS
       const eps = 23.439291 - 0.0130042 * T - 0.00000016 * T * T;
       const gmst0 = rev(100.46061837 + 36000.770053608 * T + 0.000387933 * T * T);
       const gmst = rev(gmst0 + 360.98564724 * (utcHours / 24.0));
       const ramc = rev(gmst + lng);
-
       const cusps = calculateAccurateHouses(ramc, eps, lat);
+
       const houses = cusps.map((cDeg, idx) => {
         const norm = rev(cDeg);
         const signIdx = Math.floor(norm / 30);
@@ -897,7 +1176,6 @@
         };
       });
 
-      // Aspectos calculados con orbes estrictos Astrodienst
       const aspectLines = [];
       for (let i = 0; i < planets.length; i++) {
         for (let j = i + 1; j < planets.length; j++) {
@@ -930,7 +1208,376 @@
       };
     }
 
-    // GESTIÓN DE PERFILES Y EVENTOS DE INTERFAZ
+    const TARGET_ANGLES_BY_EVENT = {
+      matrimonio: [6, 0],
+      divorcio: [6, 0],
+      profesional: [9, 0],
+      graduacion: [9, 8],
+      despido: [9, 5],
+      empresa: [9, 0],
+      herencia: [7, 1],
+      hijo: [4, 6],
+      mudanza: [3, 9],
+      vivienda: [3, 1],
+      viaje_largo: [8, 2],
+      accidente: [0, 5],
+      enfermedad: [5, 11],
+      duelo_padres: [3, 9],
+      duelo: [3, 7],
+      crisis_vital: [7, 0],
+      legal: [6, 8],
+      personalizado: [0, 9]
+    };
+
+    function renderEventsList() {
+      const container = document.getElementById('eventsListContainer');
+      if (biographicalEvents.length === 0) {
+        container.innerHTML = '<span class="text-slate-500 italic text-xs">Añade al menos un acontecimiento biográfico para calcular las horas más probables.</span>';
+        return;
+      }
+      container.innerHTML = '';
+      biographicalEvents.forEach((ev, idx) => {
+        const badge = document.createElement('div');
+        badge.className = "flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-amber-200 text-xs";
+        badge.innerHTML = `
+          <span><strong>${ev.label}</strong>: ${ev.date}</span>
+          <button type="button" class="text-rose-400 hover:text-rose-300 font-bold ml-1" data-remove-idx="${idx}">✕</button>
+        `;
+        container.appendChild(badge);
+      });
+
+      container.querySelectorAll('[data-remove-idx]').forEach(b => {
+        b.addEventListener('click', () => {
+          const idx = parseInt(b.dataset.removeIdx);
+          biographicalEvents.splice(idx, 1);
+          renderEventsList();
+        });
+      });
+    }
+
+    document.getElementById('addEventBtn').addEventListener('click', () => {
+      const select = document.getElementById('eventPresetSelect');
+      const dateInput = document.getElementById('eventDateInput');
+      const val = select.value;
+      const label = select.options[select.selectedIndex].text.split('(')[0].trim();
+      const date = dateInput.value;
+
+      if (!date) {
+        alert("Por favor selecciona la fecha del acontecimiento.");
+        return;
+      }
+
+      biographicalEvents.push({ type: val, label, date });
+      renderEventsList();
+      dateInput.value = '';
+    });
+
+    // EJECUCIÓN MULTI-CASO CON RESOLUCIÓN AJUSTABLE POR MINUTOS
+    document.getElementById('runRectificationBtn').addEventListener('click', () => {
+      const birthDate = document.getElementById('birthDate').value;
+      const lat = parseFloat(document.getElementById('geoLat').value);
+      const lng = parseFloat(document.getElementById('geoLng').value);
+      const tz = parseFloat(document.getElementById('dstOffset').value);
+      const stepMin = parseInt(document.getElementById('rectScanResolution').value) || 1;
+
+      if (!birthDate) {
+        alert("Introduce primero la fecha de nacimiento en el formulario principal.");
+        return;
+      }
+      if (biographicalEvents.length === 0) {
+        alert("Añade al menos un acontecimiento biográfico para cotejar los casos de prueba.");
+        return;
+      }
+
+      const testedCases = [];
+      for (let minTotal = 0; minTotal < 1440; minTotal += stepMin) {
+        const hStr = String(Math.floor(minTotal / 60)).padStart(2, '0');
+        const mStr = String(minTotal % 60).padStart(2, '0');
+        const timeStr = `${hStr}:${mStr}`;
+
+        const testProf = calculateAstronomicalProfile("Prueba", birthDate, timeStr, lat, lng, tz);
+        let score = 0;
+
+        biographicalEvents.forEach(ev => {
+          const evSky = calculateAstronomicalProfile("EventoSky", ev.date, "12:00", lat, lng, tz);
+          const tJup = evSky.planets.find(p => p.name === "Júpiter").absDeg;
+          const tSat = evSky.planets.find(p => p.name === "Saturno").absDeg;
+          const tMar = evSky.planets.find(p => p.name === "Marte").absDeg;
+          const tUra = evSky.planets.find(p => p.name === "Urano").absDeg;
+          const tPlu = evSky.planets.find(p => p.name === "Plutón").absDeg;
+
+          const targetAngleIndices = TARGET_ANGLES_BY_EVENT[ev.type] || [0, 9];
+
+          targetAngleIndices.forEach(idx => {
+            const angleDeg = testProf.houses[idx].deg;
+            [tJup, tSat, tMar, tUra, tPlu].forEach(tPlanetDeg => {
+              let diff = Math.abs(angleDeg - tPlanetDeg);
+              if (diff > 180) diff = 360 - diff;
+              if (diff <= 3.0) {
+                score += (3.5 - diff) * 25;
+              }
+            });
+          });
+        });
+
+        if (score > 0) {
+          testedCases.push({
+            time: timeStr,
+            asc: testProf.houses[0].label,
+            mc: testProf.houses[9].label,
+            score: Math.round(score)
+          });
+        }
+      }
+
+      testedCases.sort((a, b) => b.score - a.score);
+
+      const tableBody = document.getElementById('rectificationRankingBody');
+      tableBody.innerHTML = '';
+
+      if (testedCases.length === 0) {
+        tableBody.innerHTML = '<tr><td colspan="5" class="py-3 px-3 text-center text-slate-400 italic">No se hallaron contactos angulares con orbe estrecho en los casos muestreados. Prueba a añadir más acontecimientos.</td></tr>';
+      } else {
+        const topCases = testedCases.slice(0, 10);
+        const maxScore = topCases[0].score;
+
+        topCases.forEach(tc => {
+          const pct = Math.min(Math.round((tc.score / maxScore) * 100), 99);
+          const row = document.createElement('tr');
+          row.className = "hover:bg-slate-800/80 transition";
+          row.innerHTML = `
+            <td class="py-2 px-3 font-bold text-amber-300">${tc.time} h</td>
+            <td class="py-2 px-3 text-slate-200">${tc.asc}</td>
+            <td class="py-2 px-3 text-slate-400">${tc.mc}</td>
+            <td class="py-2 px-3">
+              <span class="px-2 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 font-bold">${pct}% concordancia</span>
+            </td>
+            <td class="py-2 px-3 text-right">
+              <button type="button" class="apply-case-btn px-2.5 py-1 rounded-lg bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs" data-time="${tc.time}">
+                Aplicar
+              </button>
+            </td>
+          `;
+          tableBody.appendChild(row);
+        });
+
+        tableBody.querySelectorAll('.apply-case-btn').forEach(b => {
+          b.addEventListener('click', () => {
+            const chosenTime = b.dataset.time;
+            document.getElementById('birthTime').value = chosenTime;
+            document.getElementById('rectifiedTimeBadge').textContent = chosenTime;
+            document.getElementById('unknownTimeCheckbox').checked = false;
+            document.getElementById('rectificationSection').classList.add('hidden');
+            document.getElementById('astralForm').dispatchEvent(new Event('submit'));
+          });
+        });
+      }
+
+      document.getElementById('rectificationResultsArea').classList.remove('hidden');
+    });
+
+    function shiftBirthTimeMinutes(deltaMinutes) {
+      const birthTimeInput = document.getElementById('birthTime');
+      let [h, m] = birthTimeInput.value.split(':').map(Number);
+      if (isNaN(h) || isNaN(m)) { h = 12; m = 0; }
+
+      let totalMinutes = h * 60 + m + deltaMinutes;
+      totalMinutes = (totalMinutes % 1440 + 1440) % 1440;
+
+      const newH = String(Math.floor(totalMinutes / 60)).padStart(2, '0');
+      const newM = String(totalMinutes % 60).padStart(2, '0');
+      const newTime = `${newH}:${newM}`;
+
+      birthTimeInput.value = newTime;
+      document.getElementById('rectifiedTimeBadge').textContent = newTime;
+
+      document.getElementById('astralForm').dispatchEvent(new Event('submit'));
+    }
+
+    document.querySelectorAll('.rect-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const delta = parseInt(btn.dataset.shift);
+        if (!isNaN(delta)) shiftBirthTimeMinutes(delta);
+      });
+    });
+
+    document.getElementById('unknownTimeCheckbox').addEventListener('change', (e) => {
+      if (e.target.checked) {
+        document.getElementById('birthTime').value = "12:00";
+        document.getElementById('rectifiedTimeBadge').textContent = "12:00";
+        document.getElementById('rectificationSection').classList.remove('hidden');
+        document.getElementById('astralForm').dispatchEvent(new Event('submit'));
+      } else {
+        document.getElementById('rectificationSection').classList.add('hidden');
+      }
+    });
+
+    document.getElementById('rectResetBtn').addEventListener('click', () => {
+      document.getElementById('birthTime').value = originalBirthTime;
+      document.getElementById('rectifiedTimeBadge').textContent = originalBirthTime;
+      document.getElementById('astralForm').dispatchEvent(new Event('submit'));
+    });
+
+    // GENERADOR DE INTERPRETACIÓN INTEGRAL PROFUNDIZADA DE LA CARTA NATAL
+    function generateNatalInterpretation(profile) {
+      const sun = profile.planets.find(p => p.name === "Sol");
+      const moon = profile.planets.find(p => p.name === "Luna");
+      const merc = profile.planets.find(p => p.name === "Mercurio");
+      const ven = profile.planets.find(p => p.name === "Venus");
+      const mars = profile.planets.find(p => p.name === "Marte");
+      const jup = profile.planets.find(p => p.name === "Júpiter");
+      const sat = profile.planets.find(p => p.name.includes("Saturno"));
+      const node = profile.planets.find(p => p.name.includes("Nodo"));
+      const asc = profile.houses[0];
+      const mc = profile.houses[9];
+
+      document.getElementById('interpProfileBadge').textContent = `${profile.name} (${profile.birthDate})`;
+
+      document.getElementById('interpSunAscText').innerHTML = `
+        <p>Tu Sol en <strong>${sun.sign}</strong> en la <strong>Casa ${sun.house} (${HOUSE_KEYWORDS[sun.house]})</strong> sitúa el núcleo de tu conciencia, individualidad y vitalidad radiante en el perfeccionamiento continuo de los asuntos de esta casa. Este emplazamiento te otorga un impulso innato por comprender los engranajes profundos de la realidad, operando con rigor, discriminación analítica y una búsqueda incansable de utilidad práctica.</p>
+        <p>Esta fuerza interior no se manifiesta en el vacío: se canaliza a través de la máscara viva del Ascendente en <strong>${asc.sign}</strong> (${asc.label}). El Ascendente actúa como el timón de tu encarnación física: ante el entorno te muestras con una receptividad protectora, sensible e intuitiva, capaz de percibir las atmósferas y corrientes sutiles antes de tomar la palabra. La dialéctica entre tu fuego o tierra solar y tu horizonte vital te exige no aislarte en la hipercrítica y permitir que tu sensibilidad guíe tus mayores obras materiales.</p>
+      `;
+
+      document.getElementById('interpMoonText').innerHTML = `
+        <p>La Luna en <strong>${moon.sign}</strong> en la <strong>Casa ${moon.house} (${HOUSE_KEYWORDS[moon.house]})</strong> define el sanctasanctórum de tu psique: tu memoria biográfica, tus patrones de consuelo íntimo y la manera en que metabolizas el estrés. En este signo y casa, tu mundo afectivo trasciende los límites ordinarios, buscando un sentido de disolución mística, comprensión compasiva y conexión con ideales filosóficos o trascendentes de largo alcance.</p>
+        <p>Bajo tensión o agotamiento psíquico, tu instinto natural es el repliegue reflexivo hacia horizontes lejanos o el estudio de las leyes invisibles de la vida. Para alcanzar el equilibrio supremo, necesitas validar esta vulnerabilidad poética y espiritual sin juzgarla como irracional, utilizándola como la fuente nutricia desde la cual brotan tus creaciones y decisiones éticas más certeras.</p>
+      `;
+
+      document.getElementById('interpMentalText').innerHTML = `
+        <p>Tu aparato cognitivo está gobernado por Mercurio en <strong>${merc.sign}</strong> (Casa ${merc.house}), lo que dota a tus procesos intelectuales de una permanente búsqueda de ecuanimidad, diplomacia dialéctica y equilibrio conceptual. No toleras el pensamiento dogmático o unilateral; tu mente necesita sopesar las polaridades opuestas con elegancia argumentativa antes de emitir un juicio definitivo.</p>
+        <p>En el terreno del deseo y la estética, Venus en <strong>${ven.sign}</strong> (Casa ${ven.house}) busca nutrición, lealtad entrañable y raíces emocionales inquebrantables. Al combinarse con el empuje de Marte en <strong>${mars.sign}</strong> (Casa ${mars.house}), tu motor de conquista no es mezquino: actúas movido por convicciones morales expansivas, entusiasmo visionario y la defensa apasionada de tus verdades filosóficas, dotando a tus proyectos de un combustible inagotable.</p>
+      `;
+
+      document.getElementById('interpKarmaText').innerHTML = `
+        <p>El punto culminante del meridiano, tu Medio Cielo (MC) en <strong>${mc.sign}</strong> (${mc.label}), define la cumbre de tu reputación pública y tu destino profesional: estás llamado a ser pionero, abrir brecha con coraje e inaugurar directrices independientes donde otros dudan o retroceden.</p>
+        <p>Sin embargo, el fiel de la balanza kármica está en manos de Saturno en <strong>${sat.sign}</strong> en la <strong>Casa ${sat.house} (${HOUSE_KEYWORDS[sat.house]})</strong>. Saturno no concede laureles apresurados: te somete a pruebas de paciencia, sobriedad y perseverancia inquebrantable. Todo lo que cimentes en esta esfera requerirá un método estricto, libre de atajos; pero una vez superado el tamiz del tiempo, se convertirá en un monumento inexpugnable de prestigio, autoridad moral y maestría perdurable.</p>
+      `;
+
+      document.getElementById('interpNodalText').innerHTML = `
+        <p>El Nodo Norte Verdadero en <strong>${node ? node.sign : 'Piscis'}</strong> (Casa ${node ? node.house : 9}) traza la brújula evolutiva de tu encarnación. Tu punto de inercia o comodidad pasada (Nodo Sur en Virgo/Casa 3) te inclinaba a la hiperracionalización, la acumulación meticulosa de datos y la necesidad de tener cada detalle bajo control analítico.</p>
+        <p>Tu mandato evolutivo supremo en esta vida es cruzar el puente hacia el Nodo Norte: desarrollar la fe ontológica, la rendición a lo superior, la visión holística de síntesis y la sabiduría que brota de la entrega consciente al misterio cósmico. Júpiter en ${jup ? jup.sign : 'Libra'} actúa como el puente benéfico que expande tu capacidad de generar comunidad a través de esta síntesis entre razón y espíritu.</p>
+      `;
+
+      document.getElementById('interpSummaryText').innerHTML = `
+        <p>Tu carta encierra una fórmula alquímica de inmenso potencial: el maridaje entre la precisión analítica y el vuelo místico de la conciencia. Tu sendero de autorrealización no consiste en amputar la razón ni en ahogar la sensibilidad, sino en convertir tu mente metódica en el servidor consagrado de tu intuición trascendente. Cuando alineas tu acción voluntaria con los ciclos naturales universales, te conviertes en un verdadero arquitecto de realidades luminosas y duraderas.</p>
+      `;
+    }
+
+    // MOTOR DE CÁLCULO ELECTIVO DE FECHAS PROPICIAS
+    const ELECTIVE_CRITERIA = {
+      contratos: { planets: ["Mercurio", "Júpiter"], targetHouses: [3, 9, 10], moonPhaseFav: "creciente", desc: "Fluidez mercantil, lucidez legal y acuerdos ventajosos." },
+      inicios: { planets: ["Marte", "Sol"], targetHouses: [1, 10], moonPhaseFav: "nueva_creciente", desc: "Vigor ejecutor, empuje físico y liderazgo personal." },
+      amor: { planets: ["Venus", "Luna"], targetHouses: [7, 5], moonPhaseFav: "creciente_llena", desc: "Apertura afectiva, magnetismo y compenetración íntima." },
+      inversion: { planets: ["Júpiter", "Saturno"], targetHouses: [2, 8], moonPhaseFav: "creciente", desc: "Consolidación de valor, solidez financiera y prudencia." },
+      dialogo: { planets: ["Mercurio", "Venus"], targetHouses: [3, 7], moonPhaseFav: "cualquiera", desc: "Tacto diplomático, capacidad de escucha y consenso." },
+      estudio: { planets: ["Mercurio", "Júpiter"], targetHouses: [9, 10, 3], moonPhaseFav: "creciente", desc: "Concentración lúcida, absorción de conceptos y elocuencia." },
+      salud: { planets: ["Sol", "Saturno"], targetHouses: [6, 1], moonPhaseFav: "menguante", desc: "Cuerpo templado, eliminación de toxinas y recuperación estable." },
+      descanso: { planets: ["Luna", "Neptuno"], targetHouses: [12, 4], moonPhaseFav: "menguante", desc: "Regeneración nerviosa, calma mental y desconexión reparadora." }
+    };
+
+    document.getElementById('searchBestDaysBtn').addEventListener('click', () => {
+      if (!currentActiveProfile) {
+        alert("Por favor calcula primero tu carta natal.");
+        return;
+      }
+
+      const queryType = document.getElementById('electiveQueryPreset').value;
+      const horizonDays = parseInt(document.getElementById('electiveTimeHorizon').value) || 30;
+      const criteria = ELECTIVE_CRITERIA[queryType];
+      const baseEvalDateStr = document.getElementById('evalDate').value;
+
+      const results = [];
+      const baseDate = new Date(baseEvalDateStr + "T00:00:00");
+      const birthDate = new Date(currentActiveProfile.birthDate + "T00:00:00");
+      const natalSunDayIdx = birthDate.getDay();
+
+      const lat = currentActiveProfile.lat || 39.4699;
+      const lng = currentActiveProfile.lng || -0.3763;
+      const tz = parseFloat(currentActiveProfile.dst) || 1;
+
+      for (let i = 1; i <= horizonDays; i++) {
+        const testD = new Date(baseDate);
+        testD.setDate(testD.getDate() + i);
+        const dateStr = testD.toISOString().split('T')[0];
+
+        const transitSky = calculateAstronomicalProfile("Transit", dateStr, "12:00", lat, lng, tz);
+
+        let dayScore = 50;
+        const dayOfWeek = testD.getDay();
+
+        const cyclePhaseIdx = (dayOfWeek - natalSunDayIdx + 7) % 7;
+        if (queryType === "inicios" && cyclePhaseIdx === 0) dayScore += 25;
+        if (queryType === "contratos" && (cyclePhaseIdx === 2 || cyclePhaseIdx === 3)) dayScore += 20;
+        if (queryType === "amor" && cyclePhaseIdx === 5) dayScore += 25;
+        if (queryType === "descanso" && cyclePhaseIdx === 6) dayScore += 30;
+        if (queryType === "inversion" && cyclePhaseIdx === 4) dayScore += 25;
+
+        criteria.planets.forEach(pName => {
+          const tp = transitSky.planets.find(p => p.name === pName);
+          if (tp) {
+            const house = getHouseFromCusps(tp.absDeg, currentActiveProfile.houses);
+            if (criteria.targetHouses.includes(house)) dayScore += 25;
+
+            currentActiveProfile.planets.forEach(np => {
+              let diff = Math.abs(tp.absDeg - np.absDeg);
+              if (diff > 180) diff = 360 - diff;
+              if (Math.abs(diff - 120) <= 2.5) dayScore += 20;
+              if (Math.abs(diff - 60) <= 2.0) dayScore += 15;
+              if (Math.abs(diff - 90) <= 2.0 && (pName === "Marte" || pName === "Saturno")) dayScore -= 15;
+            });
+          }
+        });
+
+        const sunDeg = transitSky.planets.find(p => p.name === "Sol").absDeg;
+        const moonDeg = transitSky.planets.find(p => p.name === "Luna").absDeg;
+        let moonPhaseAngle = rev(moonDeg - sunDeg);
+        const isWaxing = moonPhaseAngle > 0 && moonPhaseAngle < 180;
+
+        if (criteria.moonPhaseFav === "creciente" && isWaxing) dayScore += 15;
+        if (criteria.moonPhaseFav === "menguante" && !isWaxing) dayScore += 15;
+
+        results.push({
+          dateStr,
+          dateObj: testD,
+          dayName: DAYS_NAMES[dayOfWeek],
+          score: dayScore,
+          isWaxing
+        });
+      }
+
+      results.sort((a, b) => b.score - a.score);
+      const topDays = results.slice(0, 3);
+
+      const cardsGrid = document.getElementById('electiveCardsGrid');
+      cardsGrid.innerHTML = '';
+
+      topDays.forEach((td, idx) => {
+        const card = document.createElement('div');
+        const badgeColors = idx === 0 
+          ? "border-amber-400 bg-amber-400/10 text-amber-300" 
+          : "border-sky-400/40 bg-sky-950/40 text-sky-300";
+
+        card.className = `p-4 rounded-xl border ${badgeColors} space-y-2 text-xs flex flex-col justify-between`;
+        card.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-sm font-cinzel text-white">${td.dayName}, ${td.dateStr}</span>
+              <span class="px-2 py-0.5 rounded-full font-mono text-[10px] border ${badgeColors} font-bold">Top ${idx + 1}</span>
+            </div>
+            <div class="text-[11px] text-amber-300 mt-1">Fase Lunar: ${td.isWaxing ? '🌓 Luna Creciente (Fértil/Expansiva)' : '🌘 Luna Menguante (Depuración/Firmeza)'}</div>
+            <p class="text-slate-300 text-xs mt-2 leading-relaxed">${criteria.desc}</p>
+          </div>
+          <div class="pt-2 border-t border-slate-800 text-[11px] text-slate-400 flex justify-between items-center">
+            <span>Índice de Afinidad Cósmica:</span>
+            <span class="font-mono font-bold text-amber-300">${Math.min(td.score, 100)} pts</span>
+          </div>
+        `;
+        cardsGrid.appendChild(card);
+      });
+
+      document.getElementById('electiveResultsContainer').classList.remove('hidden');
+    });
+
     function getStoredProfiles() {
       try { return JSON.parse(localStorage.getItem('astro_saved_profiles') || '{}'); }
       catch (e) { return {}; }
@@ -962,7 +1609,9 @@
       document.getElementById('savedProfilesSelect').value = 'none';
       document.getElementById('userName').value = '';
       document.getElementById('birthDate').value = '';
-      document.getElementById('birthTime').value = '';
+      document.getElementById('birthTime').value = '12:00';
+      document.getElementById('unknownTimeCheckbox').checked = false;
+      document.getElementById('rectificationSection').classList.add('hidden');
       document.getElementById('results').classList.add('hidden');
       currentActiveProfile = null;
       isolatedPlanetDeg = null;
@@ -1004,6 +1653,10 @@
         document.getElementById('geoLat').value = p.lat;
         document.getElementById('geoLng').value = p.lng;
         document.getElementById('dstOffset').value = p.dst;
+        originalBirthTime = p.birthTime;
+        document.getElementById('rectifiedTimeBadge').textContent = p.birthTime;
+        document.getElementById('unknownTimeCheckbox').checked = false;
+        document.getElementById('rectificationSection').classList.add('hidden');
         renderComplete(p, document.getElementById('evalDate').value);
         return;
       }
@@ -1014,11 +1667,15 @@
 
       document.getElementById('userName').value = p.name || '';
       document.getElementById('birthDate').value = p.birthDate || '';
-      document.getElementById('birthTime').value = p.birthTime || '';
+      document.getElementById('birthTime').value = p.birthTime || '12:00';
       document.getElementById('cityPreset').value = p.cityKey || 'valencia';
       document.getElementById('geoLat').value = p.lat || 39.4699;
       document.getElementById('geoLng').value = p.lng || -0.3763;
       document.getElementById('dstOffset').value = p.dst || "1";
+      originalBirthTime = p.birthTime;
+      document.getElementById('rectifiedTimeBadge').textContent = p.birthTime;
+      document.getElementById('unknownTimeCheckbox').checked = false;
+      document.getElementById('rectificationSection').classList.add('hidden');
 
       document.getElementById('astralForm').dispatchEvent(new Event('submit'));
     });
@@ -1161,7 +1818,6 @@
       evalDateInput.dispatchEvent(new Event('change'));
     });
 
-    // RENDERIZADO DE RUEDAS EN CANVAS
     function drawGenericWheel(canvasId, profile, isNatal = false) {
       const canvas = document.getElementById(canvasId);
       if (!canvas) return;
@@ -1911,16 +2567,28 @@
       currentActiveProfile = profile;
       document.getElementById('userName').value = profile.name || '';
       document.getElementById('birthDate').value = profile.birthDate || '';
-      document.getElementById('birthTime').value = profile.birthTime || '';
+      document.getElementById('birthTime').value = profile.birthTime || '12:00';
+      document.getElementById('rectifiedTimeBadge').textContent = profile.birthTime || '12:00';
+      if (!originalBirthTime) originalBirthTime = profile.birthTime;
+
       document.getElementById('dstOffset').value = profile.dst || "1";
       document.getElementById('geoLat').value = profile.lat || 39.4699;
       document.getElementById('geoLng').value = profile.lng || -0.3763;
       document.getElementById('evalDate').value = evalDateStr;
 
+      // Mostrar u ocultar la sección de rectificación según la casilla de hora desconocida
+      const isUnknownTime = document.getElementById('unknownTimeCheckbox').checked;
+      const rectSection = document.getElementById('rectificationSection');
+      if (isUnknownTime) {
+        rectSection.classList.remove('hidden');
+      } else {
+        rectSection.classList.add('hidden');
+      }
+
       document.getElementById('results').classList.remove('hidden');
 
-      const sun = profile.planets.find(p => p.name.includes("Sol")) || profile.planets[0];
-      const moon = profile.planets.find(p => p.name.includes("Luna")) || profile.planets[1];
+      const sun = profile.planets.find(p => p.name === "Sol") || profile.planets[0];
+      const moon = profile.planets.find(p => p.name === "Luna") || profile.planets[1];
       const asc = profile.houses[0];
       const mc = profile.houses[9];
 
@@ -1969,7 +2637,6 @@
       const lat = profile.lat || 39.4699;
       const lng = profile.lng || -0.3763;
       
-      // Cielo actual calculado astronómicamente
       currentSkyProfileGlobal = calculateAstronomicalProfile("Cielo Actual", evalDateStr, "12:00", lat, lng, 2);
       drawGenericWheel('currentAstroWheel', currentSkyProfileGlobal, false);
       drawBiWheelCanvas('biWheelCanvas', profile, currentSkyProfileGlobal);
@@ -1979,6 +2646,7 @@
       renderPartileTransits(profile, currentSkyProfileGlobal);
       renderCFMTable(profile.planets, profile.houses);
       renderAspectMatrix(profile.planets);
+      generateNatalInterpretation(profile);
 
       const evalDate = new Date(evalDateStr + "T00:00:00");
       const birthDate = new Date(profile.birthDate + "T00:00:00");
@@ -2069,7 +2737,6 @@
       calculateUpcomingIngressesAndForecast(profile.houses, evalDate);
     }
 
-    // INTERACTIVIDAD EN CANVAS
     const wheelCanvas = document.getElementById('astroWheel');
     const tooltip = document.getElementById('planetTooltip');
     const tooltipContent = document.getElementById('tooltipContent');
@@ -2171,21 +2838,26 @@
 
     biWheelCanvas.addEventListener('mouseleave', () => biWheelTooltip.classList.add('hidden'));
 
-    const cityPresetEl = document.getElementById('cityPreset');
-    const astralForm = document.getElementById('astralForm');
+    function syncTimezoneAndCoordinates() {
+      const cityKey = document.getElementById('cityPreset').value;
+      const birthDate = document.getElementById('birthDate').value;
 
-    cityPresetEl.addEventListener('change', () => {
-      const cityKey = cityPresetEl.value;
       if (PRESET_CITIES[cityKey]) {
         document.getElementById('geoLat').value = PRESET_CITIES[cityKey].lat;
         document.getElementById('geoLng').value = PRESET_CITIES[cityKey].lng;
-        if (PRESET_CITIES[cityKey].tz !== undefined) {
-          document.getElementById('dstOffset').value = String(PRESET_CITIES[cityKey].tz);
+
+        if (birthDate) {
+          const autoTz = getHistoricalTimezone(birthDate, cityKey);
+          document.getElementById('dstOffset').value = String(autoTz);
+          document.getElementById('tzAutoNotice').textContent = `Huso ajustado automáticamente a UTC${autoTz >= 0 ? '+' : ''}${autoTz}`;
         }
       }
-    });
+    }
 
-    astralForm.addEventListener('submit', (e) => {
+    document.getElementById('cityPreset').addEventListener('change', syncTimezoneAndCoordinates);
+    document.getElementById('birthDate').addEventListener('change', syncTimezoneAndCoordinates);
+
+    document.getElementById('astralForm').addEventListener('submit', (e) => {
       e.preventDefault();
       const name = document.getElementById('userName').value.trim();
       const birthDate = document.getElementById('birthDate').value;
@@ -2194,6 +2866,8 @@
       const lat = parseFloat(document.getElementById('geoLat').value);
       const lng = parseFloat(document.getElementById('geoLng').value);
       const tz = parseFloat(document.getElementById('dstOffset').value);
+
+      if (!originalBirthTime) originalBirthTime = birthTime;
 
       const isVerified = Object.keys(VERIFIED_PROFILES).find(k => 
         VERIFIED_PROFILES[k].birthDate === birthDate && 
@@ -2221,7 +2895,9 @@
     refreshProfilesDropdown();
     document.getElementById('userName').value = '';
     document.getElementById('birthDate').value = '';
-    document.getElementById('birthTime').value = '';
+    document.getElementById('birthTime').value = '12:00';
+    document.getElementById('unknownTimeCheckbox').checked = false;
+    document.getElementById('rectificationSection').classList.add('hidden');
     document.getElementById('results').classList.add('hidden');
   </script>
 </body>
